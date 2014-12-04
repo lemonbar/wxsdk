@@ -1,0 +1,30 @@
+# tmp
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# maven 
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.next
+release.properties
+
+# idea
+.idea/
+*.iml
+
+# log
+.log
+
+# vim
+*.sw*
+
+# psd
+*.psd
+
+# node_modules
+node_modules/
+
+# .build
+.build/
