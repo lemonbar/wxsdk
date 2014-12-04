@@ -1,7 +1,6 @@
 package com.lemon.weixin.sdk.util;
 
-import com.lemon.weixin.sdk.base.WXHttpService;
-import com.lemon.weixin.sdk.constants.WXApiUrl;
+import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import lombok.Data;
 
 import java.util.Date;
@@ -13,18 +12,17 @@ public class WXAccessTokenUtil {
 
     private static AccessToken accessToken;
 
-    public synchronized static String getToken() {
-//        return "LpY4SBBNTNnrWZ4AUzgr6W5kvmRIpqYHy4bW1R1x8ubGjtqasizY9k6LliWNStokxgQiOssgdk_5fOBcyrMPX5aezjm35VdIu7t8TRU8Thw";
-        if (accessToken == null || accessToken.isExpired()) {
-            String response = WXHttpService.responseWithURL(WXApiUrl.getBaseTokenUrl());
-            if (response != null) {
-                accessToken = WXJsonUtil.jsonToBean(response, AccessToken.class);
-                accessToken.setCreateDate(new Date());
-            } else {
-                //todo log the error
-                return null;
-            }
-        }
+    public synchronized static String parseAndStoreAccessToken(String jsonStr) {
+        accessToken = WXJsonUtil.jsonToBean(jsonStr, AccessToken.class);
+        accessToken.setCreateDate(new Date());
+        return accessToken.getAccess_token();
+    }
+
+    public static boolean isTokenAvailable() {
+        return (accessToken != null && !accessToken.isExpired());
+    }
+
+    public static String getToken() {
         return accessToken.getAccess_token();
     }
 

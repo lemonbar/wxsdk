@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.constants;
+package com.lemon.weixin.sdk.base.constants;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

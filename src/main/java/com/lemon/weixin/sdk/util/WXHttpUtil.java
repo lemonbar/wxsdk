@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.base;
+package com.lemon.weixin.sdk.util;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * Created by lemon_bar on 2014/12/4.
  */
-public class WXHttpService {
+public class WXHttpUtil {
     public static String responseWithURL(String URL) {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpGet req = new HttpGet(URL);

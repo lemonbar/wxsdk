@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.constants;
+package com.lemon.weixin.sdk.base.constants;
 
 /**
  * Created by lemon_bar on 2014/12/4.
