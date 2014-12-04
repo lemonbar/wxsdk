@@ -15,17 +15,21 @@ import java.io.IOException;
  * Created by lemon_bar on 2014/12/4.
  */
 public class WXHttpUtil {
+    private final static String DEFAULT_CHARACTER_SET = "UTF-8";
+
     public static String responseWithURL(String URL) {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpGet req = new HttpGet(URL);
         try {
             CloseableHttpResponse response = client.execute(req);
             HttpEntity entity = response.getEntity();
-            return EntityUtils.toString(entity);
+            return EntityUtils.toString(entity, DEFAULT_CHARACTER_SET);
         } catch (IOException e) {
             //todo;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            req.abort();
         }
         return null;
     }
@@ -33,13 +37,15 @@ public class WXHttpUtil {
     public static String postResponseWithURL(String URL, String body) {
         CloseableHttpClient client = HttpClients.createDefault();
         HttpPost req = new HttpPost(URL);
-        req.setEntity(new StringEntity(body, "utf-8"));
+        req.setEntity(new StringEntity(body, DEFAULT_CHARACTER_SET));
         try {
             CloseableHttpResponse response = client.execute(req);
             HttpEntity entity = response.getEntity();
-            return EntityUtils.toString(entity);
+            return EntityUtils.toString(entity, DEFAULT_CHARACTER_SET);
         } catch (IOException e) {
             //todo;
+        } finally {
+            req.abort();
         }
         return null;
     }

@@ -1,5 +1,6 @@
 package com.lemon.weixin.sdk.user;
 
+import com.lemon.weixin.sdk.user.model.WXUserInfo;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import com.lemon.weixin.sdk.user.model.WXUserPage;
@@ -17,6 +18,17 @@ public class WXUserService {
 
         if (response != null) {
             return WXJsonUtil.jsonToBean(response, WXUserPage.class);
+        }
+
+        return null;
+    }
+
+    public WXUserInfo getUserInfo(String accessToken, String openId) {
+        String url = WXApiUrl.getUserInfoUrl(accessToken, openId);
+        String response = WXHttpUtil.responseWithURL(url);
+
+        if (response != null) {
+            return WXJsonUtil.jsonToBean(response, WXUserInfo.class);
         }
 
         return null;

@@ -15,11 +15,17 @@ public class WXApiUrl {
     private static String AUTH_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";//support chinese.
 
     private static String MESSAGE_SEND_URL = "https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=%s";
+    private static String MESSAGE_TEMPLATE_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s";
 
-    private static String USER_LIST_GET_URL = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";
+    private static String USER_LIST_URL = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";
+    private static String USER_INFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN";
 
-    public static String getUserListUrl(String accessToken, String openId) {
-        return String.format(USER_LIST_GET_URL, accessToken, openId);
+    public static String getUserListUrl(String accessToken, String firstOpenId) {
+        return String.format(USER_LIST_URL, accessToken, firstOpenId);
+    }
+
+    public static String getUserInfoUrl(String accessToken, String openId) {
+        return String.format(USER_INFO_URL, accessToken, openId);
     }
 
     public static String getBaseTokenUrl() {
@@ -48,5 +54,9 @@ public class WXApiUrl {
 
     public static String getMessageSendUrl(String accessToken) {
         return String.format(MESSAGE_SEND_URL, accessToken);
+    }
+
+    public static String getMessageTemplateSendUrl(String accessToken) {
+        return String.format(MESSAGE_TEMPLATE_URL, accessToken);
     }
 }

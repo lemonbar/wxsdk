@@ -1,6 +1,8 @@
 package com.lemon.weixin.sdk.message;
 
 import com.google.gson.GsonBuilder;
+import com.lemon.weixin.sdk.message.model.send.WXSendNewsMessage;
+import com.lemon.weixin.sdk.message.model.send.content.WXSendNews;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import com.lemon.weixin.sdk.message.model.receive.WXReceiveTextMessage;
@@ -19,13 +21,28 @@ import java.io.StringReader;
  */
 public class WXMessageService {
 
-    public String sendText(String accessToken, String touser, String content) {
-        WXSendTextMessage textMessage = new WXSendTextMessage(touser, content);
+    public String sendText(String accessToken, String toUser, String content) {
+        WXSendTextMessage textMessage = new WXSendTextMessage(toUser, content);
         String jsonBody =
                 new GsonBuilder().disableHtmlEscaping().create().toJson(textMessage, WXSendTextMessage.class);
 
         String url = WXApiUrl.getMessageSendUrl(accessToken);
         return WXHttpUtil.postResponseWithURL(url, jsonBody);
+    }
+
+    public String sendNews(String accessToken, String toUser, WXSendNews news) {
+        WXSendNewsMessage newsMessage = new WXSendNewsMessage(toUser, news);
+
+        String jsonBody =
+                new GsonBuilder().disableHtmlEscaping().create().toJson(newsMessage, WXSendNewsMessage.class);
+
+        String url = WXApiUrl.getMessageSendUrl(accessToken);
+        return WXHttpUtil.postResponseWithURL(url, jsonBody);
+    }
+
+    public String sendTemplate(String accessToken, String content) {
+        String url = WXApiUrl.getMessageTemplateSendUrl(accessToken);
+        return WXHttpUtil.postResponseWithURL(url, content);
     }
 
     public void receiveText(String xmlStr) {
