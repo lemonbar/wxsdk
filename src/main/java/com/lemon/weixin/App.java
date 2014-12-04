@@ -15,11 +15,11 @@ import java.util.List;
  * Hello world!
  */
 public class App {
-    private static String openId = "olONIt-ysZO4zk5IJggNMaCq7qCU";
+    private static String openId = "olONItxh5dYPMapYvL28MpUIX-ZQ";
 
     public static void main(String[] args) {
 //        testSendMessageTemplate();
-//        testGetUserInfoApi("");
+//        testGetUserInfoApi("DYun");
         testSendNewsMessage();
         System.out.println("Hello World!");
     }
