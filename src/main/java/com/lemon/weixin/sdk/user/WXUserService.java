@@ -16,6 +16,7 @@ public class WXUserService {
 
         if (response != null) {
             WXUserPage userPage = WXJsonUtil.jsonToBean(response, WXUserPage.class);
+            System.out.println("xxx");
         }
     }
 

@@ -14,18 +14,18 @@ public class WXAccessTokenUtil {
     private static AccessToken accessToken;
 
     public synchronized static String getToken() {
-        return "LpY4SBBNTNnrWZ4AUzgr6W5kvmRIpqYHy4bW1R1x8ubGjtqasizY9k6LliWNStokxgQiOssgdk_5fOBcyrMPX5aezjm35VdIu7t8TRU8Thw";
-//        if (accessToken == null || accessToken.isExpired()) {
-//            String response = WXHttpService.responseWithURL(WXApiUrl.getBaseTokenUrl());
-//            if (response != null) {
-//                accessToken = WXJsonUtil.jsonToBean(response, AccessToken.class);
-//                accessToken.setCreateDate(new Date());
-//            } else {
-//                //todo log the error
-//                return null;
-//            }
-//        }
-//        return accessToken.getAccess_token();
+//        return "LpY4SBBNTNnrWZ4AUzgr6W5kvmRIpqYHy4bW1R1x8ubGjtqasizY9k6LliWNStokxgQiOssgdk_5fOBcyrMPX5aezjm35VdIu7t8TRU8Thw";
+        if (accessToken == null || accessToken.isExpired()) {
+            String response = WXHttpService.responseWithURL(WXApiUrl.getBaseTokenUrl());
+            if (response != null) {
+                accessToken = WXJsonUtil.jsonToBean(response, AccessToken.class);
+                accessToken.setCreateDate(new Date());
+            } else {
+                //todo log the error
+                return null;
+            }
+        }
+        return accessToken.getAccess_token();
     }
 
     @Data
