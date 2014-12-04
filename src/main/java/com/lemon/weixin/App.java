@@ -15,13 +15,23 @@ import java.util.List;
  * Hello world!
  */
 public class App {
-    private static String openId = "olONItxh5dYPMapYvL28MpUIX-ZQ";
+    private static String openId = "olONIt17KaZJPbcoeMb8oZ5O7j8E";
+    private static String mediaId = "201491588";
 
     public static void main(String[] args) {
 //        testSendMessageTemplate();
 //        testGetUserInfoApi("DYun");
-        testSendNewsMessage();
+//        testSendNewsMessage();
+        testSendImage();
         System.out.println("Hello World!");
+    }
+
+    public static void testSendImage() {
+        WXTokenService tokenService = new WXTokenService();
+        WXMessageService messageService = new WXMessageService();
+
+        String result = messageService.sendImage(tokenService.getAccessToken(), openId, mediaId);
+        System.out.println(result);
     }
 
     public static void testSendMessageTemplate() {
@@ -65,7 +75,7 @@ public class App {
         WXSendArticle article1 = new WXSendArticle();
         article1.setDescription("各位同事，我们医院购买了GE的CT 1000设备，厂家为我们提供了丰富的应用培训课程，请大家访问一下链接进行申请：https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0cd7b36db6ebbc17&redirect_uri=http://edu.gehealthcare.cn/wx/user/signup/1&response_type=code&scope=snsapi_base&state=123#wechat_redirect");
         article1.setTitle("This is title");
-        article1.setPicurl("https://mp.weixin.qq.com/misc/getqrcode?fakeid=3075007380&token=148552068&style=1&action=show");
+        article1.setPicurl("https://github.com/lemonbar/wxsdk/blob/master/src/test/test.jpg");
         article1.setUrl("https://mp.weixin.qq.com/misc/getqrcode?fakeid=3075007380&token=148552068&style=1&action=show");
         news.getArticles().add(article1);
 

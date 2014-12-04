@@ -1,6 +1,7 @@
 package com.lemon.weixin.sdk.message;
 
 import com.google.gson.GsonBuilder;
+import com.lemon.weixin.sdk.message.model.send.WXSendImageMessage;
 import com.lemon.weixin.sdk.message.model.send.WXSendNewsMessage;
 import com.lemon.weixin.sdk.message.model.send.content.WXSendNews;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
@@ -35,6 +36,16 @@ public class WXMessageService {
 
         String jsonBody =
                 new GsonBuilder().disableHtmlEscaping().create().toJson(newsMessage, WXSendNewsMessage.class);
+
+        String url = WXApiUrl.getMessageSendUrl(accessToken);
+        return WXHttpUtil.postResponseWithURL(url, jsonBody);
+    }
+
+    public String sendImage(String accessToken, String toUser, String mediaId) {
+        WXSendImageMessage imageMessage = new WXSendImageMessage(toUser, mediaId);
+
+        String jsonBody =
+                new GsonBuilder().disableHtmlEscaping().create().toJson(imageMessage, WXSendImageMessage.class);
 
         String url = WXApiUrl.getMessageSendUrl(accessToken);
         return WXHttpUtil.postResponseWithURL(url, jsonBody);
