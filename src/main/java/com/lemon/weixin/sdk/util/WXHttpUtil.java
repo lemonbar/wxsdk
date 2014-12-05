@@ -119,7 +119,7 @@ public class WXHttpUtil {
         return null;
     }
 
-    public String sendFile(String url, String filePath) throws IOException {
+    public static String sendFile(String url, String filePath) throws IOException {
         String result = null;
 
         File file = new File(filePath);

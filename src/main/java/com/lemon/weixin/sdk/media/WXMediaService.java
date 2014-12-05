@@ -13,7 +13,11 @@ public class WXMediaService {
 
     public String uploadMedia(String accessToken, String type, String mediaPath) {
         String url = WXApiUrl.getMediaUploadUrl(accessToken, type);
-
-        return WXHttpUtil.doUpload(url, mediaPath);
+        try {
+            return WXHttpUtil.sendFile(url, mediaPath);
+        } catch (Exception e) {
+            return null;
+        }
+//        return WXHttpUtil.doUpload(url, mediaPath);
     }
 }
