@@ -1,23 +1,29 @@
 package com.lemon.weixin.sdk.media;
 
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
+import com.lemon.weixin.sdk.media.model.WXMedia;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
+import com.lemon.weixin.sdk.util.WXJsonUtil;
 
 /**
  * Created by lemon_bar on 2014/12/5.
  */
 public class WXMediaService {
-    public String uploadImage(String accessToken, String imagePath) {
+    public WXMedia uploadImage(String accessToken, String imagePath) {
         return uploadMedia(accessToken, "image", imagePath);
     }
 
-    public String uploadMedia(String accessToken, String type, String mediaPath) {
+    public WXMedia uploadMedia(String accessToken, String type, String mediaPath) {
         String url = WXApiUrl.getMediaUploadUrl(accessToken, type);
         try {
-            return WXHttpUtil.sendFile(url, mediaPath);
+            String response = WXHttpUtil.sendFile(url, mediaPath);
+            //        return WXHttpUtil.doUpload(url, mediaPath);
+            if (response != null) {
+                return WXJsonUtil.jsonToBean(response, WXMedia.class);
+            }
         } catch (Exception e) {
             return null;
         }
-//        return WXHttpUtil.doUpload(url, mediaPath);
+        return null;
     }
 }

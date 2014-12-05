@@ -2,6 +2,7 @@ package com.lemon.weixin;
 
 import com.lemon.weixin.sdk.base.WXTokenService;
 import com.lemon.weixin.sdk.media.WXMediaService;
+import com.lemon.weixin.sdk.media.model.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
 import com.lemon.weixin.sdk.message.model.send.WXSendNewsMessage;
 import com.lemon.weixin.sdk.message.model.send.content.WXSendArticle;
@@ -17,15 +18,17 @@ import java.util.List;
  */
 public class App {
     private static String openId = "olONIt17KaZJPbcoeMb8oZ5O7j8E";
-    private static String mediaId = "fcTEh-AOs80PlRjQamcnsFFSMihMvn8aRAaeetZFvWwJkNpdkGEOtAOMeu8D0ZAd";
+    private static String mediaId = null;
     private static String image = "qrcode_for_gh_eapp.jpg";
 
     public static void main(String[] args) {
 //        testSendMessageTemplate();
 //        testGetUserInfoApi("DYun");
 //        testSendNewsMessage();
-//        testSendImage();
         testUploadImage();
+        if (mediaId != null) {
+            testSendImage();
+        }
         System.out.println("Hello World!");
     }
 
@@ -33,8 +36,11 @@ public class App {
         WXTokenService tokenService = new WXTokenService();
         WXMediaService mediaService = new WXMediaService();
         String imagePath = App.class.getClassLoader().getResource(image).getPath();
-        String result = mediaService.uploadImage(tokenService.getAccessToken(), imagePath);
-        System.out.println(result);
+        WXMedia result = mediaService.uploadImage(tokenService.getAccessToken(), imagePath);
+        if (result != null) {
+            mediaId = result.getMedia_id();
+            System.out.println(mediaId);
+        }
     }
 
     public static void testSendImage() {
