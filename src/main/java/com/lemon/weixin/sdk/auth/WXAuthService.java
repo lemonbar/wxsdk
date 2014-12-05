@@ -17,9 +17,9 @@ public class WXAuthService {
     private synchronized WXAuthToken getAuthToken(String code) {
         String response = null;
         if (authToken == null) {
-            response = WXHttpUtil.responseWithURL(WXApiUrl.getAuthTokenUrl(code));
+            response = WXHttpUtil.doGet(WXApiUrl.getAuthTokenUrl(code));
         } else if (StringUtils.isNotBlank(authToken.getRefresh_token()) && authToken.isExpired()) {
-            response = WXHttpUtil.responseWithURL(WXApiUrl.getAuthTokenRefreshUrl(authToken.getRefresh_token()));
+            response = WXHttpUtil.doGet(WXApiUrl.getAuthTokenRefreshUrl(authToken.getRefresh_token()));
         }
         if (response != null) {
             authToken = new Gson().fromJson(response, WXAuthToken.class);

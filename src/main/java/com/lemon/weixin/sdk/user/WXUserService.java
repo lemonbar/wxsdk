@@ -4,7 +4,6 @@ import com.lemon.weixin.sdk.user.model.WXUserInfo;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import com.lemon.weixin.sdk.user.model.WXUserPage;
-import com.lemon.weixin.sdk.util.WXAccessTokenUtil;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 
 /**
@@ -14,7 +13,7 @@ public class WXUserService {
 
     public WXUserPage getUserList(String accessToken, String firstOpenId) {
         String url = WXApiUrl.getUserListUrl(accessToken, firstOpenId);
-        String response = WXHttpUtil.responseWithURL(url);
+        String response = WXHttpUtil.doGet(url);
 
         if (response != null) {
             return WXJsonUtil.jsonToBean(response, WXUserPage.class);
@@ -25,7 +24,7 @@ public class WXUserService {
 
     public WXUserInfo getUserInfo(String accessToken, String openId) {
         String url = WXApiUrl.getUserInfoUrl(accessToken, openId);
-        String response = WXHttpUtil.responseWithURL(url);
+        String response = WXHttpUtil.doGet(url);
 
         if (response != null) {
             return WXJsonUtil.jsonToBean(response, WXUserInfo.class);

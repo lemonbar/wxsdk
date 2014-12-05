@@ -20,6 +20,12 @@ public class WXApiUrl {
     private static String USER_LIST_URL = "https://api.weixin.qq.com/cgi-bin/user/get?access_token=%s&next_openid=%s";
     private static String USER_INFO_URL = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=%s&openid=%s&lang=zh_CN";
 
+    private static String MEDIA_UPLOAD_URL = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s";
+
+    public static String getMediaUploadUrl(String accessToken, String type) {
+        return String.format(MEDIA_UPLOAD_URL, accessToken, type);
+    }
+
     public static String getUserListUrl(String accessToken, String firstOpenId) {
         return String.format(USER_LIST_URL, accessToken, firstOpenId);
     }

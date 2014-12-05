@@ -12,7 +12,7 @@ public class WXTokenService {
         if (WXAccessTokenUtil.isTokenAvailable()) {
             return WXAccessTokenUtil.getToken();
         } else {
-            String response = WXHttpUtil.responseWithURL(WXApiUrl.getBaseTokenUrl());
+            String response = WXHttpUtil.doGet(WXApiUrl.getBaseTokenUrl());
             if (response != null) {
                 return WXAccessTokenUtil.parseAndStoreAccessToken(response);
             }
@@ -21,7 +21,7 @@ public class WXTokenService {
     }
 
     public String refreshAccessToken() {
-        String response = WXHttpUtil.responseWithURL(WXApiUrl.getBaseTokenUrl());
+        String response = WXHttpUtil.doGet(WXApiUrl.getBaseTokenUrl());
         if (response != null) {
             return WXAccessTokenUtil.parseAndStoreAccessToken(response);
         }
