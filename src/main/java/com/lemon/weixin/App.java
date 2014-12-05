@@ -19,17 +19,19 @@ import java.util.List;
  * Hello world!
  */
 public class App {
-    private static String openId = "olONIt17KaZJPbcoeMb8oZ5O7j8E";
+    private static String openId = null;
     private static String mediaId = null;
-    private static String image = "qrcode_for_gh_eapp.jpg";
+    private static String image = "qrcode_for_gh_eapp_860.jpg";
 
     public static void main(String[] args) {
 //        testSendMessageTemplate();
-//        testGetUserInfoApi("DYun");
+        testGetUserInfoApi("DYun");
 //        testSendNewsMessage();
-        testUploadImage();
-        if (mediaId != null) {
-            testSendImage();
+        if (openId != null) {
+            testUploadImage();
+            if (mediaId != null) {
+                testSendImage();
+            }
         }
         System.out.println("Hello World!");
     }
@@ -118,12 +120,13 @@ public class App {
 
         if (wxUserPage != null && wxUserPage.getData().getOpenid() != null) {
             List<String> openIdList = wxUserPage.getData().getOpenid();
-            for (String openId : openIdList) {
-                WXUserInfo userInfo = userService.getUserInfo(token, openId);
+            for (String tmp : openIdList) {
+                WXUserInfo userInfo = userService.getUserInfo(token, tmp);
                 if (userInfo != null) {
                     System.out.println(userInfo.getNickname());
                     if (userInfo.getNickname().equals(nickname)) {
-                        System.out.println(userInfo.getOpenid());
+                        openId = userInfo.getOpenid();
+                        break;
                     }
                 }
             }
