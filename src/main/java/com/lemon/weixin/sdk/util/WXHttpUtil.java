@@ -14,7 +14,6 @@ import org.apache.http.util.EntityUtils;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.charset.Charset;
 
 /**
  * Created by lemon_bar on 2014/12/4.
@@ -91,7 +90,6 @@ public class WXHttpUtil {
             HttpPost req = new HttpPost(URL);
             FileBody fileBody = new FileBody(new File(file));
             HttpEntity reqEntity = MultipartEntityBuilder.create()
-                    .setCharset(Charset.forName(DEFAULT_CHARACTER_SET))
                     .addPart("media", fileBody)
                     .build();
             req.setEntity(reqEntity);
@@ -156,7 +154,7 @@ public class WXHttpUtil {
         sb.append("--"); // 必须多两道线
         sb.append(BOUNDARY);
         sb.append("\r\n");
-        sb.append("Content-Disposition: form-data;name=\"file\";filename=\""
+        sb.append("Content-Disposition: form-data;name=\"media\";filename=\""
                 + file.getName() + "\"\r\n");
         sb.append("Content-Type:application/octet-stream\r\n\r\n");
 

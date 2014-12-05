@@ -11,6 +11,8 @@ import com.lemon.weixin.sdk.user.WXUserService;
 import com.lemon.weixin.sdk.user.model.WXUserInfo;
 import com.lemon.weixin.sdk.user.model.WXUserPage;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 /**
@@ -36,6 +38,12 @@ public class App {
         WXTokenService tokenService = new WXTokenService();
         WXMediaService mediaService = new WXMediaService();
         String imagePath = App.class.getClassLoader().getResource(image).getPath();
+        //decode url for utf-8 chars in image path.
+        try {
+            imagePath = URLDecoder.decode(imagePath, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         WXMedia result = mediaService.uploadImage(tokenService.getAccessToken(), imagePath);
         if (result != null) {
             mediaId = result.getMedia_id();
