@@ -22,6 +22,23 @@ public class WXApiUrl {
 
     private static String MEDIA_UPLOAD_URL = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=%s&type=%s";
 
+    private static String QRCODE_CREATE_URL = "https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=%s";
+    private static String QRCODE_SHOW_URL = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=%s";
+
+    private static String TRANSFER_SHORT_URL = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=%s";
+
+    public static String getShortUrl(String accessToken) {
+        return String.format(TRANSFER_SHORT_URL, accessToken);
+    }
+
+    public static String getQrcodeCreateUrl(String accessToken) {
+        return String.format(QRCODE_CREATE_URL, accessToken);
+    }
+
+    public static String getQrcodeShowUrl(String ticket) {
+        return String.format(QRCODE_SHOW_URL, ticket);
+    }
+
     public static String getMediaUploadUrl(String accessToken, String type) {
         return String.format(MEDIA_UPLOAD_URL, accessToken, type);
     }

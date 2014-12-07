@@ -1,6 +1,7 @@
 package com.lemon.weixin.sdk.util;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 
 /**
@@ -14,5 +15,9 @@ public class WXJsonUtil {
         } catch (JsonSyntaxException e) {
             return null;
         }
+    }
+
+    public static String beanToJson(Object src) {
+        return new GsonBuilder().disableHtmlEscaping().create().toJson(src, src.getClass());
     }
 }
