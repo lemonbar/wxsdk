@@ -5,34 +5,39 @@ import com.lemon.weixin.sdk.media.WXMediaService;
 import com.lemon.weixin.sdk.media.model.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
 import com.lemon.weixin.sdk.message.model.send.WXSendNewsMessage;
+import com.lemon.weixin.sdk.message.model.send.WXSendTemplateMessage;
 import com.lemon.weixin.sdk.message.model.send.content.WXSendArticle;
 import com.lemon.weixin.sdk.message.model.send.content.WXSendNews;
+import com.lemon.weixin.sdk.message.model.send.content.WXSendTemplateItem;
 import com.lemon.weixin.sdk.user.WXUserService;
 import com.lemon.weixin.sdk.user.model.WXUserInfo;
 import com.lemon.weixin.sdk.user.model.WXUserPage;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Hello world!
  */
 public class App {
-    private static String openId = null;
+    private static String openId = "olONIt17KaZJPbcoeMb8oZ5O7j8E";
     private static String mediaId = null;
+    private static String template_id = "I29KF5q1-_y2akKp1v2Fo1xCkpqYuF8P_2PQ_xK6NHE";
     private static String image = "qrcode_for_gh_eapp_860.jpg";
 
     public static void main(String[] args) {
-//        testSendMessageTemplate();
-        testGetUserInfoApi("DYun");
+        testSendMessageTemplate();
+//        testGetUserInfoApi("DYun");
 //        testSendNewsMessage();
-        if (openId != null) {
-            testUploadImage();
-            if (mediaId != null) {
-                testSendImage();
-            }
-        }
+//        if (openId != null) {
+//            testUploadImage();
+//            if (mediaId != null) {
+//                testSendImage();
+//            }
+//        }
         System.out.println("Hello World!");
     }
 
@@ -65,31 +70,55 @@ public class App {
         WXTokenService tokenService = new WXTokenService();
         WXMessageService messageService = new WXMessageService();
 
-        String content = "{\"touser\":\"olONIt-ysZO4zk5IJggNMaCq7qCU\",\n" +
-                "           \"template_id\":\"I29KF5q1-_y2akKp1v2Fo1xCkpqYuF8P_2PQ_xK6NHE\",\n" +
-                "           \"url\":\"http://weixin.qq.com/download\",\n" +
-                "           \"topcolor\":\"#FF0000\",\n" +
-                "           \"data\":{\n" +
-                "                   \"userName\": {\n" +
-                "                       \"value\":\"各位同事，我们医院购买了GE的CT 1000设备，厂家为我们提供了丰富的应用培训课程，请大家访问一下链接进行申请\",\n" +
-                "                       \"color\":\"#0A0A0A\"\n" +
-                "                   },\n" +
-                "                   \"courseName\":{\n" +
-                "                       \"value\":\"CT 1000\",\n" +
-                "                       \"color\":\"#CCCCCC\"\n" +
-                "                   },\n" +
-                "                   \"date\":{\n" +
-                "                       \"value\":\"2014年9月16日\",\n" +
-                "                       \"color\":\"#CCCCCC\"\n" +
-                "                   },\n" +
-                "                   \"remark\":{\n" +
-                "                       \"value\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0cd7b36db6ebbc17&redirect_uri=http://edu.gehealthcare.cn/wx/user/signup/1&response_type=code&scope=snsapi_base&state=123#wechat_redirect\",\n" +
-                "                       \"color\":\"#173177\"\n" +
-                "                   }\n" +
-                "           }\n" +
-                "       }";
+        Map<String, WXSendTemplateItem> data = new HashMap<String, WXSendTemplateItem>();
+        data.put("userName", new WXSendTemplateItem("各位同事，欢迎购买。。。", "#0A0A0A"));
+        data.put("courseName", new WXSendTemplateItem("CT 1000", "#CCCCCC"));
+        data.put("date", new WXSendTemplateItem("2014年9月16日", "#CCCCCC"));
 
-        String result = messageService.sendTemplate(tokenService.getAccessToken(), content);
+//        String dataRaw = "{\"userName\": {\n" +
+//                "                       \"value\":\"各位同事，我们医院购买了GE的CT 1000设备，厂家为我们提供了丰富的应用培训课程，请大家访问一下链接进行申请\",\n" +
+//                "                       \"color\":\"#0A0A0A\"\n" +
+//                "                   },\n" +
+//                "                   \"courseName\":{\n" +
+//                "                       \"value\":\"CT 1000\",\n" +
+//                "                       \"color\":\"#CCCCCC\"\n" +
+//                "                   },\n" +
+//                "                   \"date\":{\n" +
+//                "                       \"value\":\"2014年9月16日\",\n" +
+//                "                       \"color\":\"#CCCCCC\"\n" +
+//                "                   },\n" +
+//                "                   \"remark\":{\n" +
+//                "                       \"value\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0cd7b36db6ebbc17&redirect_uri=http://edu.gehealthcare.cn/wx/user/signup/1&response_type=code&scope=snsapi_base&state=123#wechat_redirect\",\n" +
+//                "                       \"color\":\"#173177\"\n" +
+//                "                   }}\n";
+
+        WXSendTemplateMessage message = new WXSendTemplateMessage(openId, template_id, "http://weixin.qq.com/download", "#FF0000", data);
+
+//        String content = "{\"touser\":\"olONIt-ysZO4zk5IJggNMaCq7qCU\",\n" +
+//                "           \"template_id\":\"I29KF5q1-_y2akKp1v2Fo1xCkpqYuF8P_2PQ_xK6NHE\",\n" +
+//                "           \"url\":\"http://weixin.qq.com/download\",\n" +
+//                "           \"topcolor\":\"#FF0000\",\n" +
+//                "           \"data\":{\n" +
+//                "                   \"userName\": {\n" +
+//                "                       \"value\":\"各位同事，我们医院购买了GE的CT 1000设备，厂家为我们提供了丰富的应用培训课程，请大家访问一下链接进行申请\",\n" +
+//                "                       \"color\":\"#0A0A0A\"\n" +
+//                "                   },\n" +
+//                "                   \"courseName\":{\n" +
+//                "                       \"value\":\"CT 1000\",\n" +
+//                "                       \"color\":\"#CCCCCC\"\n" +
+//                "                   },\n" +
+//                "                   \"date\":{\n" +
+//                "                       \"value\":\"2014年9月16日\",\n" +
+//                "                       \"color\":\"#CCCCCC\"\n" +
+//                "                   },\n" +
+//                "                   \"remark\":{\n" +
+//                "                       \"value\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0cd7b36db6ebbc17&redirect_uri=http://edu.gehealthcare.cn/wx/user/signup/1&response_type=code&scope=snsapi_base&state=123#wechat_redirect\",\n" +
+//                "                       \"color\":\"#173177\"\n" +
+//                "                   }\n" +
+//                "           }\n" +
+//                "       }";
+
+        String result = messageService.sendTemplate(tokenService.getAccessToken(), message);
         System.out.println(result);
     }
 
