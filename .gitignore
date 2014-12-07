@@ -28,3 +28,6 @@ node_modules/
 
 # .build
 .build/
+
+#ignore appinfo file
+WXAppInfo.java
