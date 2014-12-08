@@ -16,7 +16,6 @@ public class WXMediaService {
     public WXMedia uploadMedia(String accessToken, String type, String mediaPath) {
         String url = WXApiUrl.getMediaUploadUrl(accessToken, type);
         try {
-//            String response = WXHttpUtil.sendFile(url, mediaPath);
             String response = WXHttpUtil.doUpload(url, mediaPath);
             if (response != null) {
                 return WXJsonUtil.jsonToBean(response, WXMedia.class);

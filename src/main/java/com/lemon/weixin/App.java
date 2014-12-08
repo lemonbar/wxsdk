@@ -7,7 +7,6 @@ import com.lemon.weixin.sdk.base.model.WXShortUrlAction;
 import com.lemon.weixin.sdk.media.WXMediaService;
 import com.lemon.weixin.sdk.media.model.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
-import com.lemon.weixin.sdk.message.model.send.WXSendNewsMessage;
 import com.lemon.weixin.sdk.message.model.send.WXSendTemplateMessage;
 import com.lemon.weixin.sdk.message.model.send.content.WXSendArticle;
 import com.lemon.weixin.sdk.message.model.send.content.WXSendNews;
@@ -110,7 +109,7 @@ public class App {
 
         WXSendTemplateMessage message = new WXSendTemplateMessage(openId, template_id, "http://weixin.qq.com/download", "#FF0000", data);
 
-        String result = messageService.sendTemplate(tokenService.getAccessToken(), message);
+        String result = messageService.sendTemplateMessage(tokenService.getAccessToken(), message);
         System.out.println(result);
     }
 

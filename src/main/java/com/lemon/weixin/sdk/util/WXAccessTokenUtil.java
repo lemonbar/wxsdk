@@ -1,6 +1,5 @@
 package com.lemon.weixin.sdk.util;
 
-import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import lombok.Data;
 
 import java.util.Date;

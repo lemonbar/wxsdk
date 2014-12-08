@@ -1,6 +1,5 @@
 package com.lemon.weixin.sdk.qrcode;
 
-import com.google.gson.GsonBuilder;
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import com.lemon.weixin.sdk.qrcode.model.WXPermQrcode;
 import com.lemon.weixin.sdk.qrcode.model.WXQrcodeTicket;
