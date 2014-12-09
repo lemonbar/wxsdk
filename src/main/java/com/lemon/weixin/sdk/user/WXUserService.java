@@ -1,9 +1,9 @@
 package com.lemon.weixin.sdk.user;
 
-import com.lemon.weixin.sdk.user.model.WXUserInfo;
+import com.lemon.weixin.sdk.user.resp.WXUserInfo;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
-import com.lemon.weixin.sdk.user.model.WXUserPage;
+import com.lemon.weixin.sdk.user.resp.WXUserPage;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 
 /**

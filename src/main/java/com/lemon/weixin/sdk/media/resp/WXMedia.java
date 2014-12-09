@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.media.model;
+package com.lemon.weixin.sdk.media.resp;
 
 import lombok.Data;
 

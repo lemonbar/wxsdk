@@ -1,9 +1,9 @@
 package com.lemon.weixin.sdk.qrcode;
 
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
-import com.lemon.weixin.sdk.qrcode.model.WXPermQrcode;
-import com.lemon.weixin.sdk.qrcode.model.WXQrcodeTicket;
-import com.lemon.weixin.sdk.qrcode.model.WXTempQrcode;
+import com.lemon.weixin.sdk.qrcode.req.WXPermQrcode;
+import com.lemon.weixin.sdk.qrcode.resp.WXQrcodeTicket;
+import com.lemon.weixin.sdk.qrcode.req.WXTempQrcode;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 

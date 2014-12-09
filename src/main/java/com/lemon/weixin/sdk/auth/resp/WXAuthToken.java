@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.auth.model;
+package com.lemon.weixin.sdk.auth.resp;
 
 import lombok.Data;
 

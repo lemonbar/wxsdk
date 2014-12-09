@@ -1,7 +1,7 @@
 package com.lemon.weixin.sdk.media;
 
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
-import com.lemon.weixin.sdk.media.model.WXMedia;
+import com.lemon.weixin.sdk.media.resp.WXMedia;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 

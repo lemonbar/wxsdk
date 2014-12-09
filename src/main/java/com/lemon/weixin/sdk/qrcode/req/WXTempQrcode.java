@@ -1,5 +1,6 @@
-package com.lemon.weixin.sdk.qrcode.model;
+package com.lemon.weixin.sdk.qrcode.req;
 
+import com.lemon.weixin.sdk.qrcode.req.WXActionInfo;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.qrcode.model;
+package com.lemon.weixin.sdk.qrcode.resp;
 
 import lombok.Data;
 

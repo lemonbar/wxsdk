@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.base.model;
+package com.lemon.weixin.sdk.base.req;
 
 import lombok.Data;
 

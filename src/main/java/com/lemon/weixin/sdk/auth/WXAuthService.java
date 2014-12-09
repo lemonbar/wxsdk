@@ -1,7 +1,7 @@
 package com.lemon.weixin.sdk.auth;
 
 import com.google.gson.Gson;
-import com.lemon.weixin.sdk.auth.model.WXAuthToken;
+import com.lemon.weixin.sdk.auth.resp.WXAuthToken;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
 import org.apache.commons.lang3.StringUtils;

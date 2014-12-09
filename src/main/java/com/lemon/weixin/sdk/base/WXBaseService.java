@@ -1,8 +1,8 @@
 package com.lemon.weixin.sdk.base;
 
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
-import com.lemon.weixin.sdk.base.model.WXShortUrlAction;
-import com.lemon.weixin.sdk.base.model.WXShortUrlResponse;
+import com.lemon.weixin.sdk.base.req.WXShortUrlAction;
+import com.lemon.weixin.sdk.base.resp.WXShortUrlResponse;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 

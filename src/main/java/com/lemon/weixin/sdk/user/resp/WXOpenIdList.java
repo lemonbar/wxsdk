@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.user.model;
+package com.lemon.weixin.sdk.user.resp;
 
 import lombok.Data;
 
