@@ -34,6 +34,7 @@ public class WXXmlUtil {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, false);
             StringWriter writer = new StringWriter();
             marshaller.marshal(obj, writer);
             result = writer.toString();

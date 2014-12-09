@@ -8,6 +8,7 @@ import com.lemon.weixin.sdk.media.WXMediaService;
 import com.lemon.weixin.sdk.media.resp.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
 import com.lemon.weixin.sdk.message.receive.WXReceiveTextMessage;
+import com.lemon.weixin.sdk.message.receive.resp.WXImageMessage;
 import com.lemon.weixin.sdk.message.send.WXSendTemplateMessage;
 import com.lemon.weixin.sdk.message.send.content.WXSendArticle;
 import com.lemon.weixin.sdk.message.send.content.WXSendNews;
@@ -55,20 +56,23 @@ public class App {
     }
 
     public static void testXmlConverter() {
-        String testStr = "<xml><ToUserName>This is to user name.</ToUserName><FromUserName>This is from user name.</FromUserName>\n" +
-                "<CreateTime>1348831860</CreateTime>\n" +
-                "<MsgType>message type.</MsgType>\n" +
-                "<Content>This is content.</Content>\n" +
-                "<MsgId>1234567890123456</MsgId>\n" +
+        String testStr = "<xml>\n" +
+                "<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
+                "<CreateTime>12345678</CreateTime>\n" +
+                "<MsgType><![CDATA[image]]></MsgType>\n" +
+                "<Image>\n" +
+                "<MediaId><![CDATA[media_id]]></MediaId>\n" +
+                "</Image>\n" +
                 "</xml>";
 
         System.out.println(testStr);
         System.out.println("##################################################");
-        WXReceiveTextMessage message = WXXmlUtil.xmlToBean(testStr, WXReceiveTextMessage.class);
+        WXImageMessage message = WXXmlUtil.xmlToBean(testStr, WXImageMessage.class);
 
         String xml = WXXmlUtil.beanToXml(message, "UTF-8");
 
-        WXReceiveTextMessage message2 = WXXmlUtil.xmlToBean(xml, WXReceiveTextMessage.class);
+        WXImageMessage message2 = WXXmlUtil.xmlToBean(xml, WXImageMessage.class);
 
         System.out.println(xml);
     }
