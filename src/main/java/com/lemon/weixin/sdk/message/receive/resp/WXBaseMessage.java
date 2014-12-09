@@ -1,16 +1,23 @@
 package com.lemon.weixin.sdk.message.receive.resp;
 
+import com.lemon.weixin.sdk.util.WXCDataAdapter;
 import lombok.Getter;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * Created by lemon_bar on 2014/12/9.
  */
-@Getter
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class WXBaseMessage {
     //接收方帐号（收到的OpenID）
-    @XmlElement
+//    @XmlElement
+    @XmlJavaTypeAdapter(WXCDataAdapter.class)
     private String ToUserName;
     //开发者微信号
     @XmlElement
