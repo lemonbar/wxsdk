@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.message.model.send;
+package com.lemon.weixin.sdk.message.send;
 
 import lombok.Data;
 

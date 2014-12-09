@@ -1,6 +1,6 @@
-package com.lemon.weixin.sdk.message.model.send;
+package com.lemon.weixin.sdk.message.send;
 
-import com.lemon.weixin.sdk.message.model.send.content.WXSendTemplateItem;
+import com.lemon.weixin.sdk.message.send.content.WXSendTemplateItem;
 import lombok.Data;
 
 import java.util.Map;

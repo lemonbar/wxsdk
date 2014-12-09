@@ -1,4 +1,4 @@
-package com.lemon.weixin.sdk.message.model.receive;
+package com.lemon.weixin.sdk.message.receive;
 
 import javax.xml.bind.annotation.XmlElement;
 

@@ -7,10 +7,11 @@ import com.lemon.weixin.sdk.base.req.WXShortUrlAction;
 import com.lemon.weixin.sdk.media.WXMediaService;
 import com.lemon.weixin.sdk.media.resp.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
-import com.lemon.weixin.sdk.message.model.send.WXSendTemplateMessage;
-import com.lemon.weixin.sdk.message.model.send.content.WXSendArticle;
-import com.lemon.weixin.sdk.message.model.send.content.WXSendNews;
-import com.lemon.weixin.sdk.message.model.send.content.WXSendTemplateItem;
+import com.lemon.weixin.sdk.message.receive.WXReceiveTextMessage;
+import com.lemon.weixin.sdk.message.send.WXSendTemplateMessage;
+import com.lemon.weixin.sdk.message.send.content.WXSendArticle;
+import com.lemon.weixin.sdk.message.send.content.WXSendNews;
+import com.lemon.weixin.sdk.message.send.content.WXSendTemplateItem;
 import com.lemon.weixin.sdk.qrcode.WXQrcodeService;
 import com.lemon.weixin.sdk.qrcode.req.WXActionInfo;
 import com.lemon.weixin.sdk.qrcode.resp.WXQrcodeTicket;
@@ -18,6 +19,7 @@ import com.lemon.weixin.sdk.qrcode.req.WXTempQrcode;
 import com.lemon.weixin.sdk.user.WXUserService;
 import com.lemon.weixin.sdk.user.resp.WXUserInfo;
 import com.lemon.weixin.sdk.user.resp.WXUserPage;
+import com.lemon.weixin.sdk.util.WXXmlUtil;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -37,8 +39,9 @@ public class App {
     private static String longUrl = null;
 
     public static void main(String[] args) {
-        testCreateQrcode();
-        testLong2ShortUrl();
+        testXmlConverter();
+//        testCreateQrcode();
+//        testLong2ShortUrl();
 //        testSendMessageTemplate();
 //        testGetUserInfoApi("DYun");
 //        testSendNewsMessage();
@@ -49,6 +52,25 @@ public class App {
 //            }
 //        }
         System.out.println("Hello World!");
+    }
+
+    public static void testXmlConverter() {
+        String testStr = "<xml><ToUserName>This is to user name.</ToUserName><FromUserName>This is from user name.</FromUserName>\n" +
+                "<CreateTime>1348831860</CreateTime>\n" +
+                "<MsgType>message type.</MsgType>\n" +
+                "<Content>This is content.</Content>\n" +
+                "<MsgId>1234567890123456</MsgId>\n" +
+                "</xml>";
+
+        System.out.println(testStr);
+        System.out.println("##################################################");
+        WXReceiveTextMessage message = WXXmlUtil.xmlToBean(testStr, WXReceiveTextMessage.class);
+
+        String xml = WXXmlUtil.beanToXml(message, "UTF-8");
+
+        WXReceiveTextMessage message2 = WXXmlUtil.xmlToBean(xml, WXReceiveTextMessage.class);
+
+        System.out.println(xml);
     }
 
     public static void testLong2ShortUrl() {

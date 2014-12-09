@@ -1,12 +1,12 @@
 package com.lemon.weixin.sdk.message;
 
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
-import com.lemon.weixin.sdk.message.model.receive.WXReceiveTextMessage;
-import com.lemon.weixin.sdk.message.model.send.WXSendImageMessage;
-import com.lemon.weixin.sdk.message.model.send.WXSendNewsMessage;
-import com.lemon.weixin.sdk.message.model.send.WXSendTemplateMessage;
-import com.lemon.weixin.sdk.message.model.send.WXSendTextMessage;
-import com.lemon.weixin.sdk.message.model.send.content.WXSendNews;
+import com.lemon.weixin.sdk.message.receive.WXReceiveTextMessage;
+import com.lemon.weixin.sdk.message.send.WXSendImageMessage;
+import com.lemon.weixin.sdk.message.send.WXSendNewsMessage;
+import com.lemon.weixin.sdk.message.send.WXSendTemplateMessage;
+import com.lemon.weixin.sdk.message.send.WXSendTextMessage;
+import com.lemon.weixin.sdk.message.send.content.WXSendNews;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 import com.lemon.weixin.sdk.util.WXXmlUtil;
