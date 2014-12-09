@@ -1,6 +1,6 @@
-package com.lemon.weixin.sdk.message.send;
+package com.lemon.weixin.sdk.message.send.req;
 
-import com.lemon.weixin.sdk.message.send.content.WXSendMedia;
+import com.lemon.weixin.sdk.message.send.req.content.WXSendMedia;
 import lombok.Data;
 
 /**

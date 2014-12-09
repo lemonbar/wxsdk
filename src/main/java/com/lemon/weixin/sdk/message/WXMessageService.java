@@ -1,12 +1,12 @@
 package com.lemon.weixin.sdk.message;
 
 import com.lemon.weixin.sdk.base.constants.WXApiUrl;
-import com.lemon.weixin.sdk.message.receive.WXReceiveTextMessage;
-import com.lemon.weixin.sdk.message.send.WXSendImageMessage;
-import com.lemon.weixin.sdk.message.send.WXSendNewsMessage;
-import com.lemon.weixin.sdk.message.send.WXSendTemplateMessage;
-import com.lemon.weixin.sdk.message.send.WXSendTextMessage;
-import com.lemon.weixin.sdk.message.send.content.WXSendNews;
+import com.lemon.weixin.sdk.message.receive.req.WXReceiveRequestTextMessage;
+import com.lemon.weixin.sdk.message.send.req.WXSendImageMessage;
+import com.lemon.weixin.sdk.message.send.req.WXSendNewsMessage;
+import com.lemon.weixin.sdk.message.send.req.WXSendTemplateMessage;
+import com.lemon.weixin.sdk.message.send.req.WXSendTextMessage;
+import com.lemon.weixin.sdk.message.send.req.content.WXSendNews;
 import com.lemon.weixin.sdk.util.WXHttpUtil;
 import com.lemon.weixin.sdk.util.WXJsonUtil;
 import com.lemon.weixin.sdk.util.WXXmlUtil;
@@ -46,8 +46,8 @@ public class WXMessageService {
     }
 
     public void receiveText(String xmlStr) {
-        WXReceiveTextMessage message =
-                WXXmlUtil.xmlToBean(xmlStr, WXReceiveTextMessage.class);
+        WXReceiveRequestTextMessage message =
+                WXXmlUtil.xmlToBean(xmlStr, WXReceiveRequestTextMessage.class);
 
     }
 }

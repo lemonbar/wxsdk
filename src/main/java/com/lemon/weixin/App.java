@@ -7,13 +7,13 @@ import com.lemon.weixin.sdk.base.req.WXShortUrlAction;
 import com.lemon.weixin.sdk.media.WXMediaService;
 import com.lemon.weixin.sdk.media.resp.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
-import com.lemon.weixin.sdk.message.receive.WXReceiveTextMessage;
-import com.lemon.weixin.sdk.message.receive.resp.WXImageMessage;
-import com.lemon.weixin.sdk.message.receive.resp.WXNewsMessage;
-import com.lemon.weixin.sdk.message.send.WXSendTemplateMessage;
-import com.lemon.weixin.sdk.message.send.content.WXSendArticle;
-import com.lemon.weixin.sdk.message.send.content.WXSendNews;
-import com.lemon.weixin.sdk.message.send.content.WXSendTemplateItem;
+import com.lemon.weixin.sdk.message.receive.req.WXReceiveRequestImageMessage;
+import com.lemon.weixin.sdk.message.receive.req.WXReceiveRequestTextMessage;
+import com.lemon.weixin.sdk.message.receive.resp.*;
+import com.lemon.weixin.sdk.message.send.req.WXSendTemplateMessage;
+import com.lemon.weixin.sdk.message.send.req.content.WXSendArticle;
+import com.lemon.weixin.sdk.message.send.req.content.WXSendNews;
+import com.lemon.weixin.sdk.message.send.req.content.WXSendTemplateItem;
 import com.lemon.weixin.sdk.qrcode.WXQrcodeService;
 import com.lemon.weixin.sdk.qrcode.req.WXActionInfo;
 import com.lemon.weixin.sdk.qrcode.resp.WXQrcodeTicket;
@@ -41,7 +41,12 @@ public class App {
     private static String longUrl = null;
 
     public static void main(String[] args) {
-        testXmlConverter();
+//        testReceiveRespMusicMessage();
+//        testReceiveRespVideoMessage();
+//        testReceiveRespImageMessage();
+//        testReceiveReqImageMessage();
+//        testReceiveReqTextMessage();
+        testReceiveRespNewsMessage();
 //        testCreateQrcode();
 //        testLong2ShortUrl();
 //        testSendMessageTemplate();
@@ -56,7 +61,97 @@ public class App {
         System.out.println("Hello World!");
     }
 
-    public static void testXmlConverter() {
+    public static void testReceiveRespMusicMessage(){
+        String str = "<xml>\n" +
+                "<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
+                "<CreateTime>12345678</CreateTime>\n" +
+                "<MsgType><![CDATA[music]]></MsgType>\n" +
+                "<Music>\n" +
+                "<Title><![CDATA[TITLE]]></Title>\n" +
+                "<Description><![CDATA[DESCRIPTION]]></Description>\n" +
+                "<MusicUrl><![CDATA[MUSIC_Url]]></MusicUrl>\n" +
+                "<HQMusicUrl><![CDATA[HQ_MUSIC_Url]]></HQMusicUrl>\n" +
+                "<ThumbMediaId><![CDATA[media_id]]></ThumbMediaId>\n" +
+                "</Music>\n" +
+                "</xml>";
+        System.out.println(str);
+        System.out.println("##################################################");
+        WXReceiveResponseMusicMessage message = WXXmlUtil.xmlToBean(str, WXReceiveResponseMusicMessage.class);
+        String xml = WXXmlUtil.beanToXml(message, "UTF-8");
+        System.out.println(xml);
+    }
+
+    public static void testReceiveRespVideoMessage(){
+        String str = "<xml>\n" +
+                "<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
+                "<CreateTime>12345678</CreateTime>\n" +
+                "<MsgType><![CDATA[video]]></MsgType>\n" +
+                "<Video>\n" +
+                "<MediaId><![CDATA[media_id]]></MediaId>\n" +
+                "<Title><![CDATA[title]]></Title>\n" +
+                "<Description><![CDATA[description]]></Description>\n" +
+                "</Video> \n" +
+                "</xml>";
+        System.out.println(str);
+        System.out.println("##################################################");
+        WXReceiveResponseVideoMessage message = WXXmlUtil.xmlToBean(str, WXReceiveResponseVideoMessage.class);
+        String xml = WXXmlUtil.beanToXml(message, "UTF-8");
+        System.out.println(xml);
+    }
+
+    public static void testReceiveRespImageMessage(){
+        String str = "<xml>\n" +
+                "<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
+                "<FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
+                "<CreateTime>12345678</CreateTime>\n" +
+                "<MsgType><![CDATA[image]]></MsgType>\n" +
+                "<Image>\n" +
+                "<MediaId><![CDATA[media_id]]></MediaId>\n" +
+                "</Image>\n" +
+                "</xml>";
+        System.out.println(str);
+        System.out.println("##################################################");
+        WXReceiveResponseImageMessage message = WXXmlUtil.xmlToBean(str, WXReceiveResponseImageMessage.class);
+        String xml = WXXmlUtil.beanToXml(message, "UTF-8");
+        System.out.println(xml);
+    }
+
+    public static void testReceiveReqTextMessage() {
+        String str = " <xml>\n" +
+                " <ToUserName><![CDATA[<html>toUser</html>]]></ToUserName>\n" +
+                " <FromUserName><![CDATA[fromUser]]></FromUserName> \n" +
+                " <CreateTime>1348831860</CreateTime>\n" +
+                " <MsgType><![CDATA[text]]></MsgType>\n" +
+                " <Content><![CDATA[this is a test]]></Content>\n" +
+                " <MsgId>1234567890123456</MsgId>\n" +
+                " </xml>";
+        System.out.println(str);
+        System.out.println("##################################################");
+        WXReceiveRequestTextMessage message = WXXmlUtil.xmlToBean(str, WXReceiveRequestTextMessage.class);
+        String xml = WXXmlUtil.beanToXml(message, "UTF-8");
+        System.out.println(xml);
+    }
+
+    public static void testReceiveReqImageMessage() {
+        String str = " <xml>\n" +
+                " <ToUserName><![CDATA[OpenId]]></ToUserName>\n" +
+                " <FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
+                " <CreateTime>1348831860</CreateTime>\n" +
+                " <MsgType><![CDATA[image]]></MsgType>\n" +
+                " <PicUrl><![CDATA[this is a url]]></PicUrl>\n" +
+                " <MediaId><![CDATA[media_id]]></MediaId>\n" +
+                " <MsgId>1234567890123456</MsgId>\n" +
+                " </xml>";
+        System.out.println(str);
+        System.out.println("##################################################");
+        WXReceiveRequestImageMessage message = WXXmlUtil.xmlToBean(str, WXReceiveRequestImageMessage.class);
+        String xml = WXXmlUtil.beanToXml(message, "UTF-8");
+        System.out.println(xml);
+    }
+
+    public static void testReceiveRespNewsMessage() {
         String testStr = "<xml>\n" +
                 "<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
                 "<FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
@@ -77,16 +172,12 @@ public class App {
                 "<Url><![CDATA[url]]></Url>\n" +
                 "</item>\n" +
                 "</Articles>\n" +
-                "</xml>";
+                "</xml> ";
 
         System.out.println(testStr);
         System.out.println("##################################################");
-        WXNewsMessage message = WXXmlUtil.xmlToBean(testStr, WXNewsMessage.class);
-
+        WXReceiveResponseNewsMessage message = WXXmlUtil.xmlToBean(testStr, WXReceiveResponseNewsMessage.class);
         String xml = WXXmlUtil.beanToXml(message, "UTF-8");
-
-        WXNewsMessage message2 = WXXmlUtil.xmlToBean(xml, WXNewsMessage.class);
-
         System.out.println(xml);
     }
 

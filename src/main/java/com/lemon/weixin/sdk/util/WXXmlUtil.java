@@ -34,7 +34,6 @@ public class WXXmlUtil {
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, encoding);
-//            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, false);
             marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
             marshaller.setProperty("com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler",
                     new CharacterEscapeHandler() {
