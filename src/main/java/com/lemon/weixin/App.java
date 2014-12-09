@@ -9,6 +9,7 @@ import com.lemon.weixin.sdk.media.resp.WXMedia;
 import com.lemon.weixin.sdk.message.WXMessageService;
 import com.lemon.weixin.sdk.message.receive.WXReceiveTextMessage;
 import com.lemon.weixin.sdk.message.receive.resp.WXImageMessage;
+import com.lemon.weixin.sdk.message.receive.resp.WXNewsMessage;
 import com.lemon.weixin.sdk.message.send.WXSendTemplateMessage;
 import com.lemon.weixin.sdk.message.send.content.WXSendArticle;
 import com.lemon.weixin.sdk.message.send.content.WXSendNews;
@@ -60,19 +61,31 @@ public class App {
                 "<ToUserName><![CDATA[toUser]]></ToUserName>\n" +
                 "<FromUserName><![CDATA[fromUser]]></FromUserName>\n" +
                 "<CreateTime>12345678</CreateTime>\n" +
-                "<MsgType><![CDATA[image]]></MsgType>\n" +
-                "<Image>\n" +
-                "<MediaId><![CDATA[media_id]]></MediaId>\n" +
-                "</Image>\n" +
+                "<MsgType><![CDATA[news]]></MsgType>\n" +
+                "<ArticleCount>2</ArticleCount>\n" +
+                "<Articles>\n" +
+                "<item>\n" +
+                "<Title><![CDATA[title1]]></Title> \n" +
+                "<Description><![CDATA[description1]]></Description>\n" +
+                "<PicUrl><![CDATA[picurl]]></PicUrl>\n" +
+                "<Url><![CDATA[url]]></Url>\n" +
+                "</item>\n" +
+                "<item>\n" +
+                "<Title><![CDATA[title]]></Title>\n" +
+                "<Description><![CDATA[description]]></Description>\n" +
+                "<PicUrl><![CDATA[picurl]]></PicUrl>\n" +
+                "<Url><![CDATA[url]]></Url>\n" +
+                "</item>\n" +
+                "</Articles>\n" +
                 "</xml>";
 
         System.out.println(testStr);
         System.out.println("##################################################");
-        WXImageMessage message = WXXmlUtil.xmlToBean(testStr, WXImageMessage.class);
+        WXNewsMessage message = WXXmlUtil.xmlToBean(testStr, WXNewsMessage.class);
 
         String xml = WXXmlUtil.beanToXml(message, "UTF-8");
 
-        WXImageMessage message2 = WXXmlUtil.xmlToBean(xml, WXImageMessage.class);
+        WXNewsMessage message2 = WXXmlUtil.xmlToBean(xml, WXNewsMessage.class);
 
         System.out.println(xml);
     }
