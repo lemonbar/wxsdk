@@ -1,6 +1,6 @@
 package com.lemon.weixin.sdk.util;
 
-import com.sun.xml.internal.bind.marshaller.CharacterEscapeHandler;
+import com.sun.xml.bind.marshaller.CharacterEscapeHandler;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
