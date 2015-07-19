@@ -53,11 +53,11 @@ public class WXMaterialService {
         return response;
     }
 
-    public static WXJsonResponse deleteMaterial(String mediaId) {
+    public static boolean deleteMaterial(String mediaId) {
         Material material = new Material(mediaId);
         WXDeleteMaterialRequest request = new WXDeleteMaterialRequest(WXTokenController.getToken(), material);
         WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
-        return response;
+        return response.isSuccess();
     }
 
     private static String getMediaUrl(String token, String mediaId) {

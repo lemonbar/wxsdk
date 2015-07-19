@@ -15,10 +15,10 @@ import com.kunbao.weixin.sdk.token.WXTokenController;
  * Created by lemon_bar on 15/7/7.
  */
 public class WXMenuService {
-    public static WXJsonResponse createMenu(Menu menu) {
+    public static boolean createMenu(Menu menu) {
         WXMenuCreateRequest request = new WXMenuCreateRequest(WXTokenController.getToken(), menu);
         WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
-        return response;
+        return response.isSuccess();
     }
 
     public static WXMenuGetResponse getMenu() {
@@ -33,9 +33,9 @@ public class WXMenuService {
         return response;
     }
 
-    public static WXJsonResponse deleteMenu() {
+    public static boolean deleteMenu() {
         WXMenuDeleteRequest request = new WXMenuDeleteRequest(WXTokenController.getToken());
         WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
-        return response;
+        return response.isSuccess();
     }
 }
