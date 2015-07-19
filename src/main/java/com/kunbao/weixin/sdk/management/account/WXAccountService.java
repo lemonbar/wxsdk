@@ -4,7 +4,6 @@ import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.domain.constant.WXBaseUrl;
 import com.kunbao.weixin.sdk.management.account.domain.Long2ShortAction;
 import com.kunbao.weixin.sdk.management.account.domain.QrCode;
-import com.kunbao.weixin.sdk.management.account.domain.constant.QrCodeType;
 import com.kunbao.weixin.sdk.management.account.request.WXQrCodeRequest;
 import com.kunbao.weixin.sdk.management.account.request.WXShortUrlRequest;
 import com.kunbao.weixin.sdk.management.account.response.WXQrCodeResponse;
@@ -20,30 +19,31 @@ import java.net.URLEncoder;
 public class WXAccountService {
     private final static String qrCodeUrlPath = "/cgi-bin/showqrcode?ticket=%s";
 
-    public static WXShortUrlResponse long2ShortUrl(Long2ShortAction long2ShortAction) {
+    public static String long2ShortUrl(String longUrl) {
+        Long2ShortAction long2ShortAction = new Long2ShortAction(longUrl);
         WXShortUrlRequest request = new WXShortUrlRequest(WXTokenController.getToken(), long2ShortAction);
         WXShortUrlResponse response = (WXShortUrlResponse) WXHttpDispatch.execute(request);
-        return response;
+        return response.getShortUrl();
     }
 
     public static String createTempQrcode(long expireSeconds, int scenceId) {
-        QrCode tempQrCode = new QrCode(expireSeconds, QrCodeType.QR_SCENE, scenceId);
+        QrCode tempQrCode = QrCode.createTempQrCode(expireSeconds, scenceId);
         WXQrCodeRequest request = new WXQrCodeRequest(WXTokenController.getToken(), tempQrCode);
         WXQrCodeResponse response = (WXQrCodeResponse) WXHttpDispatch.execute(request);
 
         return getQrCodeUrl(response.getTicket());
     }
 
-    public static String createLimitSceneQrCode(long expireSeconds, int scenceId) {
-        QrCode limitSceneQrCode = new QrCode(expireSeconds, QrCodeType.QR_LIMIT_SCENE, scenceId);
+    public static String createLimitSceneQrCode(int scenceId) {
+        QrCode limitSceneQrCode = QrCode.createLimitQrCode(scenceId);
         WXQrCodeRequest request = new WXQrCodeRequest(WXTokenController.getToken(), limitSceneQrCode);
         WXQrCodeResponse response = (WXQrCodeResponse) WXHttpDispatch.execute(request);
 
         return getQrCodeUrl(response.getTicket());
     }
 
-    public static String createLimitStrSceneQrCode(long expireSeconds, int scenceId) {
-        QrCode limitStrSceneQrCode = new QrCode(expireSeconds, QrCodeType.QR_LIMIT_STR_SCENE, scenceId);
+    public static String createLimitStrSceneQrCode(String scenceStr) {
+        QrCode limitStrSceneQrCode = QrCode.createLimitStrQrCode(scenceStr);
         WXQrCodeRequest request = new WXQrCodeRequest(WXTokenController.getToken(), limitStrSceneQrCode);
         WXQrCodeResponse response = (WXQrCodeResponse) WXHttpDispatch.execute(request);
 

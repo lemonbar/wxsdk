@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class QrCode {
     @JsonProperty("expire_seconds")
-    private long expireSeconds;
+    private Long expireSeconds;
 
     @JsonProperty("action_name")
     private QrCodeType type;
@@ -19,15 +19,27 @@ public class QrCode {
     @JsonProperty("action_info")
     private QrCodeActionInfo actionInfo;
 
-    public QrCode(long expireSeconds, QrCodeType type, int sceneId) {
-        this.expireSeconds = expireSeconds;
-        this.type = type;
-        this.actionInfo = new QrCodeActionInfo(new QrScene(sceneId));
+    public static QrCode createTempQrCode(long expireSeconds, int sceneId) {
+        QrCode tmpQrCode = new QrCode();
+        tmpQrCode.expireSeconds = expireSeconds;
+        tmpQrCode.type = QrCodeType.QR_SCENE;
+        tmpQrCode.actionInfo = new QrCodeActionInfo(new QrScene(sceneId));
+        return tmpQrCode;
     }
 
-    public QrCode(long expireSeconds, QrCodeType type, String sceneStr) {
-        this.expireSeconds = expireSeconds;
-        this.type = type;
-        this.actionInfo = new QrCodeActionInfo(new QrScene(sceneStr));
+    public static QrCode createLimitQrCode(int sceneId) {
+        QrCode limitQrCode = new QrCode();
+        limitQrCode.expireSeconds = null;
+        limitQrCode.type = QrCodeType.QR_LIMIT_SCENE;
+        limitQrCode.actionInfo = new QrCodeActionInfo(new QrScene(sceneId));
+        return limitQrCode;
+    }
+
+    public static QrCode createLimitStrQrCode(String sceneStr) {
+        QrCode limitStrQrCode = new QrCode();
+        limitStrQrCode.expireSeconds = null;
+        limitStrQrCode.type = QrCodeType.QR_LIMIT_STR_SCENE;
+        limitStrQrCode.actionInfo = new QrCodeActionInfo(new QrScene(sceneStr));
+        return limitStrQrCode;
     }
 }
