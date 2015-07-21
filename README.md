@@ -1,11 +1,17 @@
 Wei Xin SDK
 =====
 
-Please invoke the following method to initial your weixin configuration.
+Please use the following method to initial your weixin configuration.
 
-`WXConstant.init(String appId, String appSecret, String appToken, String encodingAESKey)`
+`private WXApi wxApi;`<br/>
+`private synchronized WXApi getWxApi() {`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`if (wxApi == null) {`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`wxApi = new WXApi(WXConstant.APP_ID, WXConstant.APP_SECRET, WXConstant.TOKEN, WXConstant.EncodingAESKey);`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`}`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`return wxApi;`<br/>
+`}`<br/>
 
-####WXAccountService
+####WX Account Service method
 Change long url to short url
 
 `String long2ShortUrl(String longUrl)`
@@ -22,7 +28,7 @@ Create qr code use scence string.
 
 `String createLimitStrSceneQrCode(String scenceStr)`
 
-####WXMaterialService
+####WX Material Service method
 Get material count.
 
 `WXGetMaterialCountResponse getCount()`
@@ -39,7 +45,7 @@ Upload temp material.
 
 `String uploadTempMedia(MediaType type, String filePath)`
 
-####WXMenuService
+####WX Menu Service method
 create weixin menu
 
 `boolean createMenu(Menu menu)`
@@ -56,7 +62,7 @@ delete weixin menu
 
 `boolean deleteMenu()`
 
-####WXMessageService
+####WX Message Service method
 consume weixin pushed message.
 
 `WXMessageBase consumeMessage(String messageStr)`
@@ -66,3 +72,13 @@ product reply message for weixin pushed message.
 `String produceText(String fromUser, String toUser, String content)`
 
 `String produceImage(String fromUser, String toUser, String mediaId)`
+
+####WX User management service method
+get user list.
+
+`WXUserGetResponse getUserList(String nextOpenId)`
+
+get user info.
+
+`WXUserInfoResponse getUserInfo(String openId, String lang)`
+
