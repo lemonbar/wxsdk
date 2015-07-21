@@ -1,6 +1,6 @@
 package com.kunbao.weixin.sdk.util.aes;
 
-import com.kunbao.weixin.sdk.base.domain.constant.WXConstant;
+import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
 import org.junit.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -75,7 +75,7 @@ public class WXBizMsgCryptTest {
         // 公众帐号开发者根据此参数来判断微信公众平台发送的消息是否加密。
         if ("aes".equals(encryptType)) {
             try {
-                WXBizMsgCrypt msgCrypt = new WXBizMsgCrypt(WXConstant.TOKEN, WXConstant.EncodingAESKey, WXConstant.APP_ID);
+                WXBizMsgCrypt msgCrypt = new WXBizMsgCrypt(WXAppInfo.TOKEN, WXAppInfo.EncodingAESKey, WXAppInfo.APP_ID);
                 requestMessage = msgCrypt.decryptMsg(msgSignature, timestamp, nonce, requestMessage);
                 System.out.println(requestMessage);
             } catch (AesException e) {

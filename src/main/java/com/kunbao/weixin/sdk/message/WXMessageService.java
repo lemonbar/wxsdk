@@ -17,17 +17,17 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class WXMessageService {
 
-    public static String produceImage(String fromUser, String toUser, String mediaId) {
+    public String produceImage(String fromUser, String toUser, String mediaId) {
         WXSendImage sendImage = new WXSendImage(fromUser, toUser, mediaId);
         return WXXMLUtil.beanToXml(sendImage);
     }
 
-    public static String produceText(String fromUser, String toUser, String content) {
+    public String produceText(String fromUser, String toUser, String content) {
         WXSendText sendText = new WXSendText(fromUser, toUser, content);
         return WXXMLUtil.beanToXml(sendText);
     }
 
-    public static WXMessageBase consumeMessage(String messageStr) {
+    public WXMessageBase consumeMessage(String messageStr) {
         WXMessageType messageType = WXParserUtil.parserPushedMessageType(messageStr);
         if (messageType != null) {
             switch (messageType) {
@@ -57,7 +57,7 @@ public class WXMessageService {
         return null;
     }
 
-    private static WXReceivedEvent consumeEvent(String eventStr) {
+    private WXReceivedEvent consumeEvent(String eventStr) {
         WXEventType eventType = WXParserUtil.parserPushedEventType(eventStr);
         if (eventType != null) {
             switch (eventType) {
