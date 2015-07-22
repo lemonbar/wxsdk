@@ -16,6 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class WXApi {
     private WXServiceFactory factory;
 
+    /**
+     * 微信api接口
+     * @param appId app id
+     * @param appSecret app secret
+     * @param appToken app token
+     * @param encodingAESKey encoding aes key
+     */
     public WXApi(String appId, String appSecret, String appToken, String encodingAESKey) {
         WXAppInfo.init(appId, appSecret, appToken, encodingAESKey);
         factory = new WXServiceFactory();
