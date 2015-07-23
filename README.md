@@ -27,6 +27,18 @@
 ====
 ###接口介绍
 
-#####安全相关的接口
-1. 
+所有的方法都通过wxApi进行调用，简单易用。
+开发者不需要关心token，相关的刷新逻辑已经封装在代码中。
 
+#####安全相关的接口
+1. 验证服务器地址有效性<br/>
+`boolean checkSignature(String signature, String timestamp, String nonce)`
+2. 解密消息<br/>
+`String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) throws AesException`
+3. 加密消息<br/>
+`String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException`
+4. 解析消息<br/>
+`WXMessageBase consumeMessage(String messageStr) throws WXException`
+5. 产生被动回复消息<br/>
+`String produceText(String fromUser, String toUser, String content) throws WXException`<br/>
+`String produceImage(String fromUser, String toUser, String mediaId) throws WXException`<br/>
