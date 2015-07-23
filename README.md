@@ -40,13 +40,25 @@
 3. 加密消息<br/>
 `String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException`<br/>
 
-4. 解析接受的消息<br/>
-`WXMessageBase consumeMessage(String messageStr) throws WXException`<br/>
-
-5. 产生被动回复消息<br/>
-`String produceText(String fromUser, String toUser, String content) throws WXException`<br/>
-`String produceImage(String fromUser, String toUser, String mediaId) throws WXException`<br/>
-
-6. 获得微信服务器IP地址列表<br/>
+4. 获得微信服务器IP地址列表<br/>
 `List<String> getCallbackIpList() throws WXException`<br/>
 
+#####消息相关的接口
+1. 解析接受的消息<br/>
+`WXMessageBase consumeMessage(String messageStr) throws WXException`<br/>
+
+2. 产生被动回复消息<br/>
+`String produceText(String fromUser, String toUser, String content) throws WXException`<br/>
+`String produceImage(String fromUser, String toUser, String mediaId) throws WXException`<br/>
+`String produceVoice(String fromUser, String toUser, String mediaId) throws WXException`<br/>
+`String produceVideo(String fromUser, String toUser, WXSendVideoMedia videoMedia) throws WXException`<br/>
+`String produceMusic(String fromUser, String toUser, WXSendMusicMedia musicMedia) throws WXException`<br/>
+`String produceNews(String fromUser, String toUser, List<WXSendNewsItem> newsItems) throws WXException`<br/>
+
+3. 发送客服消息<br/>
+`boolean sendCustomText(String toUser, String content) throws WXException`<br/>
+`boolean sendCustomImage(String toUser, String mediaId) throws WXException`<br/>
+`boolean sendCustomVoice(String toUser, String mediaId) throws WXException`<br/>
+`boolean sendCustomVideo(String toUser, VideoContent videoContent) throws WXException`<br/>
+`boolean sendCustomMusic(String toUser, MusicContent musicContent) throws WXException`<br/>
+`boolean sendCustomNews(String toUser, List<NewsItemContent> articles) throws WXException`<br/>
