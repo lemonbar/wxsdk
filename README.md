@@ -1,7 +1,8 @@
-Wei Xin SDK
+微信服务号 SDK for Java
 =====
 
-####How to download
+####如何使用？
+在maven工程的pom.xml，添加下面的引用。
 
 `<dependency>`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<groupId>com.kunbao.weixin</groupId>`<br/>
@@ -9,9 +10,9 @@ Wei Xin SDK
 &nbsp;&nbsp;&nbsp;&nbsp;`<version>1.0</version>`<br/>
 `</dependency>`<br/>
 
-####How to use
+####初始化
 
-Please use the following method to initial your weixin configuration.
+推荐使用下面的单例模式进行初始化。
 
 `private WXApi wxApi;`<br/>
 `public synchronized WXApi getWxApi() {`<br/>
@@ -21,7 +22,9 @@ Please use the following method to initial your weixin configuration.
 &nbsp;&nbsp;&nbsp;&nbsp;`return wxApi;`<br/>
 `}`<br/>
 
-####WX Account Service method
+####接口介绍
+
+
 Change long url to short url
 
 `String long2ShortUrl(String longUrl)`
