@@ -2,9 +2,13 @@ package com.kunbao.weixin.sdk.management.user;
 
 import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.exception.WXException;
+import com.kunbao.weixin.sdk.management.user.domain.WXUserGroup;
+import com.kunbao.weixin.sdk.management.user.domain.WXUserGroupWrapper;
 import com.kunbao.weixin.sdk.management.user.request.WXUserGetRequest;
+import com.kunbao.weixin.sdk.management.user.request.WXUserGroupCreateRequest;
 import com.kunbao.weixin.sdk.management.user.request.WXUserInfoRequest;
 import com.kunbao.weixin.sdk.management.user.response.WXUserGetResponse;
+import com.kunbao.weixin.sdk.management.user.response.WXUserGroupCreateResponse;
 import com.kunbao.weixin.sdk.management.user.response.WXUserInfoResponse;
 import com.kunbao.weixin.sdk.token.WXTokenController;
 
@@ -22,5 +26,12 @@ public class WXUserService {
         WXUserInfoRequest request = new WXUserInfoRequest(WXTokenController.getToken(), openId, lang);
         WXUserInfoResponse response = (WXUserInfoResponse) WXHttpDispatch.execute(request);
         return response;
+    }
+
+    public WXUserGroup createUserGroup(String groupName) throws WXException {
+        WXUserGroupWrapper userGroup = new WXUserGroupWrapper(groupName);
+        WXUserGroupCreateRequest request = new WXUserGroupCreateRequest(WXTokenController.getToken(), userGroup);
+        WXUserGroupCreateResponse response = (WXUserGroupCreateResponse) WXHttpDispatch.execute(request);
+        return response.getUserGroup();
     }
 }
