@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 
 import java.io.IOException;
 
@@ -13,11 +14,11 @@ import java.io.IOException;
 public class WXJsonUtil {
     private static ObjectMapper mapper;
 
-    public static <T> T jsonToBean(String jsonStr, Class<T> cls) {
+    public static <T> T jsonToBean(String jsonStr, Class<T> cls) throws WXException {
         try {
             return getMapper().readValue(jsonStr, cls);
         } catch (IOException e) {
-            return null;
+            throw new WXException(e.getMessage());
         }
     }
 
@@ -30,12 +31,12 @@ public class WXJsonUtil {
         return mapper;
     }
 
-    public static String beanToJson(Object src) {
+    public static String beanToJson(Object src) throws WXException {
         try {
             // Convert object to JSON string
             return getMapper().writeValueAsString(src);
         } catch (JsonProcessingException e) {
-            return null;
+            throw new WXException(e.getMessage());
         }
     }
 }

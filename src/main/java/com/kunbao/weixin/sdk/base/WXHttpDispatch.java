@@ -1,6 +1,9 @@
 package com.kunbao.weixin.sdk.base;
 
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
+import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
+import com.kunbao.weixin.sdk.base.response.WXJsonResponseChecker;
 import com.kunbao.weixin.sdk.base.response.WXResponse;
 import com.kunbao.weixin.sdk.util.WXHttpUtil;
 
@@ -16,17 +19,28 @@ public class WXHttpDispatch {
 
     private final static String URL_FORMAT = "%s?%s";
 
-    public static WXResponse execute(WXRequest request) {
+    public static WXResponse execute(WXRequest request) throws WXException {
+        WXResponse wxResponse = null;
         switch (request.getMethod()) {
             case GET:
-                return doGet(request);
+                wxResponse = doGet(request);
+                break;
             case POST:
-                return doPost(request);
+                wxResponse = doPost(request);
+                break;
             case UPLOAD:
-                return doUpload(request);
+                wxResponse = doUpload(request);
+                break;
             default:
-                return null;
+                throw new WXException("undefined request method.");
         }
+        if (wxResponse == null) {
+            throw new WXException("response is null");
+        }
+        if (wxResponse instanceof WXJsonResponse) {
+            WXJsonResponseChecker.check((WXJsonResponse) wxResponse);
+        }
+        return wxResponse;
     }
 
     private static WXResponse doGet(WXRequest request) {

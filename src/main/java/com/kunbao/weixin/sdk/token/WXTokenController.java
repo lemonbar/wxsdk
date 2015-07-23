@@ -2,6 +2,7 @@ package com.kunbao.weixin.sdk.token;
 
 import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.token.request.WXTokenRequest;
 import com.kunbao.weixin.sdk.token.response.WXTokenResponse;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class WXTokenController {
     private static AccessToken accessToken;
 
-    public synchronized static void parseAndStoreAccessToken() {
+    public synchronized static void parseAndStoreAccessToken() throws WXException {
         if (!isTokenAvailable()) {
             //get access token.
             WXTokenRequest request = new WXTokenRequest(WXAppInfo.APP_ID, WXAppInfo.APP_SECRET);
@@ -31,7 +32,7 @@ public class WXTokenController {
         return (accessToken != null && !accessToken.isExpired());
     }
 
-    public static String getToken() {
+    public static String getToken() throws WXException {
         if (!isTokenAvailable()) {
             parseAndStoreAccessToken();
         }

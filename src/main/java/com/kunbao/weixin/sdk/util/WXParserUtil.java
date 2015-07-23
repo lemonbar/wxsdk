@@ -1,5 +1,6 @@
 package com.kunbao.weixin.sdk.util;
 
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.message.domain.constant.WXEventType;
 import com.kunbao.weixin.sdk.message.domain.constant.WXMessageType;
 import com.kunbao.weixin.sdk.util.xml.WXXMLUtil;
@@ -32,7 +33,7 @@ public class WXParserUtil {
         return null;
     }
 
-    public static <T> T parserMessage(String message, Class<T> messageClass) {
+    public static <T> T parserMessage(String message, Class<T> messageClass) throws WXException {
         return WXXMLUtil.xmlToBean(message, messageClass);
     }
 

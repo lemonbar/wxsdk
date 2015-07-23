@@ -1,20 +1,15 @@
 package com.kunbao.weixin.sdk;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
-import com.kunbao.weixin.sdk.management.menu.domain.Menu;
-import com.kunbao.weixin.sdk.management.menu.response.WXMenuGetResponse;
-import com.kunbao.weixin.sdk.management.menu.response.WXSelfMenuGetResponse;
-import com.kunbao.weixin.sdk.management.user.response.WXUserGetResponse;
-import com.kunbao.weixin.sdk.management.user.response.WXUserInfoResponse;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
-import lombok.extern.slf4j.Slf4j;
+import com.kunbao.weixin.sdk.util.aes.AesException;
 
 import java.util.List;
 
 /**
  * Created by lemon_bar on 15/7/19.
  */
-@Slf4j
 public class WXApi {
     private WXServiceFactory factory;
 
@@ -31,18 +26,44 @@ public class WXApi {
         factory = new WXServiceFactory();
     }
 
+    /**
+     * 通过检验signature对请求进行校验
+     *
+     * @param signature 微信加密签名，signature结合了开发者填写的token参数和请求中的timestamp参数、nonce参数。
+     * @param timestamp 时间戳
+     * @param nonce     随机数
+     * @return 若返回true，请原样返回echostr参数内容，则接入生效，成为开发者成功，否则接入失败。
+     */
     public boolean checkSignature(String signature, String timestamp, String nonce) {
         return factory.getWxSecurityService().checkSignature(signature, timestamp, nonce);
     }
 
-    // url上无encrypt_type参数或者其值为raw时表示为不加密；
-    // encrypt_type为aes时，表示aes加密（暂时只有raw和aes两种值)。
-    // 公众帐号开发者根据此参数来判断微信公众平台发送的消息是否加密。
-    public String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) {
+    /**
+     * 解密消息
+     *
+     * @param encryptType  加密类型，encrypt_type为aes时，表示aes加密（暂时只有raw和aes两种值)。
+     * @param msgSignature 表示对消息体的签名
+     * @param timestamp    时间戳
+     * @param nonce        随机数
+     * @param content      需要解密的消息
+     * @return 解密后的消息
+     * @throws AesException
+     */
+    public String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) throws AesException {
         return factory.getWxSecurityService().decryptContent(encryptType, msgSignature, timestamp, nonce, content);
     }
 
-    public String encryptContent(String encryptType, String timestamp, String nonce, String content) {
+    /**
+     * 加密消息
+     *
+     * @param encryptType 加密类型，encrypt_type为aes时，表示aes加密（暂时只有raw和aes两种值)。
+     * @param timestamp   时间戳
+     * @param nonce       随机数
+     * @param content     需要加密的消息
+     * @return 加密后的消息
+     * @throws AesException
+     */
+    public String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException {
         return factory.getWxSecurityService().encryptContent(encryptType, timestamp, nonce, content);
     }
 
@@ -51,61 +72,67 @@ public class WXApi {
      *
      * @return 微信服务器IP地址列表
      */
-    public List<String> getCallbackIpList() {
+    public List<String> getCallbackIpList() throws WXException {
         return factory.getWxSecurityService().getCallbackIpList();
     }
 
-    public WXMessageBase consumeMessage(String messageStr) {
+    /**
+     * 解析从
+     * @param messageStr
+     * @return
+     * @throws WXException
+     */
+    public WXMessageBase consumeMessage(String messageStr) throws WXException {
         return factory.getWxMessageService().consumeMessage(messageStr);
     }
 
-    public String produceText(String fromUser, String toUser, String content) {
+    public String produceText(String fromUser, String toUser, String content) throws WXException {
         return factory.getWxMessageService().produceText(fromUser, toUser, content);
     }
 
-    public String produceImage(String fromUser, String toUser, String mediaId) {
+    public String produceImage(String fromUser, String toUser, String mediaId) throws WXException {
         return factory.getWxMessageService().produceImage(fromUser, toUser, mediaId);
     }
 
-    //the method about account.
-    public String long2ShortUrl(String longUrl) {
-        return factory.getWxAccountService().long2ShortUrl(longUrl);
-    }
-
-    public String createTempQrcode(long expireSeconds, int scenceId) {
-        return factory.getWxAccountService().createTempQrcode(expireSeconds, scenceId);
-    }
-
-    public String createLimitSceneQrCode(int scenceId) {
-        return factory.getWxAccountService().createLimitSceneQrCode(scenceId);
-    }
-
-    public String createLimitStrSceneQrCode(String scenceStr) {
-        return factory.getWxAccountService().createLimitStrSceneQrCode(scenceStr);
-    }
-
-    public boolean createMenu(Menu menu) {
-        return factory.getWxMenuService().createMenu(menu);
-    }
-
-    public WXMenuGetResponse getMenu() {
-        return factory.getWxMenuService().getMenu();
-    }
-
-    public WXSelfMenuGetResponse getSelfMenu() {
-        return factory.getWxMenuService().getSelfMenu();
-    }
-
-    public boolean deleteMenu() {
-        return factory.getWxMenuService().deleteMenu();
-    }
-
-    public WXUserGetResponse getUserList(String nextOpenId) {
-        return factory.getWxUserService().getUserList(nextOpenId);
-    }
-
-    public WXUserInfoResponse getUserInfo(String openId, String lang) {
-        return factory.getWxUserService().getUserInfo(openId, lang);
-    }
+//    //the method about account.
+//    public String long2ShortUrl(String longUrl) {
+//        return factory.getWxAccountService().long2ShortUrl(longUrl);
+//    }
+//
+//    public String createTempQrcode(long expireSeconds, int scenceId) {
+//        return factory.getWxAccountService().createTempQrcode(expireSeconds, scenceId);
+//    }
+//
+//    public String createLimitSceneQrCode(int scenceId) {
+//        return factory.getWxAccountService().createLimitSceneQrCode(scenceId);
+//    }
+//
+//    public String createLimitStrSceneQrCode(String scenceStr) {
+//        return factory.getWxAccountService().createLimitStrSceneQrCode(scenceStr);
+//    }
+//
+//    public boolean createMenu(Menu menu) {
+//        return factory.getWxMenuService().createMenu(menu);
+//    }
+//
+//    public WXMenuGetResponse getMenu() {
+//        return factory.getWxMenuService().getMenu();
+//    }
+//
+//    public WXSelfMenuGetResponse getSelfMenu() {
+//        return factory.getWxMenuService().getSelfMenu();
+//    }
+//
+//    public boolean deleteMenu() {
+//        return factory.getWxMenuService().deleteMenu();
+//    }
+//
+//    public WXUserGetResponse getUserList(String nextOpenId) {
+//        return factory.getWxUserService().getUserList(nextOpenId);
+//    }
+//
+//    public WXUserInfoResponse getUserInfo(String openId, String lang) {
+//        return factory.getWxUserService().getUserInfo(openId, lang);
+//    }
 
 }

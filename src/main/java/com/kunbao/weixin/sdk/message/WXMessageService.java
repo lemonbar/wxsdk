@@ -1,5 +1,6 @@
 package com.kunbao.weixin.sdk.message;
 
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
 import com.kunbao.weixin.sdk.message.domain.constant.WXEventType;
 import com.kunbao.weixin.sdk.message.domain.constant.WXMessageType;
@@ -9,25 +10,23 @@ import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendImage;
 import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendText;
 import com.kunbao.weixin.sdk.util.WXParserUtil;
 import com.kunbao.weixin.sdk.util.xml.WXXMLUtil;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Created by lemon_bar on 15/7/17.
  */
-@Slf4j
 public class WXMessageService {
 
-    public String produceImage(String fromUser, String toUser, String mediaId) {
+    public String produceImage(String fromUser, String toUser, String mediaId) throws WXException {
         WXSendImage sendImage = new WXSendImage(fromUser, toUser, mediaId);
         return WXXMLUtil.beanToXml(sendImage);
     }
 
-    public String produceText(String fromUser, String toUser, String content) {
+    public String produceText(String fromUser, String toUser, String content) throws WXException {
         WXSendText sendText = new WXSendText(fromUser, toUser, content);
         return WXXMLUtil.beanToXml(sendText);
     }
 
-    public WXMessageBase consumeMessage(String messageStr) {
+    public WXMessageBase consumeMessage(String messageStr) throws WXException {
         WXMessageType messageType = WXParserUtil.parserPushedMessageType(messageStr);
         if (messageType != null) {
             switch (messageType) {
@@ -48,16 +47,13 @@ public class WXMessageService {
                 case location:
                     return WXParserUtil.parserMessage(messageStr, WXReceivedLocation.class);
                 default:
-                    log.error("no matched wx message type, the message is {}", messageStr);
-                    break;
+                    throw new WXException(String.format("no matched wx message type: %s", messageStr));
             }
-        } else {
-            log.error("weixin message type is null, raw: {}", messageStr);
         }
-        return null;
+        throw new WXException(String.format("weixin message type is null, raw content: %s", messageStr));
     }
 
-    private WXReceivedEvent consumeEvent(String eventStr) {
+    private WXReceivedEvent consumeEvent(String eventStr) throws WXException {
         WXEventType eventType = WXParserUtil.parserPushedEventType(eventStr);
         if (eventType != null) {
             switch (eventType) {
@@ -74,11 +70,10 @@ public class WXMessageService {
                 case VIEW:
                     return WXParserUtil.parserMessage(eventStr, WXReceivedViewEvent.class);
                 default:
-                    log.error("no matched wx event type, the message is {}", eventStr);
-                    break;
+                    throw new WXException(String.format("no matched wx event type: %s", eventStr));
             }
         }
-        return null;
+        throw new WXException(String.format("weixin event type is null, raw content: %s", eventStr));
     }
 
 }

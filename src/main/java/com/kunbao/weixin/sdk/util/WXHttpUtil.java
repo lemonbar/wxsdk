@@ -1,5 +1,6 @@
 package com.kunbao.weixin.sdk.util;
 
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -19,10 +20,9 @@ import java.io.IOException;
  * Created by lemon_bar on 15/7/7.
  */
 public class WXHttpUtil {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(WXHttpUtil.class);
     private final static String DEFAULT_CHARACTER_SET = "UTF-8";
 
-    public static String doGet(String URL) {
+    public static String doGet(String URL) throws WXException {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
         try {
@@ -32,7 +32,7 @@ public class WXHttpUtil {
             HttpEntity resEntity = response.getEntity();
             return EntityUtils.toString(resEntity, DEFAULT_CHARACTER_SET);
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            throw new WXException(e.getMessage());
         } finally {
             try {
                 if (response != null) {
@@ -49,10 +49,9 @@ public class WXHttpUtil {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 
-    public static String doPost(String URL, String body) {
+    public static String doPost(String URL, String body) throws WXException {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
         try {
@@ -63,7 +62,7 @@ public class WXHttpUtil {
             HttpEntity resEntity = response.getEntity();
             return EntityUtils.toString(resEntity, DEFAULT_CHARACTER_SET);
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            throw new WXException(e.getMessage());
         } finally {
             try {
                 if (response != null) {
@@ -80,10 +79,9 @@ public class WXHttpUtil {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 
-    public static String doUpload(String URL, String file) {
+    public static String doUpload(String URL, String file) throws WXException {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
         try {
@@ -98,7 +96,7 @@ public class WXHttpUtil {
             HttpEntity resEntity = response.getEntity();
             return EntityUtils.toString(resEntity, DEFAULT_CHARACTER_SET);
         } catch (IOException e) {
-            logger.error(e.getMessage());
+            throw new WXException(e.getMessage());
         } finally {
             try {
                 if (response != null) {
@@ -115,6 +113,5 @@ public class WXHttpUtil {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 }

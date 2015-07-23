@@ -7,7 +7,7 @@
     <version>1.0</version>
     <packaging>jar</packaging>
     <name>wxsdk</name>
-    <description>提供weixin sdk</description>
+    <description>提供weixin服务号的java sdk</description>
     <url>https://github.com/lemonbar/wxsdk</url>
 
     <licenses>
@@ -74,14 +74,6 @@
             <artifactId>commons-codec</artifactId>
             <version>${commons.codec.version}</version>
         </dependency>
-
-        <!-- Logger -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <!-- Logger -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>

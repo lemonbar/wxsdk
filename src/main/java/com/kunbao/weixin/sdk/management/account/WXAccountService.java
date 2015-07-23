@@ -2,6 +2,7 @@ package com.kunbao.weixin.sdk.management.account;
 
 import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.domain.constant.WXBaseUrl;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.management.account.domain.Long2ShortAction;
 import com.kunbao.weixin.sdk.management.account.domain.QrCode;
 import com.kunbao.weixin.sdk.management.account.request.WXQrCodeRequest;
@@ -19,14 +20,14 @@ import java.net.URLEncoder;
 public class WXAccountService {
     private final String qrCodeUrlPath = "/cgi-bin/showqrcode?ticket=%s";
 
-    public String long2ShortUrl(String longUrl) {
+    public String long2ShortUrl(String longUrl) throws WXException {
         Long2ShortAction long2ShortAction = new Long2ShortAction(longUrl);
         WXShortUrlRequest request = new WXShortUrlRequest(WXTokenController.getToken(), long2ShortAction);
         WXShortUrlResponse response = (WXShortUrlResponse) WXHttpDispatch.execute(request);
         return response.getShortUrl();
     }
 
-    public String createTempQrcode(long expireSeconds, int scenceId) {
+    public String createTempQrcode(long expireSeconds, int scenceId) throws WXException {
         QrCode tempQrCode = QrCode.createTempQrCode(expireSeconds, scenceId);
         WXQrCodeRequest request = new WXQrCodeRequest(WXTokenController.getToken(), tempQrCode);
         WXQrCodeResponse response = (WXQrCodeResponse) WXHttpDispatch.execute(request);
@@ -34,7 +35,7 @@ public class WXAccountService {
         return getQrCodeUrl(response.getTicket());
     }
 
-    public String createLimitSceneQrCode(int scenceId) {
+    public String createLimitSceneQrCode(int scenceId) throws WXException {
         QrCode limitSceneQrCode = QrCode.createLimitQrCode(scenceId);
         WXQrCodeRequest request = new WXQrCodeRequest(WXTokenController.getToken(), limitSceneQrCode);
         WXQrCodeResponse response = (WXQrCodeResponse) WXHttpDispatch.execute(request);
@@ -42,7 +43,7 @@ public class WXAccountService {
         return getQrCodeUrl(response.getTicket());
     }
 
-    public String createLimitStrSceneQrCode(String scenceStr) {
+    public String createLimitStrSceneQrCode(String scenceStr) throws WXException {
         QrCode limitStrSceneQrCode = QrCode.createLimitStrQrCode(scenceStr);
         WXQrCodeRequest request = new WXQrCodeRequest(WXTokenController.getToken(), limitStrSceneQrCode);
         WXQrCodeResponse response = (WXQrCodeResponse) WXHttpDispatch.execute(request);
