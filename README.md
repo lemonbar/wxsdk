@@ -32,13 +32,21 @@
 
 #####安全相关的接口
 1. 验证服务器地址有效性<br/>
-`boolean checkSignature(String signature, String timestamp, String nonce)`
+`boolean checkSignature(String signature, String timestamp, String nonce)`<br/>
+
 2. 解密消息<br/>
-`String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) throws AesException`
+`String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) throws AesException`<br/>
+
 3. 加密消息<br/>
-`String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException`
+`String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException`<br/>
+
 4. 解析消息<br/>
-`WXMessageBase consumeMessage(String messageStr) throws WXException`
+`WXMessageBase consumeMessage(String messageStr) throws WXException`<br/>
+
 5. 产生被动回复消息<br/>
 `String produceText(String fromUser, String toUser, String content) throws WXException`<br/>
 `String produceImage(String fromUser, String toUser, String mediaId) throws WXException`<br/>
+
+6. 获得微信服务器IP地址列表<br/>
+`List<String> getCallbackIpList() throws WXException`<br/>
+
