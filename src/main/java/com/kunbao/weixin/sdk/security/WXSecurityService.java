@@ -1,10 +1,16 @@
 package com.kunbao.weixin.sdk.security;
 
+import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
+import com.kunbao.weixin.sdk.security.request.WXServerIplistRequest;
+import com.kunbao.weixin.sdk.security.response.WXServerIpListResponse;
+import com.kunbao.weixin.sdk.token.WXTokenController;
 import com.kunbao.weixin.sdk.util.WXSignatureUtil;
 import com.kunbao.weixin.sdk.util.aes.AesException;
 import com.kunbao.weixin.sdk.util.aes.WXBizMsgCrypt;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 /**
  * Created by lemon_bar on 15/7/19.
@@ -47,5 +53,11 @@ public class WXSecurityService {
         }
 
         return content;
+    }
+
+    public List<String> getCallbackIpList() {
+        WXServerIplistRequest request = new WXServerIplistRequest(WXTokenController.getToken());
+        WXServerIpListResponse response = (WXServerIpListResponse) WXHttpDispatch.execute(request);
+        return response.getIpList();
     }
 }

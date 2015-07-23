@@ -9,6 +9,8 @@ import com.kunbao.weixin.sdk.management.user.response.WXUserInfoResponse;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 /**
  * Created by lemon_bar on 15/7/19.
  */
@@ -18,9 +20,10 @@ public class WXApi {
 
     /**
      * 微信api接口
-     * @param appId app id
-     * @param appSecret app secret
-     * @param appToken app token
+     *
+     * @param appId          app id
+     * @param appSecret      app secret
+     * @param appToken       app token
      * @param encodingAESKey encoding aes key
      */
     public WXApi(String appId, String appSecret, String appToken, String encodingAESKey) {
@@ -41,6 +44,15 @@ public class WXApi {
 
     public String encryptContent(String encryptType, String timestamp, String nonce, String content) {
         return factory.getWxSecurityService().encryptContent(encryptType, timestamp, nonce, content);
+    }
+
+    /**
+     * 获得微信服务器IP地址列表
+     *
+     * @return 微信服务器IP地址列表
+     */
+    public List<String> getCallbackIpList() {
+        return factory.getWxSecurityService().getCallbackIpList();
     }
 
     public WXMessageBase consumeMessage(String messageStr) {

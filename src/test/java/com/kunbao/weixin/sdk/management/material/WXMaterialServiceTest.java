@@ -15,26 +15,33 @@ import java.util.List;
  * Created by lemon_bar on 15/7/12.
  */
 public class WXMaterialServiceTest extends TestCase {
+    private WXMaterialService wxMaterialService;
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        wxMaterialService = new WXMaterialService();
+    }
 
     public void testGetCount() throws Exception {
-        WXGetMaterialCountResponse response = WXMaterialService.getCount();
+        WXGetMaterialCountResponse response = wxMaterialService.getCount();
         System.out.println(response.getImageCount());
     }
 
     public void testGetCommonMaterialList() throws Exception {
         MaterialPageableRequest pageableRequest = new MaterialPageableRequest(MaterialType.image, 0, 4);
-        WXGetCommonMaterialListResponse response = WXMaterialService.getCommonMaterialList(pageableRequest);
+        WXGetCommonMaterialListResponse response = wxMaterialService.getCommonMaterialList(pageableRequest);
         System.out.println(response);
     }
 
     public void testGetNewsMaterialList() throws Exception {
         MaterialPageableRequest pageableRequest = new MaterialPageableRequest(MaterialType.news, 0, 4);
-        WXGetNewsMaterialListResponse response = WXMaterialService.getNewsMaterialList(pageableRequest);
+        WXGetNewsMaterialListResponse response = wxMaterialService.getNewsMaterialList(pageableRequest);
         System.out.println(response);
     }
 
     public void testUploadMedia() throws Exception {
-        String response = WXMaterialService.uploadTempMedia(MediaType.image, "E:\\MyPrivateDocument\\Pic\\DSC_0112.JPG");
+        String response = wxMaterialService.uploadTempMedia(MediaType.image, "E:\\MyPrivateDocument\\Pic\\DSC_0112.JPG");
         System.out.println(response);
     }
 
@@ -52,7 +59,7 @@ public class WXMaterialServiceTest extends TestCase {
         newsItems.add(newsItem);
         newsList.setNewsItems(newsItems);
 
-        WXAddNewsResponse response = WXMaterialService.addNewsList(newsList);
+        WXAddNewsResponse response = wxMaterialService.addNewsList(newsList);
         System.out.println("test");
     }
 
@@ -61,7 +68,7 @@ public class WXMaterialServiceTest extends TestCase {
     }
 
     public void testAddCommonMaterial() throws Exception {
-        WXAddCommonMaterialResponse response = WXMaterialService.addCommonMaterial("/Users/limeng/Documents/7111838.jpeg");
+        WXAddCommonMaterialResponse response = wxMaterialService.addCommonMaterial("/Users/limeng/Documents/7111838.jpeg");
         System.out.println(response.getMediaId());
         System.out.println(response.getUrl());
     }

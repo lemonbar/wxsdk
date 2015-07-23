@@ -1,10 +1,20 @@
 Wei Xin SDK
 =====
 
+####How to download
+
+`<dependency>`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`<groupId>com.kunbao.weixin</groupId>`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`<artifactId>sdk</artifactId>`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`<version>1.0</version>`<br/>
+`</dependency>`<br/>
+
+####How to use
+
 Please use the following method to initial your weixin configuration.
 
 `private WXApi wxApi;`<br/>
-`private synchronized WXApi getWxApi() {`<br/>
+`public synchronized WXApi getWxApi() {`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`if (wxApi == null) {`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`wxApi = new WXApi(WXConstant.APP_ID, WXConstant.APP_SECRET, WXConstant.TOKEN, WXConstant.EncodingAESKey);`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`}`<br/>

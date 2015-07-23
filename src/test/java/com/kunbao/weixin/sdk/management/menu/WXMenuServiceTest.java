@@ -12,6 +12,13 @@ import junit.framework.TestCase;
  * Created by lemon_bar on 15/7/7.
  */
 public class WXMenuServiceTest extends TestCase {
+    private WXMenuService wxMenuService;
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        wxMenuService = new WXMenuService();
+    }
 
     public void testCreateMenu() throws Exception {
         Menu menu = new Menu();
@@ -22,14 +29,14 @@ public class WXMenuServiceTest extends TestCase {
         menu.addButton(btn1);
         menu.addButton(btn2);
 
-        boolean response = WXMenuService.createMenu(menu);
+        boolean response = wxMenuService.createMenu(menu);
     }
 
     public void testGetMenu() throws Exception {
-        WXMenuGetResponse response = WXMenuService.getMenu();
+        WXMenuGetResponse response = wxMenuService.getMenu();
     }
 
     public void testGetSelfMenu() throws Exception {
-        WXSelfMenuGetResponse response = WXMenuService.getSelfMenu();
+        WXSelfMenuGetResponse response = wxMenuService.getSelfMenu();
     }
 }
