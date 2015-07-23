@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.account.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.management.account.domain.Long2ShortAction;
 import com.kunbao.weixin.sdk.management.account.response.WXShortUrlResponse;
@@ -11,7 +12,7 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
  */
 public class WXShortUrlRequest extends WXRequest<WXShortUrlResponse> {
 
-    public WXShortUrlRequest(String token, Long2ShortAction long2ShortAction) {
+    public WXShortUrlRequest(String token, Long2ShortAction long2ShortAction) throws WXException {
         super();
         this.method = WXHTTPMethod.POST;
         this.path = "/cgi-bin/shorturl";
@@ -20,7 +21,7 @@ public class WXShortUrlRequest extends WXRequest<WXShortUrlResponse> {
     }
 
     @Override
-    public WXShortUrlResponse createResponse(String body) {
+    public WXShortUrlResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXShortUrlResponse.class);
     }
 }

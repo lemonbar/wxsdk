@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.menu.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
@@ -18,7 +19,7 @@ public class WXMenuDeleteRequest extends WXRequest<WXJsonResponse> {
     }
 
     @Override
-    public WXJsonResponse createResponse(String body) {
+    public WXJsonResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXJsonResponse.class);
     }
 }

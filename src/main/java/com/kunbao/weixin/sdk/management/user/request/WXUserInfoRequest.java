@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.user.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.management.user.response.WXUserInfoResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
@@ -21,7 +22,7 @@ public class WXUserInfoRequest extends WXRequest<WXUserInfoResponse> {
     }
 
     @Override
-    public WXUserInfoResponse createResponse(String body) {
+    public WXUserInfoResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXUserInfoResponse.class);
     }
 }

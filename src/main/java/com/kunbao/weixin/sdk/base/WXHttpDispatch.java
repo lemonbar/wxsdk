@@ -43,21 +43,21 @@ public class WXHttpDispatch {
         return wxResponse;
     }
 
-    private static WXResponse doGet(WXRequest request) {
+    private static WXResponse doGet(WXRequest request) throws WXException {
         String url = String.format(URL_FORMAT,
                 request.getUrl(),
                 constructQuery(request.getParameters()));
         return request.createResponse(WXHttpUtil.doGet(url));
     }
 
-    private static WXResponse doPost(WXRequest request) {
+    private static WXResponse doPost(WXRequest request) throws WXException {
         String url = String.format(URL_FORMAT,
                 request.getUrl(),
                 constructQuery(request.getParameters()));
         return request.createResponse(WXHttpUtil.doPost(url, request.getBody()));
     }
 
-    private static WXResponse doUpload(WXRequest request) {
+    private static WXResponse doUpload(WXRequest request) throws WXException {
         String url = String.format(URL_FORMAT,
                 request.getUrl(),
                 constructQuery(request.getParameters()));

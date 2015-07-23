@@ -2,6 +2,7 @@ package com.kunbao.weixin.sdk.management.menu.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.collect.Lists;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,5 @@ public abstract class Button {
         this.subButtons = Lists.newArrayList();
     }
 
-    public abstract String toJson();
+    public abstract String toJson() throws WXException;
 }

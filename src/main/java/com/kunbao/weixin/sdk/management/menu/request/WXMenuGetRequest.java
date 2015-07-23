@@ -1,5 +1,6 @@
 package com.kunbao.weixin.sdk.management.menu.request;
 
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.management.menu.response.WXMenuGetResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
@@ -16,7 +17,7 @@ public class WXMenuGetRequest extends WXRequest<WXMenuGetResponse> {
     }
 
     @Override
-    public WXMenuGetResponse createResponse(String body) {
+    public WXMenuGetResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXMenuGetResponse.class);
     }
 }

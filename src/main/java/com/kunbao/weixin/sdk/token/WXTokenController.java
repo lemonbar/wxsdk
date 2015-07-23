@@ -1,7 +1,7 @@
 package com.kunbao.weixin.sdk.token;
 
 import com.kunbao.weixin.sdk.base.WXHttpDispatch;
-import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
+import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.token.request.WXTokenRequest;
 import com.kunbao.weixin.sdk.token.response.WXTokenResponse;
@@ -18,7 +18,7 @@ public class WXTokenController {
     public synchronized static void parseAndStoreAccessToken() throws WXException {
         if (!isTokenAvailable()) {
             //get access token.
-            WXTokenRequest request = new WXTokenRequest(WXAppInfo.APP_ID, WXAppInfo.APP_SECRET);
+            WXTokenRequest request = new WXTokenRequest(WXAppConstant.APP_ID, WXAppConstant.APP_SECRET);
             WXTokenResponse response = (WXTokenResponse) WXHttpDispatch.execute(request);
             //store
             accessToken = new AccessToken();

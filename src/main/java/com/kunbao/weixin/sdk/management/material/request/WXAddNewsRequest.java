@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.material.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.management.material.domain.NewsList;
 import com.kunbao.weixin.sdk.management.material.response.WXAddNewsResponse;
@@ -12,7 +13,7 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
  * Created by lemon_bar on 15/7/12.
  */
 public class WXAddNewsRequest extends WXRequest<WXAddNewsResponse> {
-    public WXAddNewsRequest(String token, NewsList newsList) {
+    public WXAddNewsRequest(String token, NewsList newsList) throws WXException {
         super();
         this.method = WXHTTPMethod.POST;
         this.path = "/cgi-bin/material/add_news";
@@ -21,7 +22,7 @@ public class WXAddNewsRequest extends WXRequest<WXAddNewsResponse> {
     }
 
     @Override
-    public WXAddNewsResponse createResponse(String body) {
+    public WXAddNewsResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXAddNewsResponse.class);
     }
 }

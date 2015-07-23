@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.menu.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
 import lombok.Getter;
 
@@ -18,7 +19,7 @@ public class ViewButton extends Button {
     }
 
     @Override
-    public String toJson() {
+    public String toJson() throws WXException {
         return WXJsonUtil.beanToJson(this);
     }
 }

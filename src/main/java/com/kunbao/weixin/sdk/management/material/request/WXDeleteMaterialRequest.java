@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.material.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
 import com.kunbao.weixin.sdk.management.material.domain.Material;
@@ -12,7 +13,7 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
  * Created by lemon_bar on 15/7/12.
  */
 public class WXDeleteMaterialRequest extends WXRequest<WXJsonResponse> {
-    public WXDeleteMaterialRequest(String token, Material material) {
+    public WXDeleteMaterialRequest(String token, Material material) throws WXException {
         super();
         this.method = WXHTTPMethod.POST;
         this.path = "/cgi-bin/material/del_material";
@@ -21,7 +22,7 @@ public class WXDeleteMaterialRequest extends WXRequest<WXJsonResponse> {
     }
 
     @Override
-    public WXJsonResponse createResponse(String body) {
+    public WXJsonResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXJsonResponse.class);
     }
 }

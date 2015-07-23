@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.material.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
 import com.kunbao.weixin.sdk.management.material.domain.MaterialPageableRequest;
@@ -22,7 +23,7 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
 public class WXGetMaterialListRequest extends WXRequest<WXJsonResponse> {
     private MaterialType type;
 
-    public WXGetMaterialListRequest(String token, MaterialPageableRequest pageableRequest) {
+    public WXGetMaterialListRequest(String token, MaterialPageableRequest pageableRequest) throws WXException {
         super();
         this.method = WXHTTPMethod.POST;
         this.path = "/cgi-bin/material/batchget_material";
@@ -32,7 +33,7 @@ public class WXGetMaterialListRequest extends WXRequest<WXJsonResponse> {
     }
 
     @Override
-    public WXJsonResponse createResponse(String body) {
+    public WXJsonResponse createResponse(String body) throws WXException {
         if (type.equals(MaterialType.news)) {
             return WXJsonUtil.jsonToBean(body, WXGetNewsMaterialListResponse.class);
         } else {

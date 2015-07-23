@@ -1,6 +1,6 @@
 package com.kunbao.weixin.sdk;
 
-import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
+import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
 import com.kunbao.weixin.sdk.util.aes.AesException;
@@ -22,7 +22,7 @@ public class WXApi {
      * @param encodingAESKey encoding aes key
      */
     public WXApi(String appId, String appSecret, String appToken, String encodingAESKey) {
-        WXAppInfo.init(appId, appSecret, appToken, encodingAESKey);
+        WXAppConstant.init(appId, appSecret, appToken, encodingAESKey);
         factory = new WXServiceFactory();
     }
 
@@ -77,7 +77,7 @@ public class WXApi {
     }
 
     /**
-     * 解析从
+     * 解析从微信推送过来的消息
      * @param messageStr
      * @return
      * @throws WXException

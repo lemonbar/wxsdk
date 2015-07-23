@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.security.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.security.response.WXServerIpListResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
@@ -17,7 +18,7 @@ public class WXServerIplistRequest extends WXRequest<WXServerIpListResponse> {
     }
 
     @Override
-    public WXServerIpListResponse createResponse(String body) {
+    public WXServerIpListResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXServerIpListResponse.class);
     }
 }

@@ -1,7 +1,7 @@
 package com.kunbao.weixin.sdk.security;
 
 import com.kunbao.weixin.sdk.base.WXHttpDispatch;
-import com.kunbao.weixin.sdk.base.domain.constant.WXAppInfo;
+import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.security.request.WXServerIplistRequest;
 import com.kunbao.weixin.sdk.security.response.WXServerIpListResponse;
@@ -17,14 +17,14 @@ import java.util.List;
  */
 public class WXSecurityService {
     public boolean checkSignature(String signature, String timestamp, String nonce) {
-        return WXSignatureUtil.checkSignature(signature, timestamp, nonce, WXAppInfo.TOKEN);
+        return WXSignatureUtil.checkSignature(signature, timestamp, nonce, WXAppConstant.TOKEN);
     }
 
     public String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) throws AesException {
         WXBizMsgCrypt msgCrypt = null;
         if ("aes".equals(encryptType)) {
             try {
-                msgCrypt = new WXBizMsgCrypt(WXAppInfo.TOKEN, WXAppInfo.EncodingAESKey, WXAppInfo.APP_ID);
+                msgCrypt = new WXBizMsgCrypt(WXAppConstant.TOKEN, WXAppConstant.EncodingAESKey, WXAppConstant.APP_ID);
                 content = msgCrypt.decryptMsg(msgSignature, timestamp, nonce, content);
             } catch (AesException e) {
                 e.printStackTrace();
@@ -39,7 +39,7 @@ public class WXSecurityService {
         //加密
         if ("aes".equals(encryptType)) {
             try {
-                msgCrypt = new WXBizMsgCrypt(WXAppInfo.TOKEN, WXAppInfo.EncodingAESKey, WXAppInfo.APP_ID);
+                msgCrypt = new WXBizMsgCrypt(WXAppConstant.TOKEN, WXAppConstant.EncodingAESKey, WXAppConstant.APP_ID);
                 content = msgCrypt.encryptMsg(content, timestamp, nonce);
             } catch (AesException e) {
                 e.printStackTrace();

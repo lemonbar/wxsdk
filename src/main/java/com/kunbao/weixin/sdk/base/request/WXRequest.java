@@ -2,6 +2,7 @@ package com.kunbao.weixin.sdk.base.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXBaseUrl;
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.response.WXResponse;
 import lombok.Getter;
 
@@ -40,5 +41,5 @@ public abstract class WXRequest<T extends WXResponse> {
         this.parameters.put(key, value);
     }
 
-    public abstract T createResponse(String body);
+    public abstract T createResponse(String body) throws WXException;
 }

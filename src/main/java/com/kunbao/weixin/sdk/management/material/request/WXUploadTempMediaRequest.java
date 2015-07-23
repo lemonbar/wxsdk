@@ -1,6 +1,7 @@
 package com.kunbao.weixin.sdk.management.material.request;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
+import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
 import com.kunbao.weixin.sdk.management.material.domain.constant.MediaType;
 import com.kunbao.weixin.sdk.management.material.response.WXUploadTempMediaResponse;
@@ -20,7 +21,7 @@ public class WXUploadTempMediaRequest extends WXRequest<WXUploadTempMediaRespons
     }
 
     @Override
-    public WXUploadTempMediaResponse createResponse(String body) {
+    public WXUploadTempMediaResponse createResponse(String body) throws WXException {
         return WXJsonUtil.jsonToBean(body, WXUploadTempMediaResponse.class);
     }
 }
