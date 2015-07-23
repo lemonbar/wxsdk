@@ -3,10 +3,7 @@ package com.kunbao.weixin.sdk.management.user;
 import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
-import com.kunbao.weixin.sdk.management.user.domain.WXUserBatchMove;
-import com.kunbao.weixin.sdk.management.user.domain.WXUserGroup;
-import com.kunbao.weixin.sdk.management.user.domain.WXUserGroupWrapper;
-import com.kunbao.weixin.sdk.management.user.domain.WXUserMove;
+import com.kunbao.weixin.sdk.management.user.domain.*;
 import com.kunbao.weixin.sdk.management.user.request.*;
 import com.kunbao.weixin.sdk.management.user.response.*;
 import com.kunbao.weixin.sdk.token.WXTokenController;
@@ -23,9 +20,15 @@ public class WXUserService {
         return response;
     }
 
-    public WXUserInfoResponse getUserInfo(String openId, String lang) throws WXException {
+    public WXUserInfoResponse getUserInfo(String openId, WXLang lang) throws WXException {
         WXUserInfoRequest request = new WXUserInfoRequest(WXTokenController.getToken(), openId, lang);
         WXUserInfoResponse response = (WXUserInfoResponse) WXHttpDispatch.execute(request);
+        return response;
+    }
+
+    public WXUserInfoListResponse getBatchUserInfo(WXUserList userList) throws WXException {
+        WXUserInfoBatchRequest request = new WXUserInfoBatchRequest(WXTokenController.getToken(), userList);
+        WXUserInfoListResponse response = (WXUserInfoListResponse)WXHttpDispatch.execute(request);
         return response;
     }
 
@@ -71,6 +74,12 @@ public class WXUserService {
 
     public boolean deleteUseGroup(int groupId) throws WXException {
         WXUserGroupDeleteRequest request = new WXUserGroupDeleteRequest(WXTokenController.getToken(), groupId);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean remarkUser(String openId, String remark) throws WXException {
+        WXUserRemarkRequest request = new WXUserRemarkRequest(WXTokenController.getToken(), openId, remark);
         WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
         return response.isSuccess();
     }
