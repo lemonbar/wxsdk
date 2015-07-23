@@ -1,7 +1,9 @@
 package com.kunbao.weixin.sdk.message.domain.send.xml;
 
 import com.kunbao.weixin.sdk.util.xml.XMLCDataAdapter;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -13,9 +15,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 public class WXSendMedia {
     @XmlJavaTypeAdapter(XMLCDataAdapter.class)
     @XmlElement(name = "MediaId")
+    @Setter(AccessLevel.PRIVATE)
     private String mediaId;
 
-    public WXSendMedia() {
+    protected WXSendMedia() {
     }
 
     public WXSendMedia(String mediaId) {

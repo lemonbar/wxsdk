@@ -3,6 +3,12 @@ package com.kunbao.weixin.sdk;
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
+import com.kunbao.weixin.sdk.message.domain.send.json.metadata.MusicContent;
+import com.kunbao.weixin.sdk.message.domain.send.json.metadata.NewsItemContent;
+import com.kunbao.weixin.sdk.message.domain.send.json.metadata.VideoContent;
+import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendMusicMedia;
+import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendNewsItem;
+import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendVideoMedia;
 import com.kunbao.weixin.sdk.util.aes.AesException;
 
 import java.util.List;
@@ -78,20 +84,163 @@ public class WXApi {
 
     /**
      * 解析从微信推送过来的消息
+     *
      * @param messageStr
-     * @return
+     * @return 解析出来的消息类实例
      * @throws WXException
      */
     public WXMessageBase consumeMessage(String messageStr) throws WXException {
         return factory.getWxMessageService().consumeMessage(messageStr);
     }
 
+    /**
+     * 产生需要被动回复的文本消息
+     *
+     * @param fromUser 公众号id
+     * @param toUser   用户的open_id
+     * @param content  回复的文本内容
+     * @return xml内容
+     * @throws WXException
+     */
     public String produceText(String fromUser, String toUser, String content) throws WXException {
         return factory.getWxMessageService().produceText(fromUser, toUser, content);
     }
 
+    /**
+     * 产生需要被动回复的图片消息
+     *
+     * @param fromUser 公众号id
+     * @param toUser   用户的open_id
+     * @param mediaId  图片的id
+     * @return xml内容
+     * @throws WXException
+     */
     public String produceImage(String fromUser, String toUser, String mediaId) throws WXException {
         return factory.getWxMessageService().produceImage(fromUser, toUser, mediaId);
+    }
+
+    /**
+     * 产生需要被动回复的音频消息
+     *
+     * @param fromUser 公众号id
+     * @param toUser   用户的open_id
+     * @param mediaId  音频的id
+     * @return xml内容
+     * @throws WXException
+     */
+    public String produceVoice(String fromUser, String toUser, String mediaId) throws WXException {
+        return factory.getWxMessageService().produceVoice(fromUser, toUser, mediaId);
+    }
+
+    /**
+     * 产生需要被动回复的视频消息
+     *
+     * @param fromUser   公众号id
+     * @param toUser     用户的open_id
+     * @param videoMedia 视频的id
+     * @return xml内容
+     * @throws WXException
+     */
+    public String produceVideo(String fromUser, String toUser, WXSendVideoMedia videoMedia) throws WXException {
+        return factory.getWxMessageService().produceVideo(fromUser, toUser, videoMedia);
+    }
+
+    /**
+     * 产生需要被动回复的音乐消息
+     *
+     * @param fromUser   公众号id
+     * @param toUser     用户的open_id
+     * @param musicMedia 音乐资源
+     * @return 音乐xml内容
+     * @throws WXException
+     */
+    public String produceMusic(String fromUser, String toUser, WXSendMusicMedia musicMedia) throws WXException {
+        return factory.getWxMessageService().produceMusic(fromUser, toUser, musicMedia);
+    }
+
+    /**
+     * 产生需要被动回复的图文消息
+     *
+     * @param fromUser  公众号id
+     * @param toUser    用户的open_id
+     * @param newsItems 图文资源(图文消息个数，限制为10条以内)
+     * @return 图文xml内容
+     * @throws WXException
+     */
+    public String produceNews(String fromUser, String toUser, List<WXSendNewsItem> newsItems) throws WXException {
+        return factory.getWxMessageService().produceNews(fromUser, toUser, newsItems);
+    }
+
+    /**
+     * 发送文本内容的客服消息
+     *
+     * @param toUser  用户的open_id
+     * @param content 文本内容
+     * @return 是否发送成功
+     * @throws WXException
+     */
+    public boolean sendCustomText(String toUser, String content) throws WXException {
+        return factory.getWxMessageService().sendCustomText(toUser, content);
+    }
+
+    /**
+     * 发送图片的客服消息
+     *
+     * @param toUser  用户的open_id
+     * @param mediaId 图片media id
+     * @return 是否发送成功
+     * @throws WXException
+     */
+    public boolean sendCustomImage(String toUser, String mediaId) throws WXException {
+        return factory.getWxMessageService().sendCustomImage(toUser, mediaId);
+    }
+
+    /**
+     * 发送音频的客服消息
+     *
+     * @param toUser  用户的open_id
+     * @param mediaId 音频media id
+     * @return 是否发送成功
+     * @throws WXException
+     */
+    public boolean sendCustomVoice(String toUser, String mediaId) throws WXException {
+        return factory.getWxMessageService().sendCustomVoice(toUser, mediaId);
+    }
+
+    /**
+     * 发送视频的客服消息
+     *
+     * @param toUser       用户的open_id
+     * @param videoContent 视频信息
+     * @return 是否发送成功
+     * @throws WXException
+     */
+    public boolean sendCustomVideo(String toUser, VideoContent videoContent) throws WXException {
+        return factory.getWxMessageService().sendCustomVideo(toUser, videoContent);
+    }
+
+    /**
+     * 发送音乐的客服消息
+     *
+     * @param toUser       用户的open_id
+     * @param musicContent 音乐信息
+     * @return 是否发送成功
+     * @throws WXException
+     */
+    public boolean sendCustomMusic(String toUser, MusicContent musicContent) throws WXException {
+        return factory.getWxMessageService().sendCustomMusic(toUser, musicContent);
+    }
+
+    /**
+     * 发送图文的客服消息
+     *
+     * @param toUser      用户的open_id
+     * @param newsContent 图文信息
+     * @return 是否发送成功
+     * @throws WXException
+     */
+    public boolean sendCustomNews(String toUser, List<NewsItemContent> newsContent) throws WXException {
+        return factory.getWxMessageService().sendCustomNews(toUser, newsContent);
     }
 
 //    //the method about account.

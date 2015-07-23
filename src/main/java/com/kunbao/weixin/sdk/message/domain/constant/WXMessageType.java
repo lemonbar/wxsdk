@@ -8,6 +8,7 @@ public enum WXMessageType {
     image,
     voice,
     video,
+    news,
     shortvideo,
     location,
     link,

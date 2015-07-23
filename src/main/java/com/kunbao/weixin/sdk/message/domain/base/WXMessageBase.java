@@ -35,7 +35,7 @@ public class WXMessageBase {
         return WXMessageType.valueOf(msgType);
     }
 
-    public WXMessageBase() {
+    protected WXMessageBase() {
     }
 
     public WXMessageBase(String fromUser, String toUser, String msgType) {

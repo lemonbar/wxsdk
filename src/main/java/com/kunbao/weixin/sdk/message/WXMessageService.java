@@ -1,15 +1,24 @@
 package com.kunbao.weixin.sdk.message;
 
+import com.kunbao.weixin.sdk.base.WXHttpDispatch;
 import com.kunbao.weixin.sdk.base.exception.WXException;
+import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
 import com.kunbao.weixin.sdk.message.domain.constant.WXEventType;
 import com.kunbao.weixin.sdk.message.domain.constant.WXMessageType;
 import com.kunbao.weixin.sdk.message.domain.received.common.*;
 import com.kunbao.weixin.sdk.message.domain.received.event.*;
-import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendImage;
-import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendText;
+import com.kunbao.weixin.sdk.message.domain.send.json.*;
+import com.kunbao.weixin.sdk.message.domain.send.json.metadata.MusicContent;
+import com.kunbao.weixin.sdk.message.domain.send.json.metadata.NewsItemContent;
+import com.kunbao.weixin.sdk.message.domain.send.json.metadata.VideoContent;
+import com.kunbao.weixin.sdk.message.domain.send.xml.*;
+import com.kunbao.weixin.sdk.message.request.WXCustomMessageSendRequest;
+import com.kunbao.weixin.sdk.token.WXTokenController;
 import com.kunbao.weixin.sdk.util.WXParserUtil;
 import com.kunbao.weixin.sdk.util.xml.WXXMLUtil;
+
+import java.util.List;
 
 /**
  * Created by lemon_bar on 15/7/17.
@@ -24,6 +33,68 @@ public class WXMessageService {
     public String produceText(String fromUser, String toUser, String content) throws WXException {
         WXSendText sendText = new WXSendText(fromUser, toUser, content);
         return WXXMLUtil.beanToXml(sendText);
+    }
+
+    public String produceVoice(String fromUser, String toUser, String mediaId) throws WXException {
+        WXSendVoice voice = new WXSendVoice(fromUser, toUser, mediaId);
+        return WXXMLUtil.beanToXml(voice);
+    }
+
+    public String produceVideo(String fromUser, String toUser, WXSendVideoMedia videoMedia) throws WXException {
+        WXSendVideo video = new WXSendVideo(fromUser, toUser, videoMedia);
+        return WXXMLUtil.beanToXml(video);
+    }
+
+    public String produceMusic(String fromUser, String toUser, WXSendMusicMedia musicMedia) throws WXException {
+        WXSendMusic music = new WXSendMusic(fromUser, toUser, musicMedia);
+        return WXXMLUtil.beanToXml(music);
+    }
+
+    public String produceNews(String fromUser, String toUser, List<WXSendNewsItem> newsItems) throws WXException {
+        WXSendNews news = new WXSendNews(fromUser, toUser, newsItems);
+        return WXXMLUtil.beanToXml(news);
+    }
+
+    public boolean sendCustomText(String toUser, String content) throws WXException {
+        WXCustomText text = new WXCustomText(toUser, content);
+        WXCustomMessageSendRequest request = new WXCustomMessageSendRequest(WXTokenController.getToken(), text);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean sendCustomImage(String toUser, String mediaId) throws WXException {
+        WXCustomImage image = new WXCustomImage(toUser, mediaId);
+        WXCustomMessageSendRequest request = new WXCustomMessageSendRequest(WXTokenController.getToken(), image);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean sendCustomVoice(String toUser, String mediaId) throws WXException {
+        WXCustomVoice voice = new WXCustomVoice(toUser, mediaId);
+        WXCustomMessageSendRequest request = new WXCustomMessageSendRequest(WXTokenController.getToken(), voice);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean sendCustomVideo(String toUser, VideoContent videoContent) throws WXException {
+        WXCustomVideo video = new WXCustomVideo(toUser, videoContent);
+        WXCustomMessageSendRequest request = new WXCustomMessageSendRequest(WXTokenController.getToken(), video);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean sendCustomMusic(String toUser, MusicContent musicContent) throws WXException {
+        WXCustomMusic music = new WXCustomMusic(toUser, musicContent);
+        WXCustomMessageSendRequest request = new WXCustomMessageSendRequest(WXTokenController.getToken(), music);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean sendCustomNews(String toUser, List<NewsItemContent> articles) throws WXException {
+        WXCustomNews news = new WXCustomNews(toUser, articles);
+        WXCustomMessageSendRequest request = new WXCustomMessageSendRequest(WXTokenController.getToken(), news);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
     }
 
     public WXMessageBase consumeMessage(String messageStr) throws WXException {
