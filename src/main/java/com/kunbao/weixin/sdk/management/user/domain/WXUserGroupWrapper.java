@@ -14,4 +14,8 @@ public class WXUserGroupWrapper {
     public WXUserGroupWrapper(String name) {
         this.group = new WXUserGroup(name);
     }
+
+    public WXUserGroupWrapper(Integer id, String name) {
+        this.group = new WXUserGroup(id, name);
+    }
 }

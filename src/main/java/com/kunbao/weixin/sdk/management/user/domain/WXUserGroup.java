@@ -20,11 +20,28 @@ public class WXUserGroup {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("count")
+    private Integer count;
+
     protected WXUserGroup() {
+        this.id = null;
+        this.count = null;
+        this.name = null;
+    }
+
+    public WXUserGroup(Integer id, String name) {
+        this();
+        this.id = id;
+        this.name = name;
     }
 
     public WXUserGroup(String name) {
-        this.id = null;
+        this();
         this.name = name;
+    }
+
+    public WXUserGroup(int id) {
+        this();
+        this.id = id;
     }
 }
