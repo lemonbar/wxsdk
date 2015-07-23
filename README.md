@@ -40,7 +40,7 @@
 3. 加密消息<br/>
 `String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException`<br/>
 
-4. 解析消息<br/>
+4. 解析接受的消息<br/>
 `WXMessageBase consumeMessage(String messageStr) throws WXException`<br/>
 
 5. 产生被动回复消息<br/>
