@@ -128,7 +128,7 @@
 2. 长链接转短链接<br/>
 `String long2ShortUrl(String longUrl) throws WXException`<br/>
 
-#####未实现的接口
+#####未实现的接口(持续实现中...)
 1. 客服账号管理<br/>
 2. 群发接口<br/>
 3. 模板消息接口<br/>
