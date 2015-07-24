@@ -62,3 +62,75 @@
 `boolean sendCustomVideo(String toUser, VideoContent videoContent) throws WXException`<br/>
 `boolean sendCustomMusic(String toUser, MusicContent musicContent) throws WXException`<br/>
 `boolean sendCustomNews(String toUser, List<NewsItemContent> articles) throws WXException`<br/>
+
+#####素材管理接口<br/>
+1. 新增临时素材，返回新增素材的url<br/>
+`String uploadTempMedia(MediaType type, String filePath) throws WXException`<br/>
+
+2. 新增永久图文素材<br/>
+`String addNewsList(NewsList newsList) throws WXException`<br/>
+
+3. 新增永久其它素材<br/>
+`WXAddCommonMaterialResponse addCommonMaterial(String filePath) throws WXException`<br/>
+
+4. 删除永久素材<br/>
+`boolean deleteMaterial(String mediaId) throws WXException`<br/>
+
+5. 修改永久图文素材<br/>
+`boolean updateNewsItem(NewsUpdater newsUpdater) throws WXException`<br/>
+
+6. 获取素材总数<br/>
+`WXGetMaterialCountResponse getMaterialCount() throws WXException`<br/>
+
+7. 获取素材列表<br/>
+`WXGetCommonMaterialListResponse getCommonMaterialList(MaterialPageableRequest pageableRequest) throws WXException`<br/>
+`WXGetNewsMaterialListResponse getNewsMaterialList(MaterialPageableRequest pageableRequest) throws WXException`<br/>
+
+#####用户管理接口<br/>
+1. 用户分组管理<br/>
+`WXUserGroup createUserGroup(String groupName) throws WXException`<br/>
+`List<WXUserGroup> getUserGroup() throws WXException`<br/>
+`int getUserInGroupId(String openId) throws WXException`<br/>
+`boolean updateUserGroup(int groupId, String groupName) throws WXException`<br/>
+`boolean moveUserToGroup(String openId, int groupId) throws WXException`<br/>
+`boolean moveBatchUserToGroup(List<String> openIdList, int groupId) throws WXException`<br/>
+`boolean deleteUseGroup(int groupId) throws WXException`<br/>
+
+2. 设置用户备注名<br/>
+`boolean remarkUser(String openId, String remark) throws WXException`<br/>
+
+3. 获取用户基本信息<br/>
+`WXUserInfoResponse getUserInfo(String openId, WXLang lang) throws WXException`<br/>
+`WXUserInfoListResponse getBatchUserInfo(WXUserList userList) throws WXException`<br/>
+
+4. 获取用户列表<br/>
+`WXUserGetResponse getUserList(String nextOpenId) throws WXException`<br/>
+
+#####自定义菜单接口<br/>
+1. 自定义菜单创建接口<br/>
+`boolean createMenu(Menu menu) throws WXException`<br/>
+
+2. 自定义菜单查询接口<br/>
+`WXMenuGetResponse getMenu() throws WXException`<br/>
+
+3. 自定义菜单删除接口<br/>
+`boolean deleteMenu() throws WXException`<br/>
+
+4. 获取自定义菜单配置接口<br/>
+`WXSelfMenuGetResponse getSelfMenu() throws WXException`<br/>
+
+#####账号管理接口<br/>
+1. 生成带参数的二维码<br/>
+`String createTempQrcode(long expireSeconds, int scenceId) throws WXException`<br/>
+`String createLimitSceneQrCode(int scenceId) throws WXException`<br/>
+`String createLimitStrSceneQrCode(String scenceStr) throws WXException`<br/>
+
+2. 长链接转短链接<br/>
+`String long2ShortUrl(String longUrl) throws WXException`<br/>
+
+#####未实现的接口
+1. 客服账号管理<br/>
+2. 群发接口<br/>
+3. 模板消息接口<br/>
+4. 获取自动回复规则接口<br/>
+5. 数据统计接口<br/>
