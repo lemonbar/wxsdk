@@ -2,6 +2,23 @@ package com.kunbao.weixin.sdk;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
+import com.kunbao.weixin.sdk.management.material.domain.MaterialPageableRequest;
+import com.kunbao.weixin.sdk.management.material.domain.NewsList;
+import com.kunbao.weixin.sdk.management.material.domain.NewsUpdater;
+import com.kunbao.weixin.sdk.management.material.domain.constant.MediaType;
+import com.kunbao.weixin.sdk.management.material.response.WXAddCommonMaterialResponse;
+import com.kunbao.weixin.sdk.management.material.response.WXGetCommonMaterialListResponse;
+import com.kunbao.weixin.sdk.management.material.response.WXGetMaterialCountResponse;
+import com.kunbao.weixin.sdk.management.material.response.WXGetNewsMaterialListResponse;
+import com.kunbao.weixin.sdk.management.menu.domain.Menu;
+import com.kunbao.weixin.sdk.management.menu.response.WXMenuGetResponse;
+import com.kunbao.weixin.sdk.management.menu.response.WXSelfMenuGetResponse;
+import com.kunbao.weixin.sdk.management.user.domain.WXLang;
+import com.kunbao.weixin.sdk.management.user.domain.WXUserGroup;
+import com.kunbao.weixin.sdk.management.user.domain.WXUserList;
+import com.kunbao.weixin.sdk.management.user.response.WXUserGetResponse;
+import com.kunbao.weixin.sdk.management.user.response.WXUserInfoListResponse;
+import com.kunbao.weixin.sdk.management.user.response.WXUserInfoResponse;
 import com.kunbao.weixin.sdk.message.domain.base.WXMessageBase;
 import com.kunbao.weixin.sdk.message.domain.send.json.metadata.MusicContent;
 import com.kunbao.weixin.sdk.message.domain.send.json.metadata.NewsItemContent;
@@ -243,45 +260,304 @@ public class WXApi {
         return factory.getWxMessageService().sendCustomNews(toUser, newsContent);
     }
 
-//    //the method about account.
-//    public String long2ShortUrl(String longUrl) {
-//        return factory.getWxAccountService().long2ShortUrl(longUrl);
-//    }
-//
-//    public String createTempQrcode(long expireSeconds, int scenceId) {
-//        return factory.getWxAccountService().createTempQrcode(expireSeconds, scenceId);
-//    }
-//
-//    public String createLimitSceneQrCode(int scenceId) {
-//        return factory.getWxAccountService().createLimitSceneQrCode(scenceId);
-//    }
-//
-//    public String createLimitStrSceneQrCode(String scenceStr) {
-//        return factory.getWxAccountService().createLimitStrSceneQrCode(scenceStr);
-//    }
-//
-//    public boolean createMenu(Menu menu) {
-//        return factory.getWxMenuService().createMenu(menu);
-//    }
-//
-//    public WXMenuGetResponse getMenu() {
-//        return factory.getWxMenuService().getMenu();
-//    }
-//
-//    public WXSelfMenuGetResponse getSelfMenu() {
-//        return factory.getWxMenuService().getSelfMenu();
-//    }
-//
-//    public boolean deleteMenu() {
-//        return factory.getWxMenuService().deleteMenu();
-//    }
-//
-//    public WXUserGetResponse getUserList(String nextOpenId) {
-//        return factory.getWxUserService().getUserList(nextOpenId);
-//    }
-//
-//    public WXUserInfoResponse getUserInfo(String openId, String lang) {
-//        return factory.getWxUserService().getUserInfo(openId, lang);
-//    }
+    /**
+     * 新增临时素材
+     *
+     * @param type     素材类型
+     * @param filePath 素材路径
+     * @return 新增后，素材的链接
+     * @throws WXException
+     */
+    public String uploadTempMedia(MediaType type, String filePath) throws WXException {
+        return factory.getWxMaterialService().uploadTempMedia(type, filePath);
+    }
+
+    /**
+     * 新增图文永久素材
+     *
+     * @param newsList 图文列表
+     * @return media Id
+     * @throws WXException
+     */
+    public String addNewsList(NewsList newsList) throws WXException {
+        return factory.getWxMaterialService().addNewsList(newsList);
+    }
+
+    /**
+     * 新增其它类型永久素材
+     *
+     * @param filePath 素材路径
+     * @return 素材media id 和 url
+     * @throws WXException
+     */
+    public WXAddCommonMaterialResponse addCommonMaterial(String filePath) throws WXException {
+        return factory.getWxMaterialService().addCommonMaterial(filePath);
+    }
+
+    /**
+     * 删除永久素材
+     *
+     * @param mediaId media id
+     * @return true代表成功
+     * @throws WXException
+     */
+    public boolean deleteMaterial(String mediaId) throws WXException {
+        return factory.getWxMaterialService().deleteMaterial(mediaId);
+    }
+
+    /**
+     * 更新永久图文素材
+     *
+     * @param newsUpdater 需要更新的内容
+     * @return true代表成功
+     * @throws WXException
+     */
+    public boolean updateNewsItem(NewsUpdater newsUpdater) throws WXException {
+        return factory.getWxMaterialService().updateNewsItem(newsUpdater);
+    }
+
+    /**
+     * 获取素材总数
+     *
+     * @return 素材总数
+     * @throws WXException
+     */
+    public WXGetMaterialCountResponse getMaterialCount() throws WXException {
+        return factory.getWxMaterialService().getCount();
+    }
+
+    /**
+     * 获取普通素材列表
+     *
+     * @param pageableRequest 查询条件
+     * @return 普通素材列表
+     * @throws WXException
+     */
+    public WXGetCommonMaterialListResponse getCommonMaterialList(MaterialPageableRequest pageableRequest) throws WXException {
+        return factory.getWxMaterialService().getCommonMaterialList(pageableRequest);
+    }
+
+    /**
+     * 获取图文素材列表
+     *
+     * @param pageableRequest 查询条件
+     * @return 图文素材列表
+     * @throws WXException
+     */
+    public WXGetNewsMaterialListResponse getNewsMaterialList(MaterialPageableRequest pageableRequest) throws WXException {
+        return factory.getWxMaterialService().getNewsMaterialList(pageableRequest);
+    }
+
+    /**
+     * 创建用户分组
+     *
+     * @param groupName 分组名称
+     * @return 新建分组信息
+     * @throws WXException
+     */
+    public WXUserGroup createUserGroup(String groupName) throws WXException {
+        return factory.getWxUserService().createUserGroup(groupName);
+    }
+
+    /**
+     * 获取分组列表
+     *
+     * @return 分组列表
+     * @throws WXException
+     */
+    public List<WXUserGroup> getUserGroup() throws WXException {
+        return factory.getWxUserService().getUserGroup();
+    }
+
+    /**
+     * 获取用户所在分组id
+     *
+     * @param openId 用户openid
+     * @return 用户所在分组id
+     * @throws WXException
+     */
+    public int getUserInGroupId(String openId) throws WXException {
+        return factory.getWxUserService().getUserInGroupId(openId);
+    }
+
+    /**
+     * 更新分组名称
+     *
+     * @param groupId   分组id
+     * @param groupName 分组名称
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean updateUserGroup(int groupId, String groupName) throws WXException {
+        return factory.getWxUserService().updateUserGroup(groupId, groupName);
+    }
+
+    /**
+     * 移动用户到某个分组
+     *
+     * @param openId  用户openid
+     * @param groupId 分组id
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean moveUserToGroup(String openId, int groupId) throws WXException {
+        return factory.getWxUserService().moveUserToGroup(openId, groupId);
+    }
+
+    /**
+     * 批量移动用户
+     *
+     * @param openIdList 用户openid列表
+     * @param groupId    分组id
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean moveBatchUserToGroup(List<String> openIdList, int groupId) throws WXException {
+        return factory.getWxUserService().moveBatchUserToGroup(openIdList, groupId);
+    }
+
+    /**
+     * 删除用户分组
+     *
+     * @param groupId 分组id
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean deleteUseGroup(int groupId) throws WXException {
+        return factory.getWxUserService().deleteUseGroup(groupId);
+    }
+
+    /**
+     * 设置用户备注名
+     *
+     * @param openId 用户openid
+     * @param remark 备注名
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean remarkUser(String openId, String remark) throws WXException {
+        return factory.getWxUserService().remarkUser(openId, remark);
+    }
+
+    /**
+     * 获取用户列表
+     *
+     * @param nextOpenId 起始的openid
+     * @return 用户列表
+     * @throws WXException
+     */
+    public WXUserGetResponse getUserList(String nextOpenId) throws WXException {
+        return factory.getWxUserService().getUserList(nextOpenId);
+    }
+
+    /**
+     * 获取用户信息
+     *
+     * @param openId 用户openid
+     * @param lang   语言
+     * @return 用户信息
+     * @throws WXException
+     */
+    public WXUserInfoResponse getUserInfo(String openId, WXLang lang) throws WXException {
+        return factory.getWxUserService().getUserInfo(openId, lang);
+    }
+
+    /**
+     * 批量获取用户信息
+     *
+     * @param userList 用户openid列表
+     * @return 用户信息
+     * @throws WXException
+     */
+    public WXUserInfoListResponse getBatchUserInfo(WXUserList userList) throws WXException {
+        return factory.getWxUserService().getBatchUserInfo(userList);
+    }
+
+    /**
+     * 创建菜单
+     *
+     * @param menu 菜单
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean createMenu(Menu menu) throws WXException {
+        return factory.getWxMenuService().createMenu(menu);
+    }
+
+    /**
+     * 获取菜单
+     *
+     * @return 菜单
+     * @throws WXException
+     */
+    public WXMenuGetResponse getMenu() throws WXException {
+        return factory.getWxMenuService().getMenu();
+    }
+
+    /**
+     * 获取自定义菜单配置
+     *
+     * @return 自定义菜单配置
+     * @throws WXException
+     */
+    public WXSelfMenuGetResponse getSelfMenu() throws WXException {
+        return factory.getWxMenuService().getSelfMenu();
+    }
+
+    /**
+     * 删除菜单
+     *
+     * @return 是否成功
+     * @throws WXException
+     */
+    public boolean deleteMenu() throws WXException {
+        return factory.getWxMenuService().deleteMenu();
+    }
+
+    /**
+     * 把长链接转为短链接
+     *
+     * @param longUrl 长链接
+     * @return 短链接
+     * @throws WXException
+     */
+    public String long2ShortUrl(String longUrl) throws WXException {
+        return factory.getWxAccountService().long2ShortUrl(longUrl);
+    }
+
+    /**
+     * 创建临时二维码
+     *
+     * @param expireSeconds 过期时间，单位秒，最大不超过604800（7天）
+     * @param scenceId      场景id
+     * @return 二维码链接
+     * @throws WXException
+     */
+    public String createTempQrcode(long expireSeconds, int scenceId) throws WXException {
+        return factory.getWxAccountService().createTempQrcode(expireSeconds, scenceId);
+    }
+
+    /**
+     * 创建带有场景id的永久二维码
+     *
+     * @param scenceId 场景id
+     * @return 二维码链接
+     * @throws WXException
+     */
+    public String createLimitSceneQrCode(int scenceId) throws WXException {
+        return factory.getWxAccountService().createLimitSceneQrCode(scenceId);
+    }
+
+    /**
+     * 创建带有场景string的永久二维码
+     *
+     * @param scenceStr 场景的string值
+     * @return 二维码链接
+     * @throws WXException
+     */
+    public String createLimitStrSceneQrCode(String scenceStr) throws WXException {
+        return factory.getWxAccountService().createLimitStrSceneQrCode(scenceStr);
+    }
+
 
 }

@@ -7,6 +7,7 @@ import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
 import com.kunbao.weixin.sdk.management.material.domain.Material;
 import com.kunbao.weixin.sdk.management.material.domain.MaterialPageableRequest;
 import com.kunbao.weixin.sdk.management.material.domain.NewsList;
+import com.kunbao.weixin.sdk.management.material.domain.NewsUpdater;
 import com.kunbao.weixin.sdk.management.material.domain.constant.MediaType;
 import com.kunbao.weixin.sdk.management.material.request.*;
 import com.kunbao.weixin.sdk.management.material.response.*;
@@ -42,10 +43,10 @@ public class WXMaterialService {
         return getMediaUrl(WXTokenController.getToken(), response.getMediaId());
     }
 
-    public WXAddNewsResponse addNewsList(NewsList newsList) throws WXException {
+    public String addNewsList(NewsList newsList) throws WXException {
         WXAddNewsRequest request = new WXAddNewsRequest(WXTokenController.getToken(), newsList);
         WXAddNewsResponse response = (WXAddNewsResponse) WXHttpDispatch.execute(request);
-        return response;
+        return response.getMediaId();
     }
 
     public WXAddCommonMaterialResponse addCommonMaterial(String filePath) throws WXException {
@@ -57,6 +58,12 @@ public class WXMaterialService {
     public boolean deleteMaterial(String mediaId) throws WXException {
         Material material = new Material(mediaId);
         WXDeleteMaterialRequest request = new WXDeleteMaterialRequest(WXTokenController.getToken(), material);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public boolean updateNewsItem(NewsUpdater newsUpdater) throws WXException {
+        WXUpdateNewsRequest request = new WXUpdateNewsRequest(WXTokenController.getToken(), newsUpdater);
         WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
         return response.isSuccess();
     }

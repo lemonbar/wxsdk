@@ -19,4 +19,9 @@ public class WXAccountServiceTest extends TestCase {
         String qrCodeUrl = wxAccountService.createTempQrcode(seconds, 1);
         System.out.println(qrCodeUrl);
     }
+
+    public void testCreateLimitStrSceneQrCode() throws Exception {
+        String qrCodeUrl = this.wxAccountService.createLimitStrSceneQrCode("aaa");
+        System.out.println(qrCodeUrl);
+    }
 }

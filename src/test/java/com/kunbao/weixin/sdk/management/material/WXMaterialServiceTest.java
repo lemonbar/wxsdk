@@ -59,7 +59,7 @@ public class WXMaterialServiceTest extends TestCase {
         newsItems.add(newsItem);
         newsList.setNewsItems(newsItems);
 
-        WXAddNewsResponse response = wxMaterialService.addNewsList(newsList);
+        String response = wxMaterialService.addNewsList(newsList);
         System.out.println("test");
     }
 

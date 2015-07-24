@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class QrScene {
     @JsonProperty("scene_id")
-    private int sceneId;
+    private Integer sceneId;
 
     @JsonProperty("scene_str")
     private String sceneStr;
