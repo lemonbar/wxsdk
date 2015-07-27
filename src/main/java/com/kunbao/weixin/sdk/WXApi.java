@@ -13,6 +13,8 @@ import com.kunbao.weixin.sdk.management.material.response.WXGetNewsMaterialListR
 import com.kunbao.weixin.sdk.management.menu.domain.Menu;
 import com.kunbao.weixin.sdk.management.menu.response.WXMenuGetResponse;
 import com.kunbao.weixin.sdk.management.menu.response.WXSelfMenuGetResponse;
+import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthResponse;
+import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthUserResponse;
 import com.kunbao.weixin.sdk.management.user.domain.WXLang;
 import com.kunbao.weixin.sdk.management.user.domain.WXUserGroup;
 import com.kunbao.weixin.sdk.management.user.domain.WXUserList;
@@ -43,7 +45,13 @@ public class WXApi {
      * @param appSecret      app secret
      * @param appToken       app token
      * @param encodingAESKey encoding aes key
+     * @param callbackUrl    app callback url
      */
+    public WXApi(String appId, String appSecret, String appToken, String encodingAESKey, String callbackUrl) {
+        WXAppConstant.init(appId, appSecret, appToken, encodingAESKey, callbackUrl);
+        factory = new WXServiceFactory();
+    }
+
     public WXApi(String appId, String appSecret, String appToken, String encodingAESKey) {
         WXAppConstant.init(appId, appSecret, appToken, encodingAESKey);
         factory = new WXServiceFactory();
@@ -559,5 +567,22 @@ public class WXApi {
         return factory.getWxAccountService().createLimitStrSceneQrCode(scenceStr);
     }
 
+    /**
+     * 通过用户授权获取的auth code 拉取auth token
+     *
+     * @param authCode 微信回调获取的auth code
+     * @return
+     * @throws WXException
+     */
+    public WXOAuthResponse getAuthToken(String authCode) throws WXException {
+        return factory.getWxOAuthService().getOAuthAccessToken(authCode);
+    }
 
+    public WXOAuthUserResponse getAuthUserInfo(String authCode, String lang) throws WXException {
+        return factory.getWxOAuthService().getAuthUserInfo(authCode, lang);
+    }
+
+    public WXOAuthUserResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {
+        return factory.getWxOAuthService().getAuthUserInfo(accessToken, openId, lang);
+    }
 }
