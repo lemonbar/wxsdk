@@ -6,4 +6,5 @@ package com.kunbao.weixin.sdk.base.domain.constant;
 public class WXBaseUrl {
     public static final String COMMON = "https://api.weixin.qq.com";
     public static final String MP = "https://mp.weixin.qq.com";
+    public static final String OPEN = "https://open.weixin.qq.com";
 }

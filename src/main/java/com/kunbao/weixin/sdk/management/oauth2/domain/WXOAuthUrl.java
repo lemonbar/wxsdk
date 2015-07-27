@@ -2,6 +2,9 @@ package com.kunbao.weixin.sdk.management.oauth2.domain;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 /**
  * Created by baylor on 15/7/26.
  */
@@ -23,7 +26,7 @@ public class WXOAuthUrl {
         if (url == null) {
             url = baseUrl + "?" +
                     "appid=" + WXAppConstant.APP_ID + "&" +
-                    "response_type="+response_type+"&" +
+                    "response_type=" + response_type + "&" +
                     "redirect_uri=" + redirect_uri + "&" +
                     "scope=" + scope + "&" +
                     "state=" + state + "&" +
@@ -59,7 +62,11 @@ public class WXOAuthUrl {
 //        }
 
         public Builder redirectUri(String redirect_uri) {
-            this.redirect_uri = redirect_uri;
+            try {
+                this.redirect_uri = URLEncoder.encode(redirect_uri, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                this.redirect_uri = redirect_uri;
+            }
             return this;
         }
 

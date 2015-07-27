@@ -13,8 +13,8 @@ import com.kunbao.weixin.sdk.management.material.response.WXGetNewsMaterialListR
 import com.kunbao.weixin.sdk.management.menu.domain.Menu;
 import com.kunbao.weixin.sdk.management.menu.response.WXMenuGetResponse;
 import com.kunbao.weixin.sdk.management.menu.response.WXSelfMenuGetResponse;
-import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthResponse;
-import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthUserResponse;
+import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthTokenGetResponse;
+import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthUserInfoGetResponse;
 import com.kunbao.weixin.sdk.management.user.domain.WXLang;
 import com.kunbao.weixin.sdk.management.user.domain.WXUserGroup;
 import com.kunbao.weixin.sdk.management.user.domain.WXUserList;
@@ -574,15 +574,15 @@ public class WXApi {
      * @return
      * @throws WXException
      */
-    public WXOAuthResponse getAuthToken(String authCode) throws WXException {
+    public WXOAuthTokenGetResponse getAuthToken(String authCode) throws WXException {
         return factory.getWxOAuthService().getOAuthAccessToken(authCode);
     }
 
-    public WXOAuthUserResponse getAuthUserInfo(String authCode, String lang) throws WXException {
+    public WXOAuthUserInfoGetResponse getAuthUserInfo(String authCode, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(authCode, lang);
     }
 
-    public WXOAuthUserResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {
+    public WXOAuthUserInfoGetResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(accessToken, openId, lang);
     }
 }
