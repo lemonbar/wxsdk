@@ -22,6 +22,9 @@
             <name>Li Meng</name>
             <email>lemon_bar@163.com</email>
         </developer>
+        <developer>
+            <name>xueyu</name>
+        </developer>
     </developers>
 
     <scm>
