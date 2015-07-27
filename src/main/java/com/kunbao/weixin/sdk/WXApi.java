@@ -2,6 +2,7 @@ package com.kunbao.weixin.sdk;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
+import com.kunbao.weixin.sdk.datacube.user.domain.UserSummaryItem;
 import com.kunbao.weixin.sdk.management.material.domain.MaterialPageableRequest;
 import com.kunbao.weixin.sdk.management.material.domain.NewsList;
 import com.kunbao.weixin.sdk.management.material.domain.NewsUpdater;
@@ -30,6 +31,7 @@ import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendNewsItem;
 import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendVideoMedia;
 import com.kunbao.weixin.sdk.util.aes.AesException;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -584,5 +586,17 @@ public class WXApi {
 
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(accessToken, openId, lang);
+    }
+
+    /**
+     * 获取用户增减数据,最大时间跨度7天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UserSummaryItem> getUserSummaryDataCube(Date start, Date end) throws WXException {
+        return factory.getUserDataCubeService().getUserSummary(start, end);
     }
 }
