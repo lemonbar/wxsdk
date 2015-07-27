@@ -8,7 +8,7 @@ import lombok.Getter;
  * Created by baylor on 15/7/25.
  */
 @Getter
-public class WXOAuthUserResponse extends WXJsonResponse {
+public class WXOAuthUserInfoGetResponse extends WXJsonResponse {
     @JsonProperty("openid")
     private String openId;
 
@@ -36,7 +36,7 @@ public class WXOAuthUserResponse extends WXJsonResponse {
     @JsonProperty("unionid")
     private String unionId;
 
-    public WXOAuthUserResponse() {
+    public WXOAuthUserInfoGetResponse() {
         super();
     }
 }

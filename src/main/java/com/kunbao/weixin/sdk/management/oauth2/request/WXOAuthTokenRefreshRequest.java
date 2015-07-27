@@ -3,7 +3,7 @@ package com.kunbao.weixin.sdk.management.oauth2.request;
 
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
-import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthResponse;
+import com.kunbao.weixin.sdk.management.oauth2.response.WXOAuthTokenGetResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
 
 /**
@@ -17,11 +17,11 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
  grant_type	是	填写为refresh_token
  refresh_token	是	填写通过access_token获取到的refresh_token参数
  */
-public class WXOAuthRefreshRequest extends WXRequest<WXOAuthResponse> {
+public class WXOAuthTokenRefreshRequest extends WXRequest<WXOAuthTokenGetResponse> {
 
     private final static String GRANT_TYPE_DEFAULT = "refresh_token";
 
-    public WXOAuthRefreshRequest(String appId, String refresh_token) {
+    public WXOAuthTokenRefreshRequest(String appId, String refresh_token) {
         super();
         this.path = "/sns/oauth2/refresh_token";
         this.addParameter("grant_type", GRANT_TYPE_DEFAULT);
@@ -30,7 +30,7 @@ public class WXOAuthRefreshRequest extends WXRequest<WXOAuthResponse> {
     }
 
     @Override
-    public WXOAuthResponse createResponse(String body) throws WXException {
-        return WXJsonUtil.jsonToBean(body, WXOAuthResponse.class);
+    public WXOAuthTokenGetResponse createResponse(String body) throws WXException {
+        return WXJsonUtil.jsonToBean(body, WXOAuthTokenGetResponse.class);
     }
 }
