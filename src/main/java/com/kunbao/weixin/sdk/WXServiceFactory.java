@@ -3,6 +3,7 @@ package com.kunbao.weixin.sdk;
 import com.kunbao.weixin.sdk.management.account.WXAccountService;
 import com.kunbao.weixin.sdk.management.material.WXMaterialService;
 import com.kunbao.weixin.sdk.management.menu.WXMenuService;
+import com.kunbao.weixin.sdk.management.oauth2.WXOAuthService;
 import com.kunbao.weixin.sdk.management.user.WXUserService;
 import com.kunbao.weixin.sdk.message.WXMessageService;
 import com.kunbao.weixin.sdk.security.WXSecurityService;
@@ -64,4 +65,17 @@ public class WXServiceFactory {
         }
         return wxUserService;
     }
+
+    private WXOAuthService wxOAuthService = null;
+
+    public synchronized WXOAuthService getWxOAuthService() {
+        if(wxOAuthService == null){
+            wxOAuthService = new WXOAuthService();
+        }
+
+        return wxOAuthService;
+
+    }
+
+
 }
