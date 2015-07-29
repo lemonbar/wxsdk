@@ -128,9 +128,34 @@
 2. 长链接转短链接<br/>
 `String long2ShortUrl(String longUrl) throws WXException`<br/>
 
+#####数据统计接口<br/>
+1. 用户分析数据接口<br/>
+`List<UserSummaryItem> getUserSummaryDataCube(Date start, Date end) throws WXException`<br/>
+`List<UserCumulateItem> getUserCumulateDateCube(Date start, Date end) throws WXException`<br/>
+
+2. 图文分析数据接口<br/>
+`List<ArticleData> getArticleSummaryDataCube(Date start, Date end) throws WXException`<br/>
+`List<ArticleTotalData> getArticleTotalDataCube(Date start, Date end) throws WXException`<br/>
+`List<UserReadData> getArticleUserReadDataCube(Date start, Date end) throws WXException`<br/>
+`List<UserReadHourData> getArticleUserReadHourDataCube(Date start, Date end) throws WXException`<br/>
+`List<ArticleShareData> getArticleShareDataCube(Date start, Date end) throws WXException`<br/>
+`List<ArticleShareHourData> getArticleShareHourDataCube(Date start, Date end) throws WXException`<br/>
+
+3. 消息分析数据接口<br/>
+`List<UpstreamMsgData> getUpstreamMsgDataCube(Date start, Date end) throws WXException`<br/>
+`List<UpstreamMsgHourData> getUpstreamMsgHourDataCube(Date start, Date end) throws WXException`<br/>
+`List<UpstreamMsgData> getUpstreamMsgWeekDataCube(Date start, Date end) throws WXException`<br/>
+`List<UpstreamMsgData> getUpstreamMsgMonthDataCube(Date start, Date end) throws WXException`<br/>
+`List<UpstreamMsgDistData> getUpstreamMsgDistDataCube(Date start, Date end) throws WXException`<br/>
+`List<UpstreamMsgDistData> getUpstreamMsgDistWeekDataCube(Date start, Date end) throws WXException`<br/>
+`List<UpstreamMsgDistData> getUpstreamMsgDistMonthDataCube(Date start, Date end) throws WXException`<br/>
+
+4. 接口分析数据接口<br/>
+`List<InterfaceData> getInterfaceSummaryDataCube(Date start, Date end) throws WXException`<br/>
+`List<InterfaceHourData> getInterfaceHourSummaryDataCube(Date start, Date end) throws WXException`<br/>
+
 #####未实现的接口(持续实现中...)
 1. 客服账号管理<br/>
 2. 群发接口<br/>
 3. 模板消息接口<br/>
 4. 获取自动回复规则接口<br/>
-5. 数据统计接口<br/>
