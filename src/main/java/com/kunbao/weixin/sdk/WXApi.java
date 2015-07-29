@@ -2,6 +2,7 @@ package com.kunbao.weixin.sdk;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
+import com.kunbao.weixin.sdk.datacube.user.domain.UserCumulateItem;
 import com.kunbao.weixin.sdk.datacube.user.domain.UserSummaryItem;
 import com.kunbao.weixin.sdk.management.material.domain.MaterialPageableRequest;
 import com.kunbao.weixin.sdk.management.material.domain.NewsList;
@@ -598,5 +599,17 @@ public class WXApi {
      */
     public List<UserSummaryItem> getUserSummaryDataCube(Date start, Date end) throws WXException {
         return factory.getUserDataCubeService().getUserSummary(start, end);
+    }
+
+    /**
+     * 获取累计用户数据,最大时间跨度7天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UserCumulateItem> getUserCumulateDateCube(Date start, Date end) throws WXException {
+        return factory.getUserDataCubeService().getUserCumulate(start, end);
     }
 }
