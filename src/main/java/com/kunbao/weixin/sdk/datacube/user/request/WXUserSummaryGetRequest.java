@@ -3,7 +3,7 @@ package com.kunbao.weixin.sdk.datacube.user.request;
 import com.kunbao.weixin.sdk.base.domain.constant.WXHTTPMethod;
 import com.kunbao.weixin.sdk.base.exception.WXException;
 import com.kunbao.weixin.sdk.base.request.WXRequest;
-import com.kunbao.weixin.sdk.datacube.user.domain.DatePeriod;
+import com.kunbao.weixin.sdk.datacube.base.domain.DatePeriod;
 import com.kunbao.weixin.sdk.datacube.user.response.WXUserSummaryGetResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
 

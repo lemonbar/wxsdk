@@ -1,6 +1,9 @@
 package com.kunbao.weixin.sdk;
 
+import com.kunbao.weixin.sdk.datacube.article.WXArticleDataCubeService;
+import com.kunbao.weixin.sdk.datacube.message.WXMessageDataCubeService;
 import com.kunbao.weixin.sdk.datacube.user.WXUserDataCubeService;
+import com.kunbao.weixin.sdk.datacube.wxinterface.WXInterfaceDataCubeService;
 import com.kunbao.weixin.sdk.management.account.WXAccountService;
 import com.kunbao.weixin.sdk.management.material.WXMaterialService;
 import com.kunbao.weixin.sdk.management.menu.WXMenuService;
@@ -88,5 +91,33 @@ public class WXServiceFactory {
         return userDataCubeService;
     }
 
+    private WXArticleDataCubeService articleDataCubeService = null;
+
+    public synchronized WXArticleDataCubeService getArticleDataCubeService() {
+        if (articleDataCubeService == null) {
+            articleDataCubeService = new WXArticleDataCubeService();
+        }
+
+        return articleDataCubeService;
+    }
+
+    private WXMessageDataCubeService messageDataCubeService = null;
+
+    public synchronized WXMessageDataCubeService getMessageDataCubeService() {
+        if (messageDataCubeService == null) {
+            messageDataCubeService = new WXMessageDataCubeService();
+        }
+
+        return messageDataCubeService;
+    }
+
+    private WXInterfaceDataCubeService interfaceDataCubeService = null;
+
+    public synchronized WXInterfaceDataCubeService getInterfaceDataCubeService() {
+        if (interfaceDataCubeService == null) {
+            interfaceDataCubeService = new WXInterfaceDataCubeService();
+        }
+        return interfaceDataCubeService;
+    }
 
 }

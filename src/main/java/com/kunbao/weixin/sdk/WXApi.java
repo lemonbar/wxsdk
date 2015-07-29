@@ -2,8 +2,14 @@ package com.kunbao.weixin.sdk;
 
 import com.kunbao.weixin.sdk.base.domain.constant.WXAppConstant;
 import com.kunbao.weixin.sdk.base.exception.WXException;
+import com.kunbao.weixin.sdk.datacube.article.domain.*;
+import com.kunbao.weixin.sdk.datacube.message.domain.UpstreamMsgData;
+import com.kunbao.weixin.sdk.datacube.message.domain.UpstreamMsgDistData;
+import com.kunbao.weixin.sdk.datacube.message.domain.UpstreamMsgHourData;
 import com.kunbao.weixin.sdk.datacube.user.domain.UserCumulateItem;
 import com.kunbao.weixin.sdk.datacube.user.domain.UserSummaryItem;
+import com.kunbao.weixin.sdk.datacube.wxinterface.domain.InterfaceData;
+import com.kunbao.weixin.sdk.datacube.wxinterface.domain.InterfaceHourData;
 import com.kunbao.weixin.sdk.management.material.domain.MaterialPageableRequest;
 import com.kunbao.weixin.sdk.management.material.domain.NewsList;
 import com.kunbao.weixin.sdk.management.material.domain.NewsUpdater;
@@ -611,5 +617,185 @@ public class WXApi {
      */
     public List<UserCumulateItem> getUserCumulateDateCube(Date start, Date end) throws WXException {
         return factory.getUserDataCubeService().getUserCumulate(start, end);
+    }
+
+    /**
+     * 获取图文群发每日数据,最大时间跨度1天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<ArticleData> getArticleSummaryDataCube(Date start, Date end) throws WXException {
+        return factory.getArticleDataCubeService().getArticleSummary(start, end);
+    }
+
+    /**
+     * 获取图文群发总数据,最大时间跨度1天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<ArticleTotalData> getArticleTotalDataCube(Date start, Date end) throws WXException {
+        return factory.getArticleDataCubeService().getArticleTotal(start, end);
+    }
+
+    /**
+     * 获取图文统计数据,最大时间跨度3天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UserReadData> getArticleUserReadDataCube(Date start, Date end) throws WXException {
+        return factory.getArticleDataCubeService().getArticleUserRead(start, end);
+    }
+
+    /**
+     * 获取图文统计分时数据,最大时间跨度1天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UserReadHourData> getArticleUserReadHourDataCube(Date start, Date end) throws WXException {
+        return factory.getArticleDataCubeService().getArticleUserReadHour(start, end);
+    }
+
+    /**
+     * 获取图文分享转发数据,最大时间跨度7天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<ArticleShareData> getArticleShareDataCube(Date start, Date end) throws WXException {
+        return factory.getArticleDataCubeService().getArticleShare(start, end);
+    }
+
+    /**
+     * 获取图文分享转发分时数据,最大时间跨度1天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<ArticleShareHourData> getArticleShareHourDataCube(Date start, Date end) throws WXException {
+        return factory.getArticleDataCubeService().getArticleShareHour(start, end);
+    }
+
+    /**
+     * 获取消息发送概况数据,最大时间跨度7天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgData> getUpstreamMsgDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsg(start, end);
+    }
+
+    /**
+     * 获取消息分送分时数据,最大时间跨度1天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgHourData> getUpstreamMsgHourDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsgHour(start, end);
+    }
+
+    /**
+     * 获取消息发送周数据,最大时间跨度30天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgData> getUpstreamMsgWeekDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsgWeek(start, end);
+    }
+
+    /**
+     * 获取消息发送月数据,最大时间跨度30天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgData> getUpstreamMsgMonthDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsgMonth(start, end);
+    }
+
+    /**
+     * 获取消息发送分布数据,最大时间跨度15天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgDistData> getUpstreamMsgDistDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsgDist(start, end);
+    }
+
+    /**
+     * 获取消息发送分布周数据,最大时间跨度30天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgDistData> getUpstreamMsgDistWeekDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsgDistWeek(start, end);
+    }
+
+    /**
+     * 获取消息发送分布月数据,最大时间跨度30天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<UpstreamMsgDistData> getUpstreamMsgDistMonthDataCube(Date start, Date end) throws WXException {
+        return factory.getMessageDataCubeService().getUpstreamMsgDistMonth(start, end);
+    }
+
+    /**
+     * 获取接口分析数据,最大时间跨度30天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<InterfaceData> getInterfaceSummaryDataCube(Date start, Date end) throws WXException {
+        return factory.getInterfaceDataCubeService().getInterfaceSummary(start, end);
+    }
+
+    /**
+     * 获取接口分析分时数据,最大时间跨度1天。
+     *
+     * @param start 开始日期
+     * @param end   结束日期
+     * @return 数据列表
+     * @throws WXException
+     */
+    public List<InterfaceHourData> getInterfaceHourSummaryDataCube(Date start, Date end) throws WXException {
+        return factory.getInterfaceDataCubeService().getInterfaceHourSummary(start, end);
     }
 }
