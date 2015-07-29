@@ -1,4 +1,4 @@
-package com.kunbao.weixin.sdk.datacube.user.domain;
+package com.kunbao.weixin.sdk.datacube.base.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kunbao.weixin.sdk.base.exception.WXException;
