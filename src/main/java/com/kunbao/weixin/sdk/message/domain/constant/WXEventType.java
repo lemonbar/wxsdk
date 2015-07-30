@@ -9,5 +9,6 @@ public enum WXEventType {
     SCAN,
     LOCATION,
     CLICK,
-    VIEW;
+    VIEW,
+    TEMPLATESENDJOBFINISH;
 }

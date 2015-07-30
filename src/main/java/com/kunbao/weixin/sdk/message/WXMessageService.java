@@ -13,7 +13,15 @@ import com.kunbao.weixin.sdk.message.domain.send.json.metadata.MusicContent;
 import com.kunbao.weixin.sdk.message.domain.send.json.metadata.NewsItemContent;
 import com.kunbao.weixin.sdk.message.domain.send.json.metadata.VideoContent;
 import com.kunbao.weixin.sdk.message.domain.send.xml.*;
+import com.kunbao.weixin.sdk.message.domain.template.Industry;
+import com.kunbao.weixin.sdk.message.domain.template.MessageInfo;
+import com.kunbao.weixin.sdk.message.domain.template.ShortId;
 import com.kunbao.weixin.sdk.message.request.WXCustomMessageSendRequest;
+import com.kunbao.weixin.sdk.message.request.WXIndustrySetRequest;
+import com.kunbao.weixin.sdk.message.request.WXTemplateIdGetRequest;
+import com.kunbao.weixin.sdk.message.request.WXTemplateSendRequest;
+import com.kunbao.weixin.sdk.message.response.WXTemplateIdGetResponse;
+import com.kunbao.weixin.sdk.message.response.WXTemplateSendResponse;
 import com.kunbao.weixin.sdk.token.WXTokenController;
 import com.kunbao.weixin.sdk.util.WXParserUtil;
 import com.kunbao.weixin.sdk.util.xml.WXXMLUtil;
@@ -24,6 +32,25 @@ import java.util.List;
  * Created by lemon_bar on 15/7/17.
  */
 public class WXMessageService {
+
+    public boolean setIndustryForTemplateMessage(Industry industry) throws WXException {
+        WXIndustrySetRequest request = new WXIndustrySetRequest(WXTokenController.getToken(), industry);
+        WXJsonResponse response = (WXJsonResponse) WXHttpDispatch.execute(request);
+        return response.isSuccess();
+    }
+
+    public String getTemplateIdByShortId(String shortId) throws WXException {
+        ShortId shortIdObject = new ShortId(shortId);
+        WXTemplateIdGetRequest request = new WXTemplateIdGetRequest(WXTokenController.getToken(), shortIdObject);
+        WXTemplateIdGetResponse response = (WXTemplateIdGetResponse) WXHttpDispatch.execute(request);
+        return response.getTemplateId();
+    }
+
+    public String sendTemplateMessage(MessageInfo messageInfo) throws WXException {
+        WXTemplateSendRequest request = new WXTemplateSendRequest(WXTokenController.getToken(), messageInfo);
+        WXTemplateSendResponse response = (WXTemplateSendResponse) WXHttpDispatch.execute(request);
+        return response.getMsgId();
+    }
 
     public String produceImage(String fromUser, String toUser, String mediaId) throws WXException {
         WXSendImage sendImage = new WXSendImage(fromUser, toUser, mediaId);
@@ -140,6 +167,8 @@ public class WXMessageService {
                     return WXParserUtil.parserMessage(eventStr, WXReceivedClickEvent.class);
                 case VIEW:
                     return WXParserUtil.parserMessage(eventStr, WXReceivedViewEvent.class);
+                case TEMPLATESENDJOBFINISH:
+                    return WXParserUtil.parserMessage(eventStr, WXReceivedTemplateSendFinishEvent.class);
                 default:
                     throw new WXException(String.format("no matched wx event type: %s", eventStr));
             }

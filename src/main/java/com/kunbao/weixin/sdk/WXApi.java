@@ -36,6 +36,8 @@ import com.kunbao.weixin.sdk.message.domain.send.json.metadata.VideoContent;
 import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendMusicMedia;
 import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendNewsItem;
 import com.kunbao.weixin.sdk.message.domain.send.xml.WXSendVideoMedia;
+import com.kunbao.weixin.sdk.message.domain.template.Industry;
+import com.kunbao.weixin.sdk.message.domain.template.MessageInfo;
 import com.kunbao.weixin.sdk.util.aes.AesException;
 
 import java.util.Date;
@@ -797,5 +799,38 @@ public class WXApi {
      */
     public List<InterfaceHourData> getInterfaceHourSummaryDataCube(Date start, Date end) throws WXException {
         return factory.getInterfaceDataCubeService().getInterfaceHourSummary(start, end);
+    }
+
+    /**
+     * 设置所属行业
+     *
+     * @param industry 公众号模板消息所属行业编号
+     * @return 执行是否成功
+     * @throws WXException
+     */
+    public boolean setIndustryForTemplateMessage(Industry industry) throws WXException {
+        return factory.getWxMessageService().setIndustryForTemplateMessage(industry);
+    }
+
+    /**
+     * 获得模板ID
+     *
+     * @param shortId 模板库中模板的编号，有“TM**”和“OPENTMTM**”等形式
+     * @return template id
+     * @throws WXException
+     */
+    public String getTemplateIdByShortId(String shortId) throws WXException {
+        return factory.getWxMessageService().getTemplateIdByShortId(shortId);
+    }
+
+    /**
+     * 发送模板消息
+     *
+     * @param messageInfo 模板消息内容
+     * @return message id
+     * @throws WXException
+     */
+    public String sendTemplateMessage(MessageInfo messageInfo) throws WXException {
+        return factory.getWxMessageService().sendTemplateMessage(messageInfo);
     }
 }
