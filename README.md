@@ -63,6 +63,11 @@
 `boolean sendCustomMusic(String toUser, MusicContent musicContent) throws WXException`<br/>
 `boolean sendCustomNews(String toUser, List<NewsItemContent> articles) throws WXException`<br/>
 
+4. 发送模板消息<br/>
+`boolean setIndustryForTemplateMessage(Industry industry) throws WXException`<br/>
+`String getTemplateIdByShortId(String shortId) throws WXException`<br/>
+`String sendTemplateMessage(MessageInfo messageInfo) throws WXException`<br/>
+
 #####素材管理接口<br/>
 1. 新增临时素材，返回新增素材的url<br/>
 `String uploadTempMedia(MediaType type, String filePath) throws WXException`<br/>
@@ -157,5 +162,4 @@
 #####未实现的接口(持续实现中...)
 1. 客服账号管理<br/>
 2. 群发接口<br/>
-3. 模板消息接口<br/>
-4. 获取自动回复规则接口<br/>
+3. 获取自动回复规则接口<br/>
