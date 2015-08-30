@@ -8,7 +8,7 @@
 `<dependency>`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<groupId>com.kunbao.weixin</groupId>`<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;`<artifactId>sdk</artifactId>`<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;`<version>1.0</version>`<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;`<version>1.1</version>`<br/>
 `</dependency>`<br/>
 
 ====
@@ -90,6 +90,12 @@
 7. 获取素材列表<br/>
 `WXGetCommonMaterialListResponse getCommonMaterialList(MaterialPageableRequest pageableRequest) throws WXException`<br/>
 `WXGetNewsMaterialListResponse getNewsMaterialList(MaterialPageableRequest pageableRequest) throws WXException`<br/>
+
+8. 根据微信端素材id,获得素材url<br/>
+`String getMaterialTempUrl(String mediaId) throws WXException`
+
+9. 根据id读取素材，返回byte数组<br/>
+`byte[] getMaterialBytes(String mediaId) throws WXException`
 
 #####用户管理接口<br/>
 1. 用户分组管理<br/>
