@@ -43,7 +43,7 @@ public class WXMaterialService {
     public String uploadTempMedia(MediaType type, String filePath) throws WXException {
         WXUploadTempMediaRequest request = new WXUploadTempMediaRequest(WXTokenController.getToken(), type, filePath);
         WXUploadTempMediaResponse response = (WXUploadTempMediaResponse) WXHttpDispatch.execute(request);
-        return getMediaUrl(response.getMediaId());
+        return response.getMediaId();
     }
 
     public String addNewsList(NewsList newsList) throws WXException {
