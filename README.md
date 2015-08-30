@@ -30,7 +30,7 @@
 所有的方法都通过wxApi进行调用，简单易用。<br/>
 开发者不需要关心token，相关的刷新逻辑已经封装在代码中。
 
-#####安全相关的接口
+#####安全相关的接口(包含js认证)
 1. 验证服务器地址有效性<br/>
 `boolean checkSignature(String signature, String timestamp, String nonce)`<br/>
 
@@ -42,6 +42,9 @@
 
 4. 获得微信服务器IP地址列表<br/>
 `List<String> getCallbackIpList() throws WXException`<br/>
+
+5. 获得js api config<br/>
+`WXJsConfig constructWXJsConfig(String url) throws WXException`<br/>
 
 #####消息相关的接口
 1. 解析接受的消息<br/>
@@ -92,10 +95,10 @@
 `WXGetNewsMaterialListResponse getNewsMaterialList(MaterialPageableRequest pageableRequest) throws WXException`<br/>
 
 8. 根据微信端素材id,获得素材url<br/>
-`String getMaterialTempUrl(String mediaId) throws WXException`
+`String getMaterialTempUrl(String mediaId) throws WXException`<br/>
 
 9. 根据id读取素材，返回byte数组<br/>
-`byte[] getMaterialBytes(String mediaId) throws WXException`
+`byte[] getMaterialBytes(String mediaId) throws WXException`<br/>
 
 #####用户管理接口<br/>
 1. 用户分组管理<br/>
