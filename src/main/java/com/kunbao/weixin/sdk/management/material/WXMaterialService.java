@@ -12,6 +12,9 @@ import com.kunbao.weixin.sdk.management.material.domain.constant.MediaType;
 import com.kunbao.weixin.sdk.management.material.request.*;
 import com.kunbao.weixin.sdk.management.material.response.*;
 import com.kunbao.weixin.sdk.token.WXTokenController;
+import com.kunbao.weixin.sdk.util.FileUtil;
+
+import java.io.IOException;
 
 /**
  * Created by lemon_bar on 15/7/12.
@@ -40,7 +43,7 @@ public class WXMaterialService {
     public String uploadTempMedia(MediaType type, String filePath) throws WXException {
         WXUploadTempMediaRequest request = new WXUploadTempMediaRequest(WXTokenController.getToken(), type, filePath);
         WXUploadTempMediaResponse response = (WXUploadTempMediaResponse) WXHttpDispatch.execute(request);
-        return getMediaUrl(WXTokenController.getToken(), response.getMediaId());
+        return getMediaUrl(response.getMediaId());
     }
 
     public String addNewsList(NewsList newsList) throws WXException {
@@ -68,7 +71,17 @@ public class WXMaterialService {
         return response.isSuccess();
     }
 
-    private String getMediaUrl(String token, String mediaId) {
-        return WXBaseUrl.COMMON + String.format(mediaUrlFormat, token, mediaId);
+    public String getMediaUrl(String mediaId) throws WXException {
+        return WXBaseUrl.COMMON + String.format(mediaUrlFormat, WXTokenController.getToken(), mediaId);
+    }
+
+    public byte[] getMediaBytes(String mediaId) throws WXException {
+        String mediaUrl = getMediaUrl(mediaId);
+        try {
+            return FileUtil.readUrlBytes(mediaUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new WXException(e.getMessage());
+        }
     }
 }

@@ -325,6 +325,28 @@ public class WXApi {
     }
 
     /**
+     * 根据mediaId，获取media url。
+     *
+     * @param mediaId
+     * @return
+     * @throws WXException
+     */
+    public String getMaterialTempUrl(String mediaId) throws WXException {
+        return factory.getWxMaterialService().getMediaUrl(mediaId);
+    }
+
+    /**
+     * 读取微信media的bytes
+     *
+     * @param mediaId media id
+     * @return media bytes
+     * @throws WXException
+     */
+    public byte[] getMaterialBytes(String mediaId) throws WXException {
+        return factory.getWxMaterialService().getMediaBytes(mediaId);
+    }
+
+    /**
      * 更新永久图文素材
      *
      * @param newsUpdater 需要更新的内容
