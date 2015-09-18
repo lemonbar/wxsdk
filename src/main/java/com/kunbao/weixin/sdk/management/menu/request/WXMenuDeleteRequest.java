@@ -14,7 +14,7 @@ public class WXMenuDeleteRequest extends WXRequest<WXJsonResponse> {
     public WXMenuDeleteRequest(String token) {
         super();
         this.method = WXHTTPMethod.GET;
-        this.path = "/cgi-bin/menu/create";
+        this.path = "/cgi-bin/menu/delete";
         this.addParameter("access_token", token);
     }
 
