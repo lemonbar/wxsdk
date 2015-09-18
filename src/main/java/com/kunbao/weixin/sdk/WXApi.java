@@ -627,6 +627,10 @@ public class WXApi {
         return factory.getWxOAuthService().getOAuthAccessToken(authCode);
     }
 
+    public String getWXOAuthUrl(String redirectUri, String scope, String state) {
+        return factory.getWxOAuthService().wxAuthUrl(redirectUri, scope, state);
+    }
+
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String authCode, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(authCode, lang);
     }
