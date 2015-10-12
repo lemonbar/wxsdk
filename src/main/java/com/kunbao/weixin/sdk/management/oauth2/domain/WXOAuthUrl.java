@@ -24,7 +24,7 @@ public class WXOAuthUrl {
 
     public String url() {
         if (url == null) {
-            url = baseUrl + "?" +
+            url = baseUrl +
                     "appid=" + WXAppConstant.APP_ID + "&" +
                     "response_type=" + response_type + "&" +
                     "redirect_uri=" + redirect_uri + "&" +
