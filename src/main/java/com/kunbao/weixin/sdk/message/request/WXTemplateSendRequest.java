@@ -16,7 +16,7 @@ public class WXTemplateSendRequest extends WXRequest<WXTemplateSendResponse> {
     public WXTemplateSendRequest(String token, MessageInfo messageInfo) throws WXException {
         super();
         this.method = WXHTTPMethod.POST;
-        this.path = "/cgi-bin/template/api_add_template";
+        this.path = "/cgi-bin/message/template/send";
         this.addParameter("access_token", token);
         this.body = WXJsonUtil.beanToJson(messageInfo);
     }
