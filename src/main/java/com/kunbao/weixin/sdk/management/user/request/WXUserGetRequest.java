@@ -16,7 +16,9 @@ public class WXUserGetRequest extends WXRequest<WXUserGetResponse> {
         this.method = WXHTTPMethod.GET;
         this.path = "/cgi-bin/user/get";
         this.addParameter("access_token", token);
-        this.addParameter("next_openid", nextOpenId);
+        if (nextOpenId != null) {
+            this.addParameter("next_openid", nextOpenId);
+        }
     }
 
     @Override
