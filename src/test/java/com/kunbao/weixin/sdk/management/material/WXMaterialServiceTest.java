@@ -31,7 +31,9 @@ public class WXMaterialServiceTest extends TestCase {
     public void testGetCommonMaterialList() throws Exception {
         MaterialPageableRequest pageableRequest = new MaterialPageableRequest(MaterialType.image, 0, 4);
         WXGetCommonMaterialListResponse response = wxMaterialService.getCommonMaterialList(pageableRequest);
-        System.out.println(response);
+        System.out.println(response.getItems().get(0).getMediaId());
+        System.out.println(response.getItems().get(0).getUrl());
+        System.out.println(response.getItems().get(0).getName());
     }
 
     public void testGetNewsMaterialList() throws Exception {

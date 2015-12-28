@@ -15,8 +15,8 @@ public class WXAccountServiceTest extends TestCase {
     }
 
     public void testCreateTempQrcode() throws Exception {
-        long seconds = 10 * 60;
-        String qrCodeUrl = wxAccountService.createTempQrcode(seconds, 1);
+        long seconds = 24 * 60 * 60;
+        String qrCodeUrl = wxAccountService.createTempQrcode(seconds, 888);
         System.out.println(qrCodeUrl);
     }
 

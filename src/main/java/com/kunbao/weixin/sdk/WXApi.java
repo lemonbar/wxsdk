@@ -58,10 +58,10 @@ public class WXApi {
      * @param appSecret      app secret
      * @param appToken       app token
      * @param encodingAESKey encoding aes key
-     * @param callbackUrl    app callback url
+     * @param domainName    domain name
      */
-    public WXApi(String appId, String appSecret, String appToken, String encodingAESKey, String callbackUrl) {
-        WXAppConstant.init(appId, appSecret, appToken, encodingAESKey, callbackUrl);
+    public WXApi(String appId, String appSecret, String appToken, String encodingAESKey, String domainName) {
+        WXAppConstant.init(appId, appSecret, appToken, encodingAESKey, domainName);
         factory = new WXServiceFactory();
     }
 

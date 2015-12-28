@@ -25,6 +25,7 @@ public class WXTokenController {
             accessToken.setAccess_token(response.getAccessToken());
             accessToken.setExpires_in(response.getExpires());
             accessToken.setCreateDate(new Date());
+            System.out.println(String.format("refresh access token:{value:%s,expires_in:%d}", accessToken.access_token, accessToken.expires_in));
         }
     }
 
