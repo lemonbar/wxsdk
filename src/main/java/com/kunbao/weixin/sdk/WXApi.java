@@ -58,7 +58,7 @@ public class WXApi {
      * @param appSecret      app secret
      * @param appToken       app token
      * @param encodingAESKey encoding aes key
-     * @param domainName    domain name
+     * @param domainName     domain name
      */
     public WXApi(String appId, String appSecret, String appToken, String encodingAESKey, String domainName) {
         WXAppConstant.init(appId, appSecret, appToken, encodingAESKey, domainName);
@@ -633,6 +633,10 @@ public class WXApi {
 
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String authCode, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(authCode, lang);
+    }
+
+    public WXOAuthUserInfoGetResponse getAuthUserInfo(String appId, String appSecret, String authCode, String lang) throws WXException {
+        return factory.getWxOAuthService().getAuthUserInfo(appId, appSecret, authCode, lang);
     }
 
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {

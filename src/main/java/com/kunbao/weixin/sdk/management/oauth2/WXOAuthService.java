@@ -50,8 +50,8 @@ public class WXOAuthService {
         return response.isSuccess();
     }
 
-    public WXOAuthUserInfoGetResponse getAuthUserInfo(String authCode, String lang) throws WXException {
-        WXOAuthTokenGetRequest authReq = new WXOAuthTokenGetRequest(WXAppConstant.APP_ID, WXAppConstant.APP_SECRET, authCode);
+    public WXOAuthUserInfoGetResponse getAuthUserInfo(String appId, String appSecret, String authCode, String lang) throws WXException {
+        WXOAuthTokenGetRequest authReq = new WXOAuthTokenGetRequest(appId, appSecret, authCode);
         WXOAuthTokenGetResponse authResp = (WXOAuthTokenGetResponse) WXHttpDispatch.execute(authReq);
 
         String accessToken = authResp.getAccessToken();
@@ -61,6 +61,10 @@ public class WXOAuthService {
         }
 
         return getAuthUserInfo(accessToken, openId, lang);
+    }
+
+    public WXOAuthUserInfoGetResponse getAuthUserInfo(String authCode, String lang) throws WXException {
+        return this.getAuthUserInfo(WXAppConstant.APP_ID, WXAppConstant.APP_SECRET, authCode, lang);
     }
 
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {
