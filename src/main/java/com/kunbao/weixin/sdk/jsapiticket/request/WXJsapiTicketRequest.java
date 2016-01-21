@@ -6,7 +6,6 @@ import com.kunbao.weixin.sdk.jsapiticket.response.WXJsapiTicketResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
 
 /**
- * https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
  * Created by lemon_bar on 15/8/30.
  */
 public class WXJsapiTicketRequest extends WXRequest<WXJsapiTicketResponse> {
@@ -17,6 +16,7 @@ public class WXJsapiTicketRequest extends WXRequest<WXJsapiTicketResponse> {
         this.path = "/cgi-bin/ticket/getticket";
         this.addParameter("access_token", token);
         this.addParameter("type", TYPE_DEFAULT);
+        // https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi
     }
 
     @Override

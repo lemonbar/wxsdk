@@ -10,14 +10,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 /**
- * <xml>
- * <ToUserName><![CDATA[toUser]]></ToUserName>
- * <FromUserName><![CDATA[fromUser]]></FromUserName>
- * <CreateTime>12345678</CreateTime>
- * <MsgType><![CDATA[news]]></MsgType>
- * <ArticleCount>2</ArticleCount>
- * <Articles>
- * <item>
  * Created by lemon_bar on 15/7/23.
  */
 @Getter

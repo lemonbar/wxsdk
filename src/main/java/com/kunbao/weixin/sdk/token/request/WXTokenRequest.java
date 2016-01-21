@@ -7,10 +7,6 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
 
 /**
  * http请求方式: GET
- * https://api.weixin.qq.com/cgi-bin/token
- * ?grant_type=client_credential
- * &appid=APPID
- * &secret=APPSECRET
  * Created by lemon_bar on 15/7/7.
  */
 public class WXTokenRequest extends WXRequest<WXTokenResponse> {
@@ -23,6 +19,10 @@ public class WXTokenRequest extends WXRequest<WXTokenResponse> {
         this.addParameter("grant_type", GRANT_TYPE_DEFAULT);
         this.addParameter("appid", appId);
         this.addParameter("secret", appSecret);
+        //https://api.weixin.qq.com/cgi-bin/token
+        //?grant_type=client_credential
+        //&appid=APPID
+        //&secret=APPSECRET
     }
 
     @Override

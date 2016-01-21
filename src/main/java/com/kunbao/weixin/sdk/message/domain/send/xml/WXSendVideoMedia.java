@@ -7,11 +7,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * <Video>
- * <MediaId><![CDATA[media_id]]></MediaId>
- * <Title><![CDATA[title]]></Title>
- * <Description><![CDATA[description]]></Description>
- * </Video>
  * Created by lemon_bar on 15/7/23.
  */
 @Getter

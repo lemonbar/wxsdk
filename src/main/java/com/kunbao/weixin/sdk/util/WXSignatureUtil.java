@@ -19,8 +19,8 @@ public class WXSignatureUtil {
      * 3. 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信
      *
      * @param signature 期望值
-     * @param textArr
-     * @return
+     * @param textArr text array
+     * @return 验证结果
      */
     public static boolean checkSignature(final String signature, final String... textArr) {
         Arrays.sort(textArr);
@@ -33,6 +33,14 @@ public class WXSignatureUtil {
     }
 
 
+    /**
+     * 获取签名
+     * @param jsapi_ticket jsapi ticket
+     * @param url url
+     * @param nonceStr noce str
+     * @param timestamp timestamp
+     * @return 签名
+     */
     public static String genSignature(String jsapi_ticket, String url, String nonceStr, String timestamp) {
         String string1;
         String signature = null;

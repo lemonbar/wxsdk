@@ -9,14 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * <xml>
- * <ToUserName><![CDATA[toUser]]></ToUserName>
- * <FromUserName><![CDATA[FromUser]]></FromUserName>
- * <CreateTime>123456789</CreateTime>
- * <MsgType><![CDATA[event]]></MsgType>
- * <Event><![CDATA[CLICK]]></Event>
- * <EventKey><![CDATA[EVENTKEY]]></EventKey>
- * </xml>
  * Created by lemon_bar on 15/7/6.
  */
 @Getter

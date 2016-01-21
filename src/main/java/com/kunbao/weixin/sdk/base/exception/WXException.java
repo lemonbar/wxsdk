@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * Created by lemon_bar on 15/7/23.
  */
-public class WXException extends RuntimeException {
+public class WXException extends Exception {
     @Getter
     private long code;
     @Getter

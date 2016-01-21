@@ -65,6 +65,14 @@ public class WXApi {
         factory = new WXServiceFactory();
     }
 
+    /**
+     * 构造函数
+     *
+     * @param appId          app id
+     * @param appSecret      app secret
+     * @param appToken       app token
+     * @param encodingAESKey encoding aes key
+     */
     public WXApi(String appId, String appSecret, String appToken, String encodingAESKey) {
         WXAppConstant.init(appId, appSecret, appToken, encodingAESKey);
         factory = new WXServiceFactory();
@@ -91,7 +99,7 @@ public class WXApi {
      * @param nonce        随机数
      * @param content      需要解密的消息
      * @return 解密后的消息
-     * @throws AesException
+     * @throws AesException 异常信息
      */
     public String decryptContent(String encryptType, String msgSignature, String timestamp, String nonce, String content) throws AesException {
         return factory.getWxSecurityService().decryptContent(encryptType, msgSignature, timestamp, nonce, content);
@@ -105,22 +113,21 @@ public class WXApi {
      * @param nonce       随机数
      * @param content     需要加密的消息
      * @return 加密后的消息
-     * @throws AesException
+     * @throws AesException 异常信息
      */
     public String encryptContent(String encryptType, String timestamp, String nonce, String content) throws AesException {
         return factory.getWxSecurityService().encryptContent(encryptType, timestamp, nonce, content);
     }
 
     /**
-     * 签名生成规则如下：参与签名的字段包括noncestr（随机字符串）, 有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分） 。
-     * 对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串string1。
-     * 这里需要注意的是所有参数名均为小写字符。对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义。
-     *
      * @param url 签名用的url必须是调用JS接口页面的完整URL。
-     * @return
-     * @throws WXException
+     * @return 微信签名
+     * @throws WXException 异常信息
      */
     public WXJsConfig constructWXJsConfig(String url) throws WXException {
+        //签名生成规则如下：参与签名的字段包括noncestr（随机字符串）, 有效的jsapi_ticket, timestamp（时间戳）, url（当前网页的URL，不包含#及其后面部分);
+        //对所有待签名参数按照字段名的ASCII 码从小到大排序（字典序）后，使用URL键值对的格式（即key1=value1&key2=value2…）拼接成字符串string1;
+        // 这里需要注意的是所有参数名均为小写字符。对string1作sha1加密，字段名和字段值都采用原始值，不进行URL 转义;
         WXJsConfig jsConfig = new WXJsConfig(url, WXJsapiTicketController.getTicket());
         return jsConfig;
     }
@@ -129,6 +136,7 @@ public class WXApi {
      * 获得微信服务器IP地址列表
      *
      * @return 微信服务器IP地址列表
+     * @throws WXException 异常信息
      */
     public List<String> getCallbackIpList() throws WXException {
         return factory.getWxSecurityService().getCallbackIpList();
@@ -137,9 +145,9 @@ public class WXApi {
     /**
      * 解析从微信推送过来的消息
      *
-     * @param messageStr
+     * @param messageStr message string
      * @return 解析出来的消息类实例
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXMessageBase consumeMessage(String messageStr) throws WXException {
         return factory.getWxMessageService().consumeMessage(messageStr);
@@ -152,7 +160,7 @@ public class WXApi {
      * @param toUser   用户的open_id
      * @param content  回复的文本内容
      * @return xml内容
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String produceText(String fromUser, String toUser, String content) throws WXException {
         return factory.getWxMessageService().produceText(fromUser, toUser, content);
@@ -165,7 +173,7 @@ public class WXApi {
      * @param toUser   用户的open_id
      * @param mediaId  图片的id
      * @return xml内容
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String produceImage(String fromUser, String toUser, String mediaId) throws WXException {
         return factory.getWxMessageService().produceImage(fromUser, toUser, mediaId);
@@ -178,7 +186,7 @@ public class WXApi {
      * @param toUser   用户的open_id
      * @param mediaId  音频的id
      * @return xml内容
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String produceVoice(String fromUser, String toUser, String mediaId) throws WXException {
         return factory.getWxMessageService().produceVoice(fromUser, toUser, mediaId);
@@ -191,7 +199,7 @@ public class WXApi {
      * @param toUser     用户的open_id
      * @param videoMedia 视频的id
      * @return xml内容
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String produceVideo(String fromUser, String toUser, WXSendVideoMedia videoMedia) throws WXException {
         return factory.getWxMessageService().produceVideo(fromUser, toUser, videoMedia);
@@ -204,7 +212,7 @@ public class WXApi {
      * @param toUser     用户的open_id
      * @param musicMedia 音乐资源
      * @return 音乐xml内容
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String produceMusic(String fromUser, String toUser, WXSendMusicMedia musicMedia) throws WXException {
         return factory.getWxMessageService().produceMusic(fromUser, toUser, musicMedia);
@@ -217,7 +225,7 @@ public class WXApi {
      * @param toUser    用户的open_id
      * @param newsItems 图文资源(图文消息个数，限制为10条以内)
      * @return 图文xml内容
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String produceNews(String fromUser, String toUser, List<WXSendNewsItem> newsItems) throws WXException {
         return factory.getWxMessageService().produceNews(fromUser, toUser, newsItems);
@@ -229,7 +237,7 @@ public class WXApi {
      * @param toUser  用户的open_id
      * @param content 文本内容
      * @return 是否发送成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean sendCustomText(String toUser, String content) throws WXException {
         return factory.getWxMessageService().sendCustomText(toUser, content);
@@ -241,7 +249,7 @@ public class WXApi {
      * @param toUser  用户的open_id
      * @param mediaId 图片media id
      * @return 是否发送成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean sendCustomImage(String toUser, String mediaId) throws WXException {
         return factory.getWxMessageService().sendCustomImage(toUser, mediaId);
@@ -253,7 +261,7 @@ public class WXApi {
      * @param toUser  用户的open_id
      * @param mediaId 音频media id
      * @return 是否发送成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean sendCustomVoice(String toUser, String mediaId) throws WXException {
         return factory.getWxMessageService().sendCustomVoice(toUser, mediaId);
@@ -265,7 +273,7 @@ public class WXApi {
      * @param toUser       用户的open_id
      * @param videoContent 视频信息
      * @return 是否发送成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean sendCustomVideo(String toUser, VideoContent videoContent) throws WXException {
         return factory.getWxMessageService().sendCustomVideo(toUser, videoContent);
@@ -277,7 +285,7 @@ public class WXApi {
      * @param toUser       用户的open_id
      * @param musicContent 音乐信息
      * @return 是否发送成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean sendCustomMusic(String toUser, MusicContent musicContent) throws WXException {
         return factory.getWxMessageService().sendCustomMusic(toUser, musicContent);
@@ -289,7 +297,7 @@ public class WXApi {
      * @param toUser      用户的open_id
      * @param newsContent 图文信息
      * @return 是否发送成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean sendCustomNews(String toUser, List<NewsItemContent> newsContent) throws WXException {
         return factory.getWxMessageService().sendCustomNews(toUser, newsContent);
@@ -301,7 +309,7 @@ public class WXApi {
      * @param type     素材类型
      * @param filePath 素材路径
      * @return 新增后，素材的链接
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String uploadTempMedia(MediaType type, String filePath) throws WXException {
         return factory.getWxMaterialService().uploadTempMedia(type, filePath);
@@ -312,7 +320,7 @@ public class WXApi {
      *
      * @param newsList 图文列表
      * @return media Id
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String addNewsList(NewsList newsList) throws WXException {
         return factory.getWxMaterialService().addNewsList(newsList);
@@ -323,7 +331,7 @@ public class WXApi {
      *
      * @param filePath 素材路径
      * @return 素材media id 和 url
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXAddCommonMaterialResponse addCommonMaterial(String filePath) throws WXException {
         return factory.getWxMaterialService().addCommonMaterial(filePath);
@@ -334,7 +342,7 @@ public class WXApi {
      *
      * @param mediaId media id
      * @return true代表成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean deleteMaterial(String mediaId) throws WXException {
         return factory.getWxMaterialService().deleteMaterial(mediaId);
@@ -343,9 +351,9 @@ public class WXApi {
     /**
      * 根据mediaId，获取media url。
      *
-     * @param mediaId
-     * @return
-     * @throws WXException
+     * @param mediaId media id
+     * @return material temp url
+     * @throws WXException 异常信息
      */
     public String getMaterialTempUrl(String mediaId) throws WXException {
         return factory.getWxMaterialService().getMediaUrl(mediaId);
@@ -356,7 +364,7 @@ public class WXApi {
      *
      * @param mediaId media id
      * @return media bytes
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public byte[] getMaterialBytes(String mediaId) throws WXException {
         return factory.getWxMaterialService().getMediaBytes(mediaId);
@@ -367,7 +375,7 @@ public class WXApi {
      *
      * @param newsUpdater 需要更新的内容
      * @return true代表成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean updateNewsItem(NewsUpdater newsUpdater) throws WXException {
         return factory.getWxMaterialService().updateNewsItem(newsUpdater);
@@ -377,7 +385,7 @@ public class WXApi {
      * 获取素材总数
      *
      * @return 素材总数
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXGetMaterialCountResponse getMaterialCount() throws WXException {
         return factory.getWxMaterialService().getCount();
@@ -388,7 +396,7 @@ public class WXApi {
      *
      * @param pageableRequest 查询条件
      * @return 普通素材列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXGetCommonMaterialListResponse getCommonMaterialList(MaterialPageableRequest pageableRequest) throws WXException {
         return factory.getWxMaterialService().getCommonMaterialList(pageableRequest);
@@ -399,7 +407,7 @@ public class WXApi {
      *
      * @param pageableRequest 查询条件
      * @return 图文素材列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXGetNewsMaterialListResponse getNewsMaterialList(MaterialPageableRequest pageableRequest) throws WXException {
         return factory.getWxMaterialService().getNewsMaterialList(pageableRequest);
@@ -410,7 +418,7 @@ public class WXApi {
      *
      * @param groupName 分组名称
      * @return 新建分组信息
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXUserGroup createUserGroup(String groupName) throws WXException {
         return factory.getWxUserService().createUserGroup(groupName);
@@ -420,7 +428,7 @@ public class WXApi {
      * 获取分组列表
      *
      * @return 分组列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<WXUserGroup> getUserGroup() throws WXException {
         return factory.getWxUserService().getUserGroup();
@@ -431,7 +439,7 @@ public class WXApi {
      *
      * @param openId 用户openid
      * @return 用户所在分组id
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public int getUserInGroupId(String openId) throws WXException {
         return factory.getWxUserService().getUserInGroupId(openId);
@@ -443,7 +451,7 @@ public class WXApi {
      * @param groupId   分组id
      * @param groupName 分组名称
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean updateUserGroup(int groupId, String groupName) throws WXException {
         return factory.getWxUserService().updateUserGroup(groupId, groupName);
@@ -455,7 +463,7 @@ public class WXApi {
      * @param openId  用户openid
      * @param groupId 分组id
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean moveUserToGroup(String openId, int groupId) throws WXException {
         return factory.getWxUserService().moveUserToGroup(openId, groupId);
@@ -467,7 +475,7 @@ public class WXApi {
      * @param openIdList 用户openid列表
      * @param groupId    分组id
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean moveBatchUserToGroup(List<String> openIdList, int groupId) throws WXException {
         return factory.getWxUserService().moveBatchUserToGroup(openIdList, groupId);
@@ -478,7 +486,7 @@ public class WXApi {
      *
      * @param groupId 分组id
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean deleteUseGroup(int groupId) throws WXException {
         return factory.getWxUserService().deleteUseGroup(groupId);
@@ -490,7 +498,7 @@ public class WXApi {
      * @param openId 用户openid
      * @param remark 备注名
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean remarkUser(String openId, String remark) throws WXException {
         return factory.getWxUserService().remarkUser(openId, remark);
@@ -501,7 +509,7 @@ public class WXApi {
      *
      * @param nextOpenId 起始的openid
      * @return 用户列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXUserGetResponse getUserList(String nextOpenId) throws WXException {
         return factory.getWxUserService().getUserList(nextOpenId);
@@ -513,7 +521,7 @@ public class WXApi {
      * @param openId 用户openid
      * @param lang   语言
      * @return 用户信息
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXUserInfoResponse getUserInfo(String openId, WXLang lang) throws WXException {
         return factory.getWxUserService().getUserInfo(openId, lang);
@@ -524,7 +532,7 @@ public class WXApi {
      *
      * @param userList 用户openid列表
      * @return 用户信息
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXUserInfoListResponse getBatchUserInfo(WXUserList userList) throws WXException {
         return factory.getWxUserService().getBatchUserInfo(userList);
@@ -535,7 +543,7 @@ public class WXApi {
      *
      * @param menu 菜单
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean createMenu(Menu menu) throws WXException {
         return factory.getWxMenuService().createMenu(menu);
@@ -545,7 +553,7 @@ public class WXApi {
      * 获取菜单
      *
      * @return 菜单
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXMenuGetResponse getMenu() throws WXException {
         return factory.getWxMenuService().getMenu();
@@ -555,7 +563,7 @@ public class WXApi {
      * 获取自定义菜单配置
      *
      * @return 自定义菜单配置
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public WXSelfMenuGetResponse getSelfMenu() throws WXException {
         return factory.getWxMenuService().getSelfMenu();
@@ -565,7 +573,7 @@ public class WXApi {
      * 删除菜单
      *
      * @return 是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean deleteMenu() throws WXException {
         return factory.getWxMenuService().deleteMenu();
@@ -576,7 +584,7 @@ public class WXApi {
      *
      * @param longUrl 长链接
      * @return 短链接
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String long2ShortUrl(String longUrl) throws WXException {
         return factory.getWxAccountService().long2ShortUrl(longUrl);
@@ -588,7 +596,7 @@ public class WXApi {
      * @param expireSeconds 过期时间，单位秒，最大不超过604800（7天）
      * @param scenceId      场景id
      * @return 二维码链接
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String createTempQrcode(long expireSeconds, int scenceId) throws WXException {
         return factory.getWxAccountService().createTempQrcode(expireSeconds, scenceId);
@@ -599,7 +607,7 @@ public class WXApi {
      *
      * @param scenceId 场景id
      * @return 二维码链接
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String createLimitSceneQrCode(int scenceId) throws WXException {
         return factory.getWxAccountService().createLimitSceneQrCode(scenceId);
@@ -610,7 +618,7 @@ public class WXApi {
      *
      * @param scenceStr 场景的string值
      * @return 二维码链接
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String createLimitStrSceneQrCode(String scenceStr) throws WXException {
         return factory.getWxAccountService().createLimitStrSceneQrCode(scenceStr);
@@ -620,25 +628,61 @@ public class WXApi {
      * 通过用户授权获取的auth code 拉取auth token
      *
      * @param authCode 微信回调获取的auth code
-     * @return
-     * @throws WXException
+     * @return auth token
+     * @throws WXException 异常信息
      */
     public WXOAuthTokenGetResponse getAuthToken(String authCode) throws WXException {
         return factory.getWxOAuthService().getOAuthAccessToken(authCode);
     }
 
+
+    /**
+     * 活的微信oauth url
+     *
+     * @param redirectUri 跳转的url
+     * @param scope       scope取值
+     * @param state       状态
+     * @return oauth url
+     */
     public String getWXOAuthUrl(String redirectUri, String scope, String state) {
         return factory.getWxOAuthService().wxAuthUrl(redirectUri, scope, state);
     }
 
+    /**
+     * 获取用户信息
+     *
+     * @param authCode code
+     * @param lang     语言
+     * @return 用户信息
+     * @throws WXException 异常信息
+     */
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String authCode, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(authCode, lang);
     }
 
+    /**
+     * 获取用户信息
+     *
+     * @param appId     app id
+     * @param appSecret app secret
+     * @param authCode  auth code
+     * @param lang      语言
+     * @return 用户信息
+     * @throws WXException 异常信息
+     */
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String appId, String appSecret, String authCode, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(appId, appSecret, authCode, lang);
     }
 
+    /**
+     * 获取用户信息
+     *
+     * @param accessToken access token
+     * @param openId      open id
+     * @param lang        语言
+     * @return 用户信息
+     * @throws WXException 异常信息
+     */
     public WXOAuthUserInfoGetResponse getAuthUserInfo(String accessToken, String openId, String lang) throws WXException {
         return factory.getWxOAuthService().getAuthUserInfo(accessToken, openId, lang);
     }
@@ -649,7 +693,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UserSummaryItem> getUserSummaryDataCube(Date start, Date end) throws WXException {
         return factory.getUserDataCubeService().getUserSummary(start, end);
@@ -661,7 +705,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UserCumulateItem> getUserCumulateDateCube(Date start, Date end) throws WXException {
         return factory.getUserDataCubeService().getUserCumulate(start, end);
@@ -673,7 +717,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<ArticleData> getArticleSummaryDataCube(Date start, Date end) throws WXException {
         return factory.getArticleDataCubeService().getArticleSummary(start, end);
@@ -685,7 +729,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<ArticleTotalData> getArticleTotalDataCube(Date start, Date end) throws WXException {
         return factory.getArticleDataCubeService().getArticleTotal(start, end);
@@ -697,7 +741,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UserReadData> getArticleUserReadDataCube(Date start, Date end) throws WXException {
         return factory.getArticleDataCubeService().getArticleUserRead(start, end);
@@ -709,7 +753,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UserReadHourData> getArticleUserReadHourDataCube(Date start, Date end) throws WXException {
         return factory.getArticleDataCubeService().getArticleUserReadHour(start, end);
@@ -721,7 +765,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<ArticleShareData> getArticleShareDataCube(Date start, Date end) throws WXException {
         return factory.getArticleDataCubeService().getArticleShare(start, end);
@@ -733,7 +777,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<ArticleShareHourData> getArticleShareHourDataCube(Date start, Date end) throws WXException {
         return factory.getArticleDataCubeService().getArticleShareHour(start, end);
@@ -745,7 +789,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgData> getUpstreamMsgDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsg(start, end);
@@ -757,7 +801,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgHourData> getUpstreamMsgHourDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsgHour(start, end);
@@ -769,7 +813,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgData> getUpstreamMsgWeekDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsgWeek(start, end);
@@ -781,7 +825,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgData> getUpstreamMsgMonthDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsgMonth(start, end);
@@ -793,7 +837,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgDistData> getUpstreamMsgDistDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsgDist(start, end);
@@ -805,7 +849,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgDistData> getUpstreamMsgDistWeekDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsgDistWeek(start, end);
@@ -817,7 +861,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<UpstreamMsgDistData> getUpstreamMsgDistMonthDataCube(Date start, Date end) throws WXException {
         return factory.getMessageDataCubeService().getUpstreamMsgDistMonth(start, end);
@@ -829,7 +873,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<InterfaceData> getInterfaceSummaryDataCube(Date start, Date end) throws WXException {
         return factory.getInterfaceDataCubeService().getInterfaceSummary(start, end);
@@ -841,7 +885,7 @@ public class WXApi {
      * @param start 开始日期
      * @param end   结束日期
      * @return 数据列表
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public List<InterfaceHourData> getInterfaceHourSummaryDataCube(Date start, Date end) throws WXException {
         return factory.getInterfaceDataCubeService().getInterfaceHourSummary(start, end);
@@ -852,7 +896,7 @@ public class WXApi {
      *
      * @param industry 公众号模板消息所属行业编号
      * @return 执行是否成功
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public boolean setIndustryForTemplateMessage(Industry industry) throws WXException {
         return factory.getWxMessageService().setIndustryForTemplateMessage(industry);
@@ -863,7 +907,7 @@ public class WXApi {
      *
      * @param shortId 模板库中模板的编号，有“TM**”和“OPENTMTM**”等形式
      * @return template id
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String getTemplateIdByShortId(String shortId) throws WXException {
         return factory.getWxMessageService().getTemplateIdByShortId(shortId);
@@ -874,7 +918,7 @@ public class WXApi {
      *
      * @param messageInfo 模板消息内容
      * @return message id
-     * @throws WXException
+     * @throws WXException 异常信息
      */
     public String sendTemplateMessage(MessageInfo messageInfo) throws WXException {
         return factory.getWxMessageService().sendTemplateMessage(messageInfo);

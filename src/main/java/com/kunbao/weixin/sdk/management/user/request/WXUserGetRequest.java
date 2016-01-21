@@ -7,7 +7,6 @@ import com.kunbao.weixin.sdk.management.user.response.WXUserGetResponse;
 import com.kunbao.weixin.sdk.util.WXJsonUtil;
 
 /**
- * https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID
  * Created by lemon_bar on 15/7/22.
  */
 public class WXUserGetRequest extends WXRequest<WXUserGetResponse> {
@@ -19,6 +18,7 @@ public class WXUserGetRequest extends WXRequest<WXUserGetResponse> {
         if (nextOpenId != null) {
             this.addParameter("next_openid", nextOpenId);
         }
+        //https://api.weixin.qq.com/cgi-bin/user/get?access_token=ACCESS_TOKEN&next_openid=NEXT_OPENID
     }
 
     @Override

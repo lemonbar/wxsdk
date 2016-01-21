@@ -9,11 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
- * <Title><![CDATA[TITLE]]></Title>
- * <Description><![CDATA[DESCRIPTION]]></Description>
- * <MusicUrl><![CDATA[MUSIC_Url]]></MusicUrl>
- * <HQMusicUrl><![CDATA[HQ_MUSIC_Url]]></HQMusicUrl>
- * <ThumbMediaId><![CDATA[media_id]]></ThumbMediaId>
  * Created by lemon_bar on 15/7/23.
  */
 @Getter

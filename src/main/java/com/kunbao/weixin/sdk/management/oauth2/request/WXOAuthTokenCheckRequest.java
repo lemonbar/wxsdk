@@ -7,7 +7,6 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
 
 /**
  * http：GET（请使用https协议）
- * https://api.weixin.qq.com/sns/auth?access_token=ACCESS_TOKEN&openid=OPENID
  * Created by lemon_bar on 15/7/27.
  */
 public class WXOAuthTokenCheckRequest extends WXRequest<WXJsonResponse> {
@@ -15,7 +14,7 @@ public class WXOAuthTokenCheckRequest extends WXRequest<WXJsonResponse> {
         super();
         this.path = "/sns/auth";
         this.parameters.put("access_token", token);
-        this.parameters.put("openid", openId);
+        this.parameters.put("openid", openId);//* https://api.weixin.qq.com/sns/auth?access_token=ACCESS_TOKEN&openid=OPENID
     }
 
     @Override

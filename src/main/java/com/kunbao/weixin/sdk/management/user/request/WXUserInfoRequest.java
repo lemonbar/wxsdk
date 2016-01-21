@@ -9,7 +9,6 @@ import com.kunbao.weixin.sdk.util.WXJsonUtil;
 
 /**
  * http请求方式: GET
- * https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
  * Created by lemon_bar on 15/7/22.
  */
 public class WXUserInfoRequest extends WXRequest<WXUserInfoResponse> {
@@ -20,6 +19,7 @@ public class WXUserInfoRequest extends WXRequest<WXUserInfoResponse> {
         this.addParameter("access_token", token);
         this.addParameter("openid", openId);
         this.addParameter("lang", lang.toString());
+        //https://api.weixin.qq.com/cgi-bin/user/info?access_token=ACCESS_TOKEN&openid=OPENID&lang=zh_CN
     }
 
     @Override
