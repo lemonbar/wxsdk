@@ -46,6 +46,9 @@
 5. 获得js api config<br/>
 `WXJsConfig constructWXJsConfig(String url) throws WXException`<br/>
 
+6. 通过oauth code获取用户信息<br/>
+`WXOAuthUserInfoGetResponse getAuthUserInfo(String appId, String appSecret, String authCode, String lang) throws WXException`<br/>
+
 #####消息相关的接口
 1. 解析接受的消息<br/>
 `WXMessageBase consumeMessage(String messageStr) throws WXException`<br/>
