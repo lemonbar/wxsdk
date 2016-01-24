@@ -21,6 +21,7 @@ public class WXOAuthUserInfoGetRequest extends WXRequest<WXOAuthUserInfoGetRespo
 
     @Override
     public WXOAuthUserInfoGetResponse createResponse(String body) throws WXException {
+//        System.out.println(body);
         return WXJsonUtil.jsonToBean(body, WXOAuthUserInfoGetResponse.class);
     }
 }

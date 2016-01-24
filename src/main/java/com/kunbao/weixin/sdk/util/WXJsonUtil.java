@@ -18,6 +18,7 @@ public class WXJsonUtil {
         try {
             return getMapper().readValue(jsonStr, cls);
         } catch (IOException e) {
+            e.printStackTrace();
             throw new WXException(e.getMessage());
         }
     }

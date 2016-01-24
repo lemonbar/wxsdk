@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.kunbao.weixin.sdk.base.response.WXJsonResponse;
 import lombok.Getter;
 
+import java.util.List;
+
 /**
  * Created by baylor on 15/7/25.
  */
@@ -31,7 +33,7 @@ public class WXOAuthUserInfoGetResponse extends WXJsonResponse {
     private String headImgUrl;
 
     @JsonProperty("privilege")
-    private String privilege;
+    private List<String> priveleges;
 
     @JsonProperty("unionid")
     private String unionId;
